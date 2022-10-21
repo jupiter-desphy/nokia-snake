@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+    margin: 0%;
+    padding: 0%;
+}
+
+body {
+    justify-content: center;
+    display: flex;
+}
+.screen {
+    width: 80vw;
+    height: 40vw;
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    border: 1px solid lime;
+}
+
+.pixel {
+    border: 1px solid lightgray;
+    font-size: .5rem;
+    color: black;
+}
