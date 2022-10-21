@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box;
-    margin: 0%;
-    padding: 0%;
+    /* margin: 1%; */
+    /* padding: 0%; */
 }
 
 body {
@@ -14,11 +14,12 @@ body {
     display: grid;
     grid-template-columns: repeat(20, 1fr);
     grid-template-rows: repeat(10, 1fr);
-    border: 1px solid lime;
+    border: 1px solid rgb(23, 23, 23);
 }
 
 .pixel {
-    border: 1px solid lightgray;
+    border: 1px solid rgb(95, 164, 95);
+    background-color: rgb(126, 189, 126);
     font-size: .5rem;
     color: black;
 }
