@@ -1,266 +1,1891 @@
 import { useState } from "react";
 
 export function MainPage(props) {
-    const [snakeArr, setSnakeArr] = useState([64, 74, 84, 94, 104])
-    const [snakeLength, setSnakeLength] = useState(5)
+    const [snakeArr, setSnakeArr] = useState([64, 74, 84, 94, 104]);
+    const [gameOver, setGameOver] = useState(false);
+    const [score, setScore] = useState(0);
+    const [direction, setDirection] = useState('right');
+    const [food, setFood] = useState(Math.floor(Math.random()*200));
 
-    function moveRight () {
-        setSnakeArr (prevSnakeArr => {
-           return [
-            prevSnakeArr.slice(1),
-            (Number([prevSnakeArr[prevSnakeArr.length-1]])+10)
-            ].flat()
-        })
+    function moveRight() {
+        if (direction != 'left') {
+            setSnakeArr(prevSnakeArr => {
+                return [
+                    prevSnakeArr.slice(1),
+                    (Number([prevSnakeArr[prevSnakeArr.length - 1]]) + 10)
+                ].flat()
+            });
+            if (snakeArr[snakeArr.length - 1] > 190) {
+                setGameOver(true)
+            };
+            setDirection('right');
+        }
     }
 
-    function moveLeft () {
-        setSnakeArr (prevSnakeArr => {
-           return [
-            prevSnakeArr.slice(1),
-            (Number([prevSnakeArr[prevSnakeArr.length-1]])-10)
-            ].flat()
-        })
+    function moveLeft() {
+        if (direction != 'right') {
+            setSnakeArr(prevSnakeArr => {
+                return [
+                    prevSnakeArr.slice(1),
+                    (Number([prevSnakeArr[prevSnakeArr.length - 1]]) - 10)
+                ].flat()
+            });
+            setDirection('left');
+        }
     }
 
-    function moveUp () {
-        setSnakeArr (prevSnakeArr => {
-           return [
-            prevSnakeArr.slice(1),
-            (Number([prevSnakeArr[prevSnakeArr.length-1]])-1)
-            ].flat()
-        })
+    function moveUp() {
+        if (direction != 'down') {
+            setSnakeArr(prevSnakeArr => {
+                return [
+                    prevSnakeArr.slice(1),
+                    (Number([prevSnakeArr[prevSnakeArr.length - 1]]) - 1)
+                ].flat()
+            });
+            setDirection('up');
+        }
     }
 
-    function moveDown () {
-        setSnakeArr (prevSnakeArr => {
-           return [
-            prevSnakeArr.slice(1),
-            ([prevSnakeArr[prevSnakeArr.length-1]]+1)
-            ].flat()
-        })
+    function moveDown() {
+        if (direction != 'up') {
+            setSnakeArr(prevSnakeArr => {
+                return [
+                    prevSnakeArr.slice(1),
+                    (Number([prevSnakeArr[prevSnakeArr.length - 1]]) + 1)
+                ].flat()
+            });
+            setDirection('down')
+        }
     }
+
 
     return (
         <>
-            <div className="score">
-                {snakeArr}
+            <div>
+                DIRECTION: {direction}
             </div>
-            <button onClick={moveRight}>Move Right</button>
-            <button onClick={moveLeft}>Move Left</button>
-            <button onClick={moveDown}>Move Down</button>
-            <button onClick={moveUp}>Move Up</button>
+            <div>
+                FOOD: {food}
+            </div>
+            <div>
+                SNAKE: {snakeArr.map((i) => i + `, `)}
+            </div>
+            <div className="score">
+                SCORE: {score}
+            </div>
+            <div>
+                {gameOver ? 'GAMEOVER' : ''}
+            </div>
+            <div>
+                <button onClick={moveRight}>Move Right</button>
+                <button onClick={moveLeft}>Move Left</button>
+                <button onClick={moveDown}>Move Down</button>
+                <button onClick={moveUp}>Move Up</button>
+            </div>
+
             <div className="screen">
-                <div id="div0" className="pixel"> 00 <br></br> C0 <br></br> R0</div>
-                <div id="div10" className="pixel"> 10 <br></br> C1 <br></br> R0</div>
-                <div id="div20" className="pixel"> 20 <br></br> C2 <br></br> R0</div>
-                <div id="div30" className="pixel"> 30 <br></br> C3 <br></br> R0</div>
-                <div id="div40" className="pixel"> 40 <br></br> C4 <br></br> R0</div>
-                <div id="div50" className="pixel"> 50 <br></br> C5 <br></br> R0</div>
-                <div id="div60" className="pixel"> 60 <br></br> C6 <br></br> R0</div>
-                <div id="div70" className="pixel"> 70 <br></br> C7 <br></br> R0</div>
-                <div id="div80" className="pixel"> 80 <br></br> C8 <br></br> R0</div>
-                <div id="div90" className="pixel"> 90 <br></br> C9 <br></br> R0</div>
-                <div id="div100" className="pixel"> 100 <br></br> C10 <br></br> R0</div>
-                <div id="div110" className="pixel"> 110 <br></br> C11 <br></br> R0</div>
-                <div id="div120" className="pixel"> 120 <br></br> C12 <br></br> R0</div>
-                <div id="div130" className="pixel"> 130 <br></br> C13 <br></br> R0</div>
-                <div id="div140" className="pixel"> 140 <br></br> C14 <br></br> R0</div>
-                <div id="div150" className="pixel"> 150 <br></br> C15 <br></br> R0</div>
-                <div id="div160" className="pixel"> 160 <br></br> C16 <br></br> R0</div>
-                <div id="div170" className="pixel"> 170 <br></br> C17 <br></br> R0</div>
-                <div id="div180" className="pixel"> 180 <br></br> C18 <br></br> R0</div>
-                <div id="div190" className="pixel"> 190 <br></br> C19 <br></br> R0</div>
 
-                <div id="div1" className="pixel"> 01 <br></br> C0 <br></br> R1</div>
-                <div id="div11" className="pixel"> 11 <br></br> C1 <br></br> R1</div>
-                <div id="div21" className="pixel"> 21 <br></br> C2 <br></br> R1</div>
-                <div id="div31" className="pixel"> 31 <br></br> C3 <br></br> R1</div>
-                <div id="div41" className="pixel"> 41 <br></br> C4 <br></br> R1</div>
-                <div id="div51" className="pixel"> 51 <br></br> C5 <br></br> R1</div>
-                <div id="div61" className="pixel"> 61 <br></br> C6 <br></br> R1</div>
-                <div id="div71" className="pixel"> 71 <br></br> C7 <br></br> R1</div>
-                <div id="div81" className="pixel"> 81 <br></br> C8 <br></br> R1</div>
-                <div id="div91" className="pixel"> 91 <br></br> C9 <br></br> R1</div>
-                <div id="div101" className="pixel"> 101 <br></br> C10 <br></br> R1</div>
-                <div id="div111" className="pixel"> 111 <br></br> C11 <br></br> R1</div>
-                <div id="div121" className="pixel"> 121 <br></br> C12 <br></br> R1</div>
-                <div id="div131" className="pixel"> 131 <br></br> C13 <br></br> R1</div>
-                <div id="div141" className="pixel"> 141 <br></br> C14 <br></br> R1</div>
-                <div id="div151" className="pixel"> 151 <br></br> C15 <br></br> R1</div>
-                <div id="div161" className="pixel"> 161 <br></br> C16 <br></br> R1</div>
-                <div id="div171" className="pixel"> 171 <br></br> C17 <br></br> R1</div>
-                <div id="div181" className="pixel"> 181 <br></br> C18 <br></br> R1</div>
-                <div id="div191" className="pixel"> 191 <br></br> C19 <br></br> R1</div>
+                <div className={`pixel ${snakeArr.includes(0) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 00 </div><div> C0 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(10) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 10 </div><div> C1 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(20) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 20 </div><div> C2 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(30) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 30 </div><div> C3 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(40) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 40 </div><div> C4 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(50) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 50 </div><div> C5 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(60) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 60 </div><div> C6 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(70) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 70 </div><div> C7 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(80) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 80 </div><div> C8 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(90) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 90 </div><div> C9 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(100) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 100 </div><div> C10 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(110) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 110 </div><div> C11 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(120) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 120 </div><div> C12 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(130) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 130 </div><div> C13 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(140) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 140 </div><div> C14 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(150) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 150 </div><div> C15 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(160) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 160 </div><div> C16 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(170) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 170 </div><div> C17 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(180) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 180 </div><div> C18 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(190) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 190 </div><div> C19 </div><div> R0</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(1) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 01 </div><div> C0 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(11) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 11 </div><div> C1 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(21) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 21 </div><div> C2 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(31) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 31 </div><div> C3 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(41) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 41 </div><div> C4 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(51) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 51 </div><div> C5 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(61) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 61 </div><div> C6 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(71) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 71 </div><div> C7 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(81) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 81 </div><div> C8 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(91) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 91 </div><div> C9 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(101) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 101 </div><div> C10 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(111) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 111 </div><div> C11 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(121) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 121 </div><div> C12 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(131) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 131 </div><div> C13 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(141) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 141 </div><div> C14 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(151) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 151 </div><div> C15 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(161) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 161 </div><div> C16 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(171) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 171 </div><div> C17 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(181) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 181 </div><div> C18 </div><div> R1</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(191) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 191 </div><div> C19 </div><div> R1</div>
+                </div>
 
-
-                <div id="div2" className="pixel"> 02 <br></br> C0 <br></br> R2</div>
-                <div id="div12" className="pixel"> 12 <br></br> C1 <br></br> R2</div>
-                <div id="div22" className="pixel"> 22 <br></br> C2 <br></br> R2</div>
-                <div id="div32" className="pixel"> 32 <br></br> C3 <br></br> R2</div>
-                <div id="div42" className="pixel"> 42 <br></br> C4 <br></br> R2</div>
-                <div id="div52" className="pixel"> 52 <br></br> C5 <br></br> R2</div>
-                <div id="div62" className="pixel"> 62 <br></br> C6 <br></br> R2</div>
-                <div id="div72" className="pixel"> 72 <br></br> C7 <br></br> R2</div>
-                <div id="div82" className="pixel"> 82 <br></br> C8 <br></br> R2</div>
-                <div id="div92" className="pixel"> 92 <br></br> C9 <br></br> R2</div>
-                <div id="div102" className="pixel"> 102 <br></br> C10 <br></br> R2</div>
-                <div id="div112" className="pixel"> 112 <br></br> C11 <br></br> R2</div>
-                <div id="div122" className="pixel"> 122 <br></br> C12 <br></br> R2</div>
-                <div id="div132" className="pixel"> 132 <br></br> C13 <br></br> R2</div>
-                <div id="div142" className="pixel"> 142 <br></br> C14 <br></br> R2</div>
-                <div id="div152" className="pixel"> 152 <br></br> C15 <br></br> R2</div>
-                <div id="div162" className="pixel"> 162 <br></br> C16 <br></br> R2</div>
-                <div id="div172" className="pixel"> 172 <br></br> C17 <br></br> R2</div>
-                <div id="div182" className="pixel"> 182 <br></br> C18 <br></br> R2</div>
-                <div id="div192" className="pixel"> 192 <br></br> C19 <br></br> R2</div>
-
-                <div id="div3" className="pixel"> 03 <br></br> C0 <br></br> R3</div>
-                <div id="div13" className="pixel"> 13 <br></br> C1 <br></br> R3</div>
-                <div id="div23" className="pixel"> 23 <br></br> C2 <br></br> R3</div>
-                <div id="div33" className="pixel"> 33 <br></br> C3 <br></br> R3</div>
-                <div id="div43" className="pixel"> 43 <br></br> C4 <br></br> R3</div>
-                <div id="div53" className="pixel"> 53 <br></br> C5 <br></br> R3</div>
-                <div id="div63" className="pixel"> 63 <br></br> C6 <br></br> R3</div>
-                <div id="div73" className="pixel"> 73 <br></br> C7 <br></br> R3</div>
-                <div id="div83" className="pixel"> 83 <br></br> C8 <br></br> R3</div>
-                <div id="div93" className="pixel"> 93 <br></br> C9 <br></br> R3</div>
-                <div id="div103" className="pixel"> 103 <br></br> C10 <br></br> R3</div>
-                <div id="div113" className="pixel"> 113 <br></br> C11 <br></br> R3</div>
-                <div id="div123" className="pixel"> 123 <br></br> C12 <br></br> R3</div>
-                <div id="div133" className="pixel"> 133 <br></br> C13 <br></br> R3</div>
-                <div id="div143" className="pixel"> 143 <br></br> C14 <br></br> R3</div>
-                <div id="div153" className="pixel"> 153 <br></br> C15 <br></br> R3</div>
-                <div id="div163" className="pixel"> 163 <br></br> C16 <br></br> R3</div>
-                <div id="div173" className="pixel"> 173 <br></br> C17 <br></br> R3</div>
-                <div id="div183" className="pixel"> 183 <br></br> C18 <br></br> R3</div>
-                <div id="div193" className="pixel"> 193 <br></br> C19 <br></br> R3</div>
-
-                <div id="div4" className="pixel"> 04 <br></br> C0 <br></br> R4</div>
-                <div id="div14" className="pixel"> 14 <br></br> C1 <br></br> R4</div>
-                <div id="div24" className="pixel"> 24 <br></br> C2 <br></br> R4</div>
-                <div id="div34" className="pixel"> 34 <br></br> C3 <br></br> R4</div>
-                <div id="div44" className="pixel"> 44 <br></br> C4 <br></br> R4</div>
-                <div id="div54" className="pixel"> 54 <br></br> C5 <br></br> R4</div>
-                <div id="div64" className="pixel"> 64 <br></br> C6 <br></br> R4</div>
-                <div id="div74" className="pixel"> 74 <br></br> C7 <br></br> R4</div>
-                <div id="div84" className="pixel"> 84 <br></br> C8 <br></br> R4</div>
-                <div id="div94" className="pixel"> 94 <br></br> C9 <br></br> R4</div>
-                <div id="div104" className="pixel"> 104 <br></br> C10 <br></br> R4</div>
-                <div id="div114" className="pixel"> 114 <br></br> C11 <br></br> R4</div>
-                <div id="div124" className="pixel"> 124 <br></br> C12 <br></br> R4</div>
-                <div id="div134" className="pixel"> 134 <br></br> C13 <br></br> R4</div>
-                <div id="div144" className="pixel"> 144 <br></br> C14 <br></br> R4</div>
-                <div id="div154" className="pixel"> 154 <br></br> C15 <br></br> R4</div>
-                <div id="div164" className="pixel"> 164 <br></br> C16 <br></br> R4</div>
-                <div id="div174" className="pixel"> 174 <br></br> C17 <br></br> R4</div>
-                <div id="div184" className="pixel"> 184 <br></br> C18 <br></br> R4</div>
-                <div id="div194" className="pixel"> 194 <br></br> C19 <br></br> R4</div>
-
-                <div id="div5" className="pixel"> 05 <br></br> C0 <br></br> R5</div>
-                <div id="div15" className="pixel"> 15 <br></br> C1 <br></br> R5</div>
-                <div id="div25" className="pixel"> 25 <br></br> C2 <br></br> R5</div>
-                <div id="div35" className="pixel"> 35 <br></br> C3 <br></br> R5</div>
-                <div id="div45" className="pixel"> 45 <br></br> C4 <br></br> R5</div>
-                <div id="div55" className="pixel"> 55 <br></br> C5 <br></br> R5</div>
-                <div id="div65" className="pixel"> 65 <br></br> C6 <br></br> R5</div>
-                <div id="div75" className="pixel"> 75 <br></br> C7 <br></br> R5</div>
-                <div id="div85" className="pixel"> 85 <br></br> C8 <br></br> R5</div>
-                <div id="div95" className="pixel"> 95 <br></br> C9 <br></br> R5</div>
-                <div id="div105" className="pixel"> 105 <br></br> C10 <br></br> R5</div>
-                <div id="div115" className="pixel"> 115 <br></br> C11 <br></br> R5</div>
-                <div id="div125" className="pixel"> 125 <br></br> C12 <br></br> R5</div>
-                <div id="div135" className="pixel"> 135 <br></br> C13 <br></br> R5</div>
-                <div id="div145" className="pixel"> 145 <br></br> C14 <br></br> R5</div>
-                <div id="div155" className="pixel"> 155 <br></br> C15 <br></br> R5</div>
-                <div id="div165" className="pixel"> 165 <br></br> C16 <br></br> R5</div>
-                <div id="div175" className="pixel"> 175 <br></br> C17 <br></br> R5</div>
-                <div id="div185" className="pixel"> 185 <br></br> C18 <br></br> R5</div>
-                <div id="div195" className="pixel"> 195 <br></br> C19 <br></br> R5</div>
-
-                <div id="div6" className="pixel"> 06 <br></br> C0 <br></br> R6</div>
-                <div id="div16" className="pixel"> 16 <br></br> C1 <br></br> R6</div>
-                <div id="div26" className="pixel"> 26 <br></br> C2 <br></br> R6</div>
-                <div id="div36" className="pixel"> 36 <br></br> C3 <br></br> R6</div>
-                <div id="div46" className="pixel"> 46 <br></br> C4 <br></br> R6</div>
-                <div id="div56" className="pixel"> 56 <br></br> C5 <br></br> R6</div>
-                <div id="div66" className="pixel"> 66 <br></br> C6 <br></br> R6</div>
-                <div id="div76" className="pixel"> 76 <br></br> C7 <br></br> R6</div>
-                <div id="div86" className="pixel"> 86 <br></br> C8 <br></br> R6</div>
-                <div id="div96" className="pixel"> 96 <br></br> C9 <br></br> R6</div>
-                <div id="div106" className="pixel"> 106 <br></br> C10 <br></br> R6</div>
-                <div id="div116" className="pixel"> 116 <br></br> C11 <br></br> R6</div>
-                <div id="div126" className="pixel"> 126 <br></br> C12 <br></br> R6</div>
-                <div id="div136" className="pixel"> 136 <br></br> C13 <br></br> R6</div>
-                <div id="div146" className="pixel"> 146 <br></br> C14 <br></br> R6</div>
-                <div id="div156" className="pixel"> 156 <br></br> C15 <br></br> R6</div>
-                <div id="div166" className="pixel"> 166 <br></br> C16 <br></br> R6</div>
-                <div id="div176" className="pixel"> 176 <br></br> C17 <br></br> R6</div>
-                <div id="div186" className="pixel"> 186 <br></br> C18 <br></br> R6</div>
-                <div id="div196" className="pixel"> 196 <br></br> C19 <br></br> R6</div>
-
-                <div id="div7" className="pixel"> 07 <br></br> C0 <br></br> R7</div>
-                <div id="div17" className="pixel"> 17 <br></br> C1 <br></br> R7</div>
-                <div id="div27" className="pixel"> 27 <br></br> C2 <br></br> R7</div>
-                <div id="div37" className="pixel"> 37 <br></br> C3 <br></br> R7</div>
-                <div id="div47" className="pixel"> 47 <br></br> C4 <br></br> R7</div>
-                <div id="div57" className="pixel"> 57 <br></br> C5 <br></br> R7</div>
-                <div id="div67" className="pixel"> 67 <br></br> C6 <br></br> R7</div>
-                <div id="div77" className="pixel"> 77 <br></br> C7 <br></br> R7</div>
-                <div id="div87" className="pixel"> 87 <br></br> C8 <br></br> R7</div>
-                <div id="div97" className="pixel"> 97 <br></br> C9 <br></br> R7</div>
-                <div id="div107" className="pixel"> 107 <br></br> C10 <br></br> R7</div>
-                <div id="div117" className="pixel"> 117 <br></br> C11 <br></br> R7</div>
-                <div id="div127" className="pixel"> 127 <br></br> C12 <br></br> R7</div>
-                <div id="div137" className="pixel"> 137 <br></br> C13 <br></br> R7</div>
-                <div id="div147" className="pixel"> 147 <br></br> C14 <br></br> R7</div>
-                <div id="div157" className="pixel"> 157 <br></br> C15 <br></br> R7</div>
-                <div id="div167" className="pixel"> 167 <br></br> C16 <br></br> R7</div>
-                <div id="div177" className="pixel"> 177 <br></br> C17 <br></br> R7</div>
-                <div id="div187" className="pixel"> 187 <br></br> C18 <br></br> R7</div>
-                <div id="div197" className="pixel"> 197 <br></br> C19 <br></br> R7</div>
-
-                <div id="div8" className="pixel"> 08 <br></br> C0 <br></br> R8</div>
-                <div id="div18" className="pixel"> 18 <br></br> C1 <br></br> R8</div>
-                <div id="div28" className="pixel"> 28 <br></br> C2 <br></br> R8</div>
-                <div id="div38" className="pixel"> 38 <br></br> C3 <br></br> R8</div>
-                <div id="div48" className="pixel"> 48 <br></br> C4 <br></br> R8</div>
-                <div id="div58" className="pixel"> 58 <br></br> C5 <br></br> R8</div>
-                <div id="div68" className="pixel"> 68 <br></br> C6 <br></br> R8</div>
-                <div id="div78" className="pixel"> 78 <br></br> C7 <br></br> R8</div>
-                <div id="div88" className="pixel"> 88 <br></br> C8 <br></br> R8</div>
-                <div id="div98" className="pixel"> 98 <br></br> C9 <br></br> R8</div>
-                <div id="div108" className="pixel"> 108 <br></br> C10 <br></br> R8</div>
-                <div id="div118" className="pixel"> 118 <br></br> C11 <br></br> R8</div>
-                <div id="div128" className="pixel"> 128 <br></br> C12 <br></br> R8</div>
-                <div id="div138" className="pixel"> 138 <br></br> C13 <br></br> R8</div>
-                <div id="div148" className="pixel"> 148 <br></br> C14 <br></br> R8</div>
-                <div id="div158" className="pixel"> 158 <br></br> C15 <br></br> R8</div>
-                <div id="div168" className="pixel"> 168 <br></br> C16 <br></br> R8</div>
-                <div id="div178" className="pixel"> 178 <br></br> C17 <br></br> R8</div>
-                <div id="div188" className="pixel"> 188 <br></br> C18 <br></br> R8</div>
-                <div id="div198" className="pixel"> 198 <br></br> C19 <br></br> R8</div>
-
-                <div id="div9" className="pixel"> 09 <br></br> C0 <br></br> R9</div>
-                <div id="div19" className="pixel"> 19 <br></br> C1 <br></br> R9</div>
-                <div id="div29" className="pixel"> 29 <br></br> C2 <br></br> R9</div>
-                <div id="div39" className="pixel"> 39 <br></br> C3 <br></br> R9</div>
-                <div id="div49" className="pixel"> 49 <br></br> C4 <br></br> R9</div>
-                <div id="div59" className="pixel"> 59 <br></br> C5 <br></br> R9</div>
-                <div id="div69" className="pixel"> 69 <br></br> C6 <br></br> R9</div>
-                <div id="div79" className="pixel"> 79 <br></br> C7 <br></br> R9</div>
-                <div id="div89" className="pixel"> 89 <br></br> C8 <br></br> R9</div>
-                <div id="div99" className="pixel"> 99 <br></br> C9 <br></br> R9</div>
-                <div id="div109" className="pixel"> 109 <br></br> C10 <br></br> R9</div>
-                <div id="div119" className="pixel"> 119 <br></br> C11 <br></br> R9</div>
-                <div id="div129" className="pixel"> 129 <br></br> C12 <br></br> R9</div>
-                <div id="div139" className="pixel"> 139 <br></br> C13 <br></br> R9</div>
-                <div id="div149" className="pixel"> 149 <br></br> C14 <br></br> R9</div>
-                <div id="div159" className="pixel"> 159 <br></br> C15 <br></br> R9</div>
-                <div id="div169" className="pixel"> 169 <br></br> C16 <br></br> R9</div>
-                <div id="div179" className="pixel"> 179 <br></br> C17 <br></br> R9</div>
-                <div id="div189" className="pixel"> 189 <br></br> C18 <br></br> R9</div>
-                <div id="div199" className="pixel"> 199 <br></br> C19 <br></br> R9</div>
-
+                <div className={`pixel ${snakeArr.includes(2) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 02 </div><div> C0 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(12) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 12 </div><div> C1 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(22) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 22 </div><div> C2 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(32) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 32 </div><div> C3 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(42) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 42 </div><div> C4 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(52) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 52 </div><div> C5 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(62) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 62 </div><div> C6 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(72) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 72 </div><div> C7 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(82) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 82 </div><div> C8 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(92) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 92 </div><div> C9 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(102) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 102 </div><div> C10 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(112) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 112 </div><div> C11 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(122) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 122 </div><div> C12 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(132) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 132 </div><div> C13 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(142) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 142 </div><div> C14 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(152) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 152 </div><div> C15 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(162) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 162 </div><div> C16 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(172) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 172 </div><div> C17 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(182) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 182 </div><div> C18 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(192) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 192 </div><div> C19 </div><div> R2</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(3) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 03 </div><div> C0 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(13) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 13 </div><div> C1 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(23) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 23 </div><div> C2 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(33) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 33 </div><div> C3 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(43) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 43 </div><div> C4 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(53) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 53 </div><div> C5 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(63) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 63 </div><div> C6 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(73) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 73 </div><div> C7 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(83) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 83 </div><div> C8 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(93) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 93 </div><div> C9 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(103) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 103 </div><div> C10 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(113) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 113 </div><div> C11 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(123) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 123 </div><div> C12 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(133) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 133 </div><div> C13 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(143) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 143 </div><div> C14 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(153) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 153 </div><div> C15 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(163) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 163 </div><div> C16 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(173) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 173 </div><div> C17 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(183) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 183 </div><div> C18 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(193) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 193 </div><div> C19 </div><div> R3</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(4) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 04 </div><div> C0 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(14) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 14 </div><div> C1 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(24) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 24 </div><div> C2 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(34) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 34 </div><div> C3 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(44) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 44 </div><div> C4 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(54) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 54 </div><div> C5 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(64) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 64 </div><div> C6 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(74) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 74 </div><div> C7 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(84) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 84 </div><div> C8 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(94) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 94 </div><div> C9 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(104) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 104 </div><div> C10 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(114) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 114 </div><div> C11 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(124) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 124 </div><div> C12 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(134) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 134 </div><div> C13 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(144) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 144 </div><div> C14 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(154) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 154 </div><div> C15 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(164) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 164 </div><div> C16 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(174) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 174 </div><div> C17 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(184) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 184 </div><div> C18 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(194) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 194 </div><div> C19 </div><div> R4</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(5) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 05 </div><div> C0 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(15) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 15 </div><div> C1 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(25) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 25 </div><div> C2 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(35) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 35 </div><div> C3 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(45) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 45 </div><div> C4 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(55) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 55 </div><div> C5 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(65) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 65 </div><div> C6 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(75) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 75 </div><div> C7 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(85) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 85 </div><div> C8 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(95) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 95 </div><div> C9 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(105) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 105 </div><div> C10 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(115) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 115 </div><div> C11 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(125) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 125 </div><div> C12 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(135) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 135 </div><div> C13 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(145) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 145 </div><div> C14 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(155) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 155 </div><div> C15 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(165) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 165 </div><div> C16 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(175) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 175 </div><div> C17 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(185) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 185 </div><div> C18 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(195) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 195 </div><div> C19 </div><div> R5</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(6) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 06 </div><div> C0 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(16) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 16 </div><div> C1 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(26) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 26 </div><div> C2 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(36) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 36 </div><div> C3 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(46) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 46 </div><div> C4 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(56) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 56 </div><div> C5 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(66) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 66 </div><div> C6 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(76) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 76 </div><div> C7 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(86) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 86 </div><div> C8 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(96) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 96 </div><div> C9 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(106) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 106 </div><div> C10 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(116) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 116 </div><div> C11 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(126) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 126 </div><div> C12 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(136) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 136 </div><div> C13 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(146) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 146 </div><div> C14 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(156) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 156 </div><div> C15 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(166) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 166 </div><div> C16 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(176) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 176 </div><div> C17 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(186) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 186 </div><div> C18 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(196) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 196 </div><div> C19 </div><div> R6</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(7) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 07 </div><div> C0 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(17) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 17 </div><div> C1 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(27) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 27 </div><div> C2 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(37) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 37 </div><div> C3 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(47) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 47 </div><div> C4 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(57) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 57 </div><div> C5 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(67) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 67 </div><div> C6 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(77) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 77 </div><div> C7 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(87) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 87 </div><div> C8 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(97) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 97 </div><div> C9 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(107) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 107 </div><div> C10 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(117) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 117 </div><div> C11 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(127) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 127 </div><div> C12 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(137) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 137 </div><div> C13 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(147) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 147 </div><div> C14 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(157) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 157 </div><div> C15 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(167) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 167 </div><div> C16 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(177) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 177 </div><div> C17 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(187) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 187 </div><div> C18 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(197) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 197 </div><div> C19 </div><div> R7</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(8) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 08 </div><div> C0 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(18) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 18 </div><div> C1 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(28) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 28 </div><div> C2 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(38) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 38 </div><div> C3 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(48) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 48 </div><div> C4 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(58) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 58 </div><div> C5 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(68) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 68 </div><div> C6 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(78) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 78 </div><div> C7 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(88) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 88 </div><div> C8 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(98) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 98 </div><div> C9 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(108) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 108 </div><div> C10 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(118) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 118 </div><div> C11 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(128) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 128 </div><div> C12 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(138) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 138 </div><div> C13 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(148) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 148 </div><div> C14 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(158) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 158 </div><div> C15 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(168) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 168 </div><div> C16 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(178) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 178 </div><div> C17 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(188) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 188 </div><div> C18 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(198) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 198 </div><div> C19 </div><div> R8</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(9) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 09 </div><div> C0 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(19) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 19 </div><div> C1 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(29) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 29 </div><div> C2 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(39) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 39 </div><div> C3 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(49) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 49 </div><div> C4 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(59) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 59 </div><div> C5 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(69) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 69 </div><div> C6 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(79) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 79 </div><div> C7 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(89) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 89 </div><div> C8 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(99) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 99 </div><div> C9 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(109) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 109 </div><div> C10 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(119) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 119 </div><div> C11 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(129) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 129 </div><div> C12 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(139) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 139 </div><div> C13 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(149) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 149 </div><div> C14 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(159) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 159 </div><div> C15 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(169) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 169 </div><div> C16 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(179) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 179 </div><div> C17 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(189) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 189 </div><div> C18 </div><div> R9</div>
+                </div>
+                <div className={`pixel ${snakeArr.includes(199) ? 'black' : 'green'}`}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div> 199 </div><div> C19 </div><div> R9</div>
+                </div>
             </div>
         </>
     )
