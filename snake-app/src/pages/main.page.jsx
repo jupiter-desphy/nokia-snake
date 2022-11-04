@@ -1,17 +1,49 @@
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
+import Board from "../components/Board.jsx";
+// import useInterval from "../helpers/useinterval.js";
+import {
+    DIRECTIONS
+} from '../constants';
 
 export function MainPage(props) {
-    const [snakeArr, setSnakeArr] = useState([64, 74, 84, 94, 104]);
+
+    //2D Array
+    const columns = 20;
+    const rows = 10;
+    const gridItems = [];
+    for (let i = 0; i < columns; i++) {
+        gridItems.push(new Array(rows))
+        for (let j = 0; j < rows; j++) {
+            //Feels a little redundant??
+            gridItems[i][j] = [i, j];
+        }
+    }
+    console.log(gridItems);
+
+    //What you currently have
+    // const gridItems = [];
+    // for (let i = 0; i < 200; i++){
+    //     gridItems[i] = i;
+    // }
+
+    const [snakeArr, setSnakeArr] = useState([
+        [6, 4],
+        [7, 4],
+        [8, 4],
+        [9, 4],
+        [10, 4]
+    ]);
     const [gameOver, setGameOver] = useState(false);
     const [score, setScore] = useState(0);
     const [direction, setDirection] = useState('right');
-    const [food, setFood] = useState(Math.floor(Math.random() * 200));
+    const [food, setFood] = useState([Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)]);
 
     function randomizeFood() {
-        setFood(Math.floor(Math.random() * 200));
-        if (snakeArr.includes(food)) {
-            randomizeFood();
+        let foodCoordinates = [Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)];
+        while (snakeArr.includes(foodCoordinates)) { //includes shouldn't work anymore
+            foodCoordinates = [Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)];
         }
+        setFood(foodCoordinates);
     }
 
     const gameLoop = () => {
@@ -21,27 +53,30 @@ export function MainPage(props) {
     // useInterval()
 
     // function eatFood() {
-        
+
     // }
 
     function moveRight() {
-        const head = snakeArr[snakeArr.length - 1] 
+        const head = snakeArr[snakeArr.length - 1]
         const lunch = food
         if (direction != 'left') {
-            if (head  == lunch) {
+            if (head == lunch) {
+                // console.log('log1', snakeArr)
                 setSnakeArr(prevSnakeArr => {
                     return [
                         prevSnakeArr,
                         (Number([prevSnakeArr[prevSnakeArr.length - 1]]) + 10)
                     ].flat()
                 });
+                console.log('before randomizefood', snakeArr)
                 randomizeFood()
+                console.log('after randomize', snakeArr)
             } else {
                 setSnakeArr(prevSnakeArr => {
-                    return [
-                        prevSnakeArr.slice(1),
-                        (Number([prevSnakeArr[prevSnakeArr.length - 1]]) + 10)
-                    ].flat()
+                    let tempThing = prevSnakeArr.slice(1);
+                    tempThing.push(Number([prevSnakeArr[prevSnakeArr.length - 1]]) + 10);
+                    return tempThing;
+
                 });
             }
 
@@ -88,6 +123,9 @@ export function MainPage(props) {
         }
     }
 
+    useEffect(() => {
+
+    }, [snakeArr, food, gameOver])
 
     return (
         <>
@@ -118,6 +156,22 @@ export function MainPage(props) {
             </div>
 
             <div className="screen">
+                <Board theGrid={gridItems} snakeArr={snakeArr} food={food} />
+
+
+                {/*
+
+<div className={`pixel ${snakeArr.includes(ind) ? 'black' : ''} ${food == ind ? 'food' : ''}`}>
+    <div className="px1"></div>
+    <div className="px2"></div>
+    <div className="px3"></div>
+    <div className="px4"></div>
+    <div className="px5"></div>
+    <div className="px6"></div>
+    <div className="px7">{ind}</div>
+    <div className="px8"></div>
+    <div className="px9"></div>
+</div>
 
                 <div className={`pixel ${snakeArr.includes(0) ? 'black' : ''} ${food == 0 ? 'food' : ''}`}>
                     <div className="px1"></div>
@@ -2319,7 +2373,7 @@ export function MainPage(props) {
                     <div className="px7"> 199 </div>
                     <div className="px8"> C19 </div>
                     <div className="px9"> R9</div>
-                </div>
+                </div> */}
             </div>
         </>
     )
