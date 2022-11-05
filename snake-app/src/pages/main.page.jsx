@@ -7,25 +7,18 @@ import {
 
 export function MainPage(props) {
 
-    //2D Array
+/* Gameboard 2D Array */
     const columns = 20;
     const rows = 10;
-    const gridItems = [];
-    for (let i = 0; i < columns; i++) {
-        gridItems.push(new Array(rows))
-        for (let j = 0; j < rows; j++) {
-            //Feels a little redundant??
-            gridItems[i][j] = [i, j];
+    const gameBoard = [];
+    for (let i = 0; i < rows; i++) {
+        gameBoard.push(new Array(rows))
+        for (let j = 0; j < columns; j++) {
+            gameBoard[i][j] = [j, i];
         }
     }
-    console.log(gridItems);
 
-    //What you currently have
-    // const gridItems = [];
-    // for (let i = 0; i < 200; i++){
-    //     gridItems[i] = i;
-    // }
-
+/* STATE */
     const [snakeArr, setSnakeArr] = useState([
         [6, 4],
         [7, 4],
@@ -35,8 +28,9 @@ export function MainPage(props) {
     ]);
     const [gameOver, setGameOver] = useState(false);
     const [score, setScore] = useState(0);
-    const [direction, setDirection] = useState('right');
+    const [direction, setDirection] = useState([1, 0]);
     const [food, setFood] = useState([Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)]);
+
 
     function randomizeFood() {
         let foodCoordinates = [Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)];
@@ -123,6 +117,8 @@ export function MainPage(props) {
         }
     }
 
+
+
     useEffect(() => {
 
     }, [snakeArr, food, gameOver])
@@ -156,7 +152,7 @@ export function MainPage(props) {
             </div>
 
             <div className="screen">
-                <Board theGrid={gridItems} snakeArr={snakeArr} food={food} />
+                <Board theGrid={gameBoard} snakeArr={snakeArr} food={food} />
 
 
                 {/*
