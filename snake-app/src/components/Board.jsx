@@ -13,14 +13,16 @@ export default function Board({ theGrid, snakeArr, food }) {
         //and the the snakeArr [[x, y], [x, y] ,[x, y], [x, y]]
         //and the food
         let gridItemState = null;
-        if (currentItem[0] == food[0] && currentItem[1] == food[1]) {
-            return "food";
-        };
+
         for (let i = 0; i < snakeArr.length; i++) {
             if (currentItem[0] == snakeArr[i][0] && currentItem[1] == snakeArr[i][1]) {
                 return "snake";
             }
         }
+
+        if (currentItem[0] == food[0] && currentItem[1] == food[1]) {
+            return "food";
+        };
 
         return "";
     }
@@ -28,7 +30,6 @@ export default function Board({ theGrid, snakeArr, food }) {
     return (
         <>
             {theGrid.map((rowArray, ind) => {
-                console.log('rows', rowArray);
                 return (
                     rowArray.map((item, i) => {
                         return <SingleGridItem pixelState={generateGridState(item)} key={`${ind}+${i}`} />
