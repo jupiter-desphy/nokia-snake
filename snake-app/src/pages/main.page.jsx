@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import Board from "../components/Board.jsx";
 // import useInterval from "../helpers/useinterval.js";
 import {
-    DIRECTIONS
+    SNAKE_START
 } from '../constants';
 import useInterval from "../helpers/useinterval.js";
 import arrayIncludes from "../helpers/arrayIncludes.js";
@@ -15,32 +15,22 @@ export function MainPage(props) {
 
 
     /* STATE */
-    const [snakeArr, setSnakeArr] = useState([
-        [10, 4],
-        [9, 4],
-        [8, 4],
-        [7, 4],
-        [6, 4]
-    ]);
+    const [snakeArr, setSnakeArr] = useState(SNAKE_START);
     const [gameOver, setGameOver] = useState(false);
     const [score, setScore] = useState(0);
     const [food, setFood] = useState([Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)]);
     const [direction, setDirection] = useState([1, 0]);
     const [speed, setSpeed] = useState(null);
+    const [prevDirection, setPrevDirection] = useState([]);
 
     /* FUNCTIONS */
 
     const startGame = () => {
-        setSnakeArr([
-            [10, 4],
-            [9, 4],
-            [8, 4],
-            [7, 4],
-            [6, 4]
-        ]);
+        setSnakeArr(SNAKE_START);
         setDirection([1, 0]);
-        setSpeed(280);
+        setSpeed(270);
         setGameOver(false);
+        setScore(0)
 
     }
 
@@ -52,24 +42,31 @@ export function MainPage(props) {
 
     function randomizeFood() {
         let foodCoordinates = [Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)];
-        // while (snakeArr.includes(foodCoordinates)) { //includes shouldn't work anymore
-        //     foodCoordinates = [Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)];
-        // }
+        for (let i = 0; i < snakeArr.length; i++) {
+            while (snakeArr[i][0] == foodCoordinates[0] && snakeArr[i][0]) {
+                foodCoordinates = [Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)];
+            }
+        }
         setFood(foodCoordinates);
     }
 
 
     const checkCollision = (piece, snk = snakeArr) => {
+
         if (
-            piece[0] >= 20 ||
+            piece[0] >= columns ||
             piece[0] < 0 ||
             piece[1] >= rows ||
             piece[1] < 0
         )
             return true;
 
-        for (const segment of snk) {
-            if (piece[0] === segment[0] && piece[1] === segment[1]) { return true; }
+        // for (const segment of snk) {
+        //     if (piece[0] === segment[0] && piece[1] === segment[1]) {
+        //         console.log(piece, 'segment', segment)
+        for (let i = 0; i < snk.length -1; i++){
+            if(piece[0] === snk[i][0] && piece[1] === snk[i][1])
+                return true;
         }
         return false;
     };
@@ -78,15 +75,37 @@ export function MainPage(props) {
 
     const gameLoop = () => {
         const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
-        const newSnakeHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1]];
+        const newSnakeHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1], snakeCopy[0][2]];
+
+        if (direction[0] == 0 && direction[1] == 1){
+            newSnakeHead[2] = 'D'
+        }
+        if (direction[0] == -1 && direction[1] == 0){
+            newSnakeHead[2] = 'L'
+        }
+        if (direction[0] == 0 && direction[1] == -1){
+            newSnakeHead[2] = 'U'
+        }
+        if (direction[0] == 1 && direction[1] == 0){
+            newSnakeHead[2] = 'R'
+        }
+
         snakeCopy.unshift(newSnakeHead);
-        console.log('snakeCopy', snakeCopy)
+
+        const logDirection = [direction[0], direction[1]];
+        setPrevDirection(logDirection);
+
+
+
         if (checkCollision(newSnakeHead)) {
             endGame()
         };
+
         if (snakeCopy[0][0] === food[0] && snakeCopy[0][1] === food[1]) {
             setSnakeArr(snakeCopy);
             randomizeFood();
+            setScore((prevScore) => prevScore + 10);
+            setSpeed((prevSpeed) => prevSpeed - 2);
         } else snakeCopy.pop();
 
 
@@ -101,37 +120,37 @@ export function MainPage(props) {
     // }
 
     const moveLeft = () => {
-        if (direction[0] != 1 && direction[1] != 0) {
+        if (prevDirection[0] != 1 && prevDirection[1] != 0) {
             setDirection([-1, 0]);
-            const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
-            const nextHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1]];
-            if (checkCollision(nextHead)) endGame();
+            // const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
+            // const nextHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1]];
+            // if (checkCollision(nextHead)) endGame();
         }
     }
 
     const moveUp = () => {
-        if (direction[0] != 0 && direction[1] != 1) {
+        if (prevDirection[0] != 0 && prevDirection[1] != 1) {
             setDirection([0, -1]);
-            const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
-            const nextHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1]];
-            if (checkCollision(nextHead)) endGame();
+            // const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
+            // const nextHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1]];
+            // if (checkCollision(nextHead)) endGame();
         }
     }
 
     const moveRight = () => {
-        if (direction[0] != -1 && direction[1] != 0) {
+        if (prevDirection[0] != -1 && prevDirection[1] != 0) {
             setDirection([1, 0]);
-            const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
-            const nextHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1]];
-            if (checkCollision(nextHead)) endGame();
+            // const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
+            // const nextHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1]];
+            // if (checkCollision(nextHead)) endGame();
         }
     }
     const moveDown = () => {
-        if (direction[0] != 0 && direction[1] != -1) {
+        if (prevDirection[0] != 0 && prevDirection[1] != -1) {
             setDirection([0, 1]);
-            const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
-            const nextHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1]];
-            if (checkCollision(nextHead)) endGame();
+            // const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
+            // const nextHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1]];
+            // if (checkCollision(nextHead)) endGame();
         }
     }
 
@@ -156,18 +175,13 @@ export function MainPage(props) {
         for (let i = 0; i < rows; i++) {
             game.push(new Array(rows))
             for (let j = 0; j < columns; j++) {
-                game[i][j] = [j, i];
+                game[i][j] = [j, i, null];
             }
         }
     }
 
 
     designBoard(gameBoard.current);
-
-    useEffect(() => {
-
-
-    }, [snakeArr, food, gameOver]);
 
     useInterval(() => gameLoop(), speed);
 
@@ -176,6 +190,7 @@ export function MainPage(props) {
             <div className="score">
                 SCORE: {score}
             </div>
+
 
             <div>
                 <button onClick={gameLoop}>GAME LOOP</button>
@@ -200,6 +215,12 @@ export function MainPage(props) {
             <div>
                 {gameOver ? 'GAMEOVER' : ''}
             </div>
+            {/* <span>
+                SNAKE ARRAY: {snakeArr + ''}
+            </span> */}
+            {/* <span>
+                PREV DIR: {prevDirection + ''}
+            </span> */}
         </div>
     )
 }

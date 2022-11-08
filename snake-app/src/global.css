@@ -16,40 +16,64 @@ body {
   display: grid;
   grid-template-columns: repeat(20, 1fr);
   grid-template-rows: repeat(10, 1fr);
-  border: 1px solid rgb(23, 23, 23);
+  border: .5rem solid rgb(23, 23, 23);
 }
 
 .pixel {
-  border: 1px solid rgb(95, 164, 95);
+  /* border: .01rem solid rgb(95, 164, 95); */
   background-color: rgb(126, 189, 126);
   font-size: .5rem;
   color: black;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
 }
 
-.snake div {
+/* .snake .scale {
   background-color: rgb(35, 35, 35);
-  border: 1px solid rgb(95, 164, 95);
+  border: .01rem solid rgb(95, 164, 95);
+} */
+
+.snake-right .right {
+  background-color: rgb(35, 35, 35);
+  border: .01rem solid rgb(95, 164, 95);
 }
 
-.food .px2 {
+.snake-down .down {
   background-color: rgb(35, 35, 35);
-  border: 1px solid rgb(95, 164, 95);
+  border: .01rem solid rgb(95, 164, 95);
 }
 
-.food .px4 {
+.snake-left .left {
   background-color: rgb(35, 35, 35);
-  border: 1px solid rgb(95, 164, 95);
+  border: .01rem solid rgb(95, 164, 95);
 }
 
-.food .px6 {
+.snake-up .up {
   background-color: rgb(35, 35, 35);
-  border: 1px solid rgb(95, 164, 95);
+  border: .01rem solid rgb(95, 164, 95);
 }
 
-.food .px8 {
+.snake-right-head .r-h, .snake-right-tail .r-t,
+.snake-left-head .l-h, .snake-left-tail .l-t,
+.snake-up-head .u-h, .snake-up-tail .u-t,
+.snake-down-head .d-h, .snake-down-tail .d-t,
+.northeast .n-e,
+.northwest .n-w,
+.southeast .s-e,
+.southwest .s-w
+{
   background-color: rgb(35, 35, 35);
-  border: 1px solid rgb(95, 164, 95);
+  border: .01rem solid rgb(95, 164, 95);
+}
+
+.food .food-pixel {
+  background-color: rgb(35, 35, 35);
+  border: .01rem solid rgb(95, 164, 95);
+}
+
+span {
+  display: flex;
+  max-width: 600px;
+  flex-wrap: wrap;
 }
