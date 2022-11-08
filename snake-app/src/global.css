@@ -34,39 +34,22 @@ body {
   border: .01rem solid rgb(95, 164, 95);
 } */
 
-.snake-right .right {
-  background-color: rgb(35, 35, 35);
-  border: .01rem solid rgb(95, 164, 95);
-}
-
-.snake-down .down {
-  background-color: rgb(35, 35, 35);
-  border: .01rem solid rgb(95, 164, 95);
-}
-
-.snake-left .left {
-  background-color: rgb(35, 35, 35);
-  border: .01rem solid rgb(95, 164, 95);
-}
-
-.snake-up .up {
-  background-color: rgb(35, 35, 35);
-  border: .01rem solid rgb(95, 164, 95);
-}
-
-.snake-right-head .r-h, .snake-right-tail .r-t,
-.snake-left-head .l-h, .snake-left-tail .l-t,
-.snake-up-head .u-h, .snake-up-tail .u-t,
-.snake-down-head .d-h, .snake-down-tail .d-t,
+.snake-right .right,
+.snake-down .down,
+.snake-left .left,
+.snake-up .up,
+.right-head .r-h, .right-tail .r-t,
+.left-head .l-h, .left-tail .l-t,
+.up-head .u-h, .up-tail .u-t,
+.down-head .d-h, .down-tail .d-t,
 .northeast .n-e,
 .northwest .n-w,
 .southeast .s-e,
-.southwest .s-w
-{
-  background-color: rgb(35, 35, 35);
-  border: .01rem solid rgb(95, 164, 95);
-}
-
+.southwest .s-w,
+.right-feed .r-f,
+.left-feed .l-f,
+.up-feed .u-f,
+.down-feed .d-f,
 .food .food-pixel {
   background-color: rgb(35, 35, 35);
   border: .01rem solid rgb(95, 164, 95);

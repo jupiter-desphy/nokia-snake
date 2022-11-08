@@ -40,19 +40,25 @@ export function MainPage(props) {
 
     }
 
-    function randomizeFood() {
+    const randomizeFood = () => {
+        let snakeClone = snakeArr
         let foodCoordinates = [Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)];
-        for (let i = 0; i < snakeArr.length; i++) {
-            while (snakeArr[i][0] == foodCoordinates[0] && snakeArr[i][0]) {
+        for (const segment of snakeClone) {
+            while (foodCoordinates[0] === segment[0] && foodCoordinates[1] === segment[1]) {
                 foodCoordinates = [Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)];
             }
         }
+        // let foodCoordinates = [Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)];
+        // for (let i = 0; i < snakeArr.length; i++) {
+        //     while (snakeArr[i][0] == foodCoordinates[0] && snakeArr[i][0]) {
+        //         foodCoordinates = [Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)];
+        //     }
+        // }
         setFood(foodCoordinates);
     }
 
 
     const checkCollision = (piece, snk = snakeArr) => {
-
         if (
             piece[0] >= columns ||
             piece[0] < 0 ||
@@ -64,6 +70,7 @@ export function MainPage(props) {
         // for (const segment of snk) {
         //     if (piece[0] === segment[0] && piece[1] === segment[1]) {
         //         console.log(piece, 'segment', segment)
+        
         for (let i = 0; i < snk.length -1; i++){
             if(piece[0] === snk[i][0] && piece[1] === snk[i][1])
                 return true;
@@ -94,8 +101,6 @@ export function MainPage(props) {
 
         const logDirection = [direction[0], direction[1]];
         setPrevDirection(logDirection);
-
-
 
         if (checkCollision(newSnakeHead)) {
             endGame()

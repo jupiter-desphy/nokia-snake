@@ -17,13 +17,13 @@ export default function Board({ theGrid, snakeArr, food }) {
 
 
             if(i == snakeArr.length-1 && currentItem[0] == snakeArr[snakeArr.length-2][0]-1 && snakeArr[snakeArr.length-1][1] == snakeArr[snakeArr.length-2][1] && currentItem[0] == snakeArr[i][0] && currentItem[1] == snakeArr[i][1]) {
-                return "snake-right-tail"
+                return "right-tail"
             } else if(i == snakeArr.length-1 && currentItem[0] == snakeArr[snakeArr.length-2][0]+1 && snakeArr[snakeArr.length-1][1] == snakeArr[snakeArr.length-2][1] && currentItem[0] == snakeArr[i][0] && currentItem[1] == snakeArr[i][1]) {
-                return "snake-left-tail"
+                return "left-tail"
             } else if(i == snakeArr.length-1 && currentItem[0] == snakeArr[snakeArr.length-2][0] && currentItem[1] == snakeArr[snakeArr.length-2][1]-1 && currentItem[0] == snakeArr[i][0] && currentItem[1] == snakeArr[i][1]) {
-                return "snake-down-tail"
+                return "down-tail"
             } else if(i == snakeArr.length-1 && currentItem[0] == snakeArr[snakeArr.length-2][0] && currentItem[1] == snakeArr[snakeArr.length-2][1]+1 && currentItem[0] == snakeArr[i][0] && currentItem[1] == snakeArr[i][1]) {
-                return "snake-up-tail"
+                return "up-tail"
             } else
             // if(i == snakeArr.length-1 && snakeArr[snakeArr.length-1][0]+1 == snakeArr[snakeArr.length-2][0]+1 && currentItem[0] == snakeArr[i][0] && currentItem[1] == snakeArr[i][1]) {
             //     return "snake-left-tail"
@@ -48,7 +48,10 @@ export default function Board({ theGrid, snakeArr, food }) {
             } else
             if (currentItem[0] == snakeArr[i][0] && currentItem[1] == snakeArr[i][1] && snakeArr[i][2] == 'D') {
                 if(currentItem[0] == snakeArr[0][0] && currentItem[1] == snakeArr[0][1] && snakeArr[0][2] == 'D') {
-                    return "snake-down-head"
+                    if(currentItem[0] == food[0] && currentItem[1] == food[1]-1) {
+                        return "down-feed"
+                    } else
+                    return "down-head"
                 } else
                 return "snake-down";
             }
@@ -57,7 +60,10 @@ export default function Board({ theGrid, snakeArr, food }) {
         for (let i = 0; i < snakeArr.length; i++) {
             if (currentItem[0] == snakeArr[i][0] && currentItem[1] == snakeArr[i][1] && snakeArr[i][2] == 'R') {
                 if(currentItem[0] == snakeArr[0][0] && currentItem[1] == snakeArr[0][1] && snakeArr[0][2] == 'R') {
-                    return "snake snake-right-head"
+                    if(currentItem[0] == food[0]-1 && currentItem[1] == food[1]) {
+                        return "right-feed"
+                    } else
+                    return "snake right-head"
                 } else
                 return "snake snake-right";
             }
@@ -67,9 +73,12 @@ export default function Board({ theGrid, snakeArr, food }) {
         for (let i = 0; i < snakeArr.length; i++) {
             if (currentItem[0] == snakeArr[i][0] && currentItem[1] == snakeArr[i][1] && snakeArr[i][2] == 'L') {
                 if(currentItem[0] == snakeArr[0][0] && currentItem[1] == snakeArr[0][1] && snakeArr[0][2] == 'L') {
-                    return "snake snake-left-head"
+                    if(currentItem[0] == food[0]+1 && currentItem[1] == food[1]) {
+                        return "left-feed"
+                    } else
+                    return "snake left-head"
                 // } else if(currentItem[0] == snakeArr[snakeArr.length-1][0] && currentItem[1] == snakeArr[snakeArr.length-1][1] && snakeArr[snakeArr.length-1][2] == 'L') {
-                //     return "snake snake-left-tail"
+                //     return "snake left-tail"
                 } else
                 return "snake snake-left";
             }
@@ -78,7 +87,10 @@ export default function Board({ theGrid, snakeArr, food }) {
         for (let i = 0; i < snakeArr.length; i++) {
             if (currentItem[0] == snakeArr[i][0] && currentItem[1] == snakeArr[i][1] && snakeArr[i][2] == 'U') {
                 if(currentItem[0] == snakeArr[0][0] && currentItem[1] == snakeArr[0][1] && snakeArr[0][2] == 'U') {
-                    return "snake snake-up-head"
+                    if(currentItem[0] == food[0] && currentItem[1] == food[1]+1) {
+                        return "up-feed"
+                    } else
+                    return "snake up-head"
                 } else
                 return "snake snake-up";
             }
@@ -86,11 +98,11 @@ export default function Board({ theGrid, snakeArr, food }) {
         
 
 
-        for (let i = 0; i < snakeArr.length; i++) {
-            if (currentItem[0] == snakeArr[i][0] && currentItem[1] == snakeArr[i][1]) {
-                return "snake";
-            }
-        }
+        // for (let i = 0; i < snakeArr.length; i++) {
+        //     if (currentItem[0] == snakeArr[i][0] && currentItem[1] == snakeArr[i][1]) {
+        //         return "snake";
+        //     }
+        // }
 
         if (currentItem[0] == food[0] && currentItem[1] == food[1]) {
             return "food";
