@@ -51,7 +51,11 @@ body {
 .up-feed .u-f,
 .down-feed .d-f,
 .food .food-pixel,
-.full .f {
+.full .f,
+.full-n-e .f-n-e,
+.full-n-w .f-n-w,
+.full-s-e .f-s-e,
+.full-s-w .f-s-w {
   background-color: rgb(35, 35, 35);
   border: .01rem solid rgb(95, 164, 95);
 }
