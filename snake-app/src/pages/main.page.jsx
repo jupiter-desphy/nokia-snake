@@ -22,6 +22,7 @@ export function MainPage(props) {
     const [direction, setDirection] = useState([1, 0]);
     const [speed, setSpeed] = useState(null);
     const [prevDirection, setPrevDirection] = useState([]);
+    const [prevFood, setPrevFood] = useState([])
 
     /* FUNCTIONS */
 
@@ -84,6 +85,10 @@ export function MainPage(props) {
         const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
         const newSnakeHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1], snakeCopy[0][2]];
 
+        if (checkCollision(newSnakeHead)) {
+            return endGame()
+        };
+
         if (direction[0] == 0 && direction[1] == 1){
             newSnakeHead[2] = 'D'
         }
@@ -102,15 +107,12 @@ export function MainPage(props) {
         const logDirection = [direction[0], direction[1]];
         setPrevDirection(logDirection);
 
-        if (checkCollision(newSnakeHead)) {
-            endGame()
-        };
-
         if (snakeCopy[0][0] === food[0] && snakeCopy[0][1] === food[1]) {
             setSnakeArr(snakeCopy);
+            setPrevFood(food)
             randomizeFood();
             setScore((prevScore) => prevScore + 10);
-            setSpeed((prevSpeed) => prevSpeed - 2);
+            setSpeed((prevSpeed) => prevSpeed - 3);
         } else snakeCopy.pop();
 
 
@@ -189,7 +191,7 @@ export function MainPage(props) {
     designBoard(gameBoard.current);
 
     useInterval(() => gameLoop(), speed);
-
+    console.log('main prev', prevFood)
     return (
         <div role="button" tabIndex="0" onKeyDown={e => moveSnake(e)}>
             <div className="score">
@@ -212,7 +214,7 @@ export function MainPage(props) {
             </div>
 
             <div className="screen">
-                <Board theGrid={gameBoard.current} snakeArr={snakeArr} food={food} />
+                <Board theGrid={gameBoard.current} snakeArr={snakeArr} food={food} prevFood={prevFood} />
             </div>
             <div>
                 <button onClick={startGame}>START GAME</button>
