@@ -1,21 +1,16 @@
 import Tile from "./SingleGridItem.jsx";
+import { useState } from "react";
 
-export default function Board({ theGrid, snakeArr, food, prevFood }) {
+export default function Board({ theGrid, snakeArr, food, prevFood, gameOver, blinkOn }) {
 
     //Write the logic that determines which state this grid item should be
     function generateGridState(currentItem) {
-        //If I have this right,
-        //currentItem should be a value that represents it's own index
 
-        //You now have all the pieces of info that you need
-        //You have the current grid item info aka currentItem
-        //and you have theGrid
-        //and the the snakeArr [[x, y], [x, y] ,[x, y], [x, y]]
-        //and the food
 
         for (let i = 0; i < snakeArr.length; i++) {
-
-
+            if (currentItem[0] === snakeArr[i][0] && currentItem[1] === snakeArr[i][1] && gameOver && blinkOn) {
+                return "";
+            }
             if (i === snakeArr.length - 1 && currentItem[0] === snakeArr[snakeArr.length - 2][0] - 1 && snakeArr[snakeArr.length - 1][1] === snakeArr[snakeArr.length - 2][1] && currentItem[0] === snakeArr[i][0] && currentItem[1] === snakeArr[i][1]) {
                 return "right-tail"
             } else if (i === snakeArr.length - 1 && currentItem[0] === snakeArr[snakeArr.length - 2][0] + 1 && snakeArr[snakeArr.length - 1][1] === snakeArr[snakeArr.length - 2][1] && currentItem[0] === snakeArr[i][0] && currentItem[1] === snakeArr[i][1]) {
@@ -30,35 +25,35 @@ export default function Board({ theGrid, snakeArr, food, prevFood }) {
                 // } else
 
                 if (i !== 0 && snakeArr[i - 1][2] === 'D' && snakeArr[i][2] === 'R' && currentItem[0] === snakeArr[i][0] && currentItem[1] === snakeArr[i][1]) {
-                    if(currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]){
+                    if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
                         return "full-n-e northeast"
                     } else return "northeast"
                 } else if (i !== 0 && snakeArr[i - 1][2] === 'L' && snakeArr[i][2] === 'U' && currentItem[0] === snakeArr[i][0] && currentItem[1] === snakeArr[i][1]) {
-                    if(currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]){
+                    if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
                         return "full-n-e northeast"
                     } else return "northeast"
                 } else if (i !== 0 && snakeArr[i - 1][2] === 'D' && snakeArr[i][2] === 'L' && currentItem[0] === snakeArr[i][0] && currentItem[1] === snakeArr[i][1]) {
-                    if(currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]){
+                    if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
                         return "full-n-w northwest"
                     } else return "northwest"
                 } else if (i !== 0 && snakeArr[i - 1][2] === 'R' && snakeArr[i][2] === 'U' && currentItem[0] === snakeArr[i][0] && currentItem[1] === snakeArr[i][1]) {
-                    if(currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]){
+                    if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
                         return "full-n-w northwest"
                     } else return "northwest"
                 } else if (i !== 0 && snakeArr[i - 1][2] === 'U' && snakeArr[i][2] === 'R' && currentItem[0] === snakeArr[i][0] && currentItem[1] === snakeArr[i][1]) {
-                    if(currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]){
+                    if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
                         return "full-s-e southeast"
                     } else return "southeast"
                 } else if (i !== 0 && snakeArr[i - 1][2] === 'L' && snakeArr[i][2] === 'D' && currentItem[0] === snakeArr[i][0] && currentItem[1] === snakeArr[i][1]) {
-                    if(currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]){
+                    if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
                         return "full-s-e southeast"
                     } else return "southeast";
                 } else if (i !== 0 && snakeArr[i - 1][2] === 'U' && snakeArr[i][2] === 'L' && currentItem[0] === snakeArr[i][0] && currentItem[1] === snakeArr[i][1]) {
-                    if(currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]){
+                    if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
                         return "full-s-w southwest"
                     } else return "southwest"
                 } else if (i !== 0 && snakeArr[i - 1][2] === 'R' && snakeArr[i][2] === 'D' && currentItem[0] === snakeArr[i][0] && currentItem[1] === snakeArr[i][1]) {
-                    if(currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]){
+                    if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
                         return "full-s-w southwest"
                     } else return "southwest"
                 } else
@@ -69,7 +64,7 @@ export default function Board({ theGrid, snakeArr, food, prevFood }) {
                             } else
                                 return "down-head";
                         } else if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
-                                return "full snake-down"
+                            return "full snake-down"
                         } else
                             return "snake-down";
                     }
@@ -82,7 +77,7 @@ export default function Board({ theGrid, snakeArr, food, prevFood }) {
                         return "right-feed";
                     } else {
                         return "snake right-head";
-                    } 
+                    }
                 } else if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
                     return "full snake-right"
                 } else
@@ -114,8 +109,8 @@ export default function Board({ theGrid, snakeArr, food, prevFood }) {
                         return "up-feed"
                     } else
                         return "snake up-head"
-                    } else if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
-                        return "full snake-up"
+                } else if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
+                    return "full snake-up"
                 } else
                     return "snake snake-up";
             }

@@ -4,8 +4,7 @@ import Board from "../components/Board.jsx";
 import {
     SNAKE_START
 } from '../constants';
-import useInterval from "../helpers/useinterval.js";
-import arrayIncludes from "../helpers/arrayIncludes.js";
+import UseInterval from "../helpers/useinterval.js";
 
 export function MainPage(props) {
 
@@ -22,24 +21,39 @@ export function MainPage(props) {
     const [direction, setDirection] = useState([1, 0]);
     const [speed, setSpeed] = useState(null);
     const [prevDirection, setPrevDirection] = useState([]);
-    const [prevFood, setPrevFood] = useState([])
+    const [prevFood, setPrevFood] = useState([]);
+    const [blinkOn, setBlinkOn] = useState(false);
 
     /* FUNCTIONS */
+
+
 
     const startGame = () => {
         setSnakeArr(SNAKE_START);
         setDirection([1, 0]);
         setSpeed(270);
         setGameOver(false);
-        setScore(0)
+        setScore(0);
 
+        // blinkSnake();
     }
 
     const endGame = () => {
         setSpeed(null);
         setGameOver(true);
-
+        // blinkSnake();
+        // UseInterval(() => blinkSnake(), 500);
     }
+
+    const blink = () => {
+        if (blinkOn) {
+            setBlinkOn(false)
+        } else if (!blinkOn) {
+            setBlinkOn(true)
+        }
+    }
+
+    UseInterval(() => blink(), 400);
 
     const randomizeFood = () => {
         let snakeClone = snakeArr
@@ -71,9 +85,9 @@ export function MainPage(props) {
         // for (const segment of snk) {
         //     if (piece[0] === segment[0] && piece[1] === segment[1]) {
         //         console.log(piece, 'segment', segment)
-        
-        for (let i = 0; i < snk.length -1; i++){
-            if(piece[0] === snk[i][0] && piece[1] === snk[i][1])
+
+        for (let i = 0; i < snk.length - 1; i++) {
+            if (piece[0] === snk[i][0] && piece[1] === snk[i][1])
                 return true;
         }
         return false;
@@ -89,16 +103,16 @@ export function MainPage(props) {
             return endGame()
         };
 
-        if (direction[0] == 0 && direction[1] == 1){
+        if (direction[0] == 0 && direction[1] == 1) {
             newSnakeHead[2] = 'D'
         }
-        if (direction[0] == -1 && direction[1] == 0){
+        if (direction[0] == -1 && direction[1] == 0) {
             newSnakeHead[2] = 'L'
         }
-        if (direction[0] == 0 && direction[1] == -1){
+        if (direction[0] == 0 && direction[1] == -1) {
             newSnakeHead[2] = 'U'
         }
-        if (direction[0] == 1 && direction[1] == 0){
+        if (direction[0] == 1 && direction[1] == 0) {
             newSnakeHead[2] = 'R'
         }
 
@@ -190,8 +204,8 @@ export function MainPage(props) {
 
     designBoard(gameBoard.current);
 
-    useInterval(() => gameLoop(), speed);
-    console.log('main prev', prevFood)
+    UseInterval(() => gameLoop(), speed);
+
     return (
         <div role="button" tabIndex="0" onKeyDown={e => moveSnake(e)}>
             <div className="score">
@@ -214,7 +228,7 @@ export function MainPage(props) {
             </div>
 
             <div className="screen">
-                <Board theGrid={gameBoard.current} snakeArr={snakeArr} food={food} prevFood={prevFood} />
+                <Board theGrid={gameBoard.current} snakeArr={snakeArr} food={food} prevFood={prevFood} gameOver={gameOver} blinkOn={blinkOn} />
             </div>
             <div>
                 <button onClick={startGame}>START GAME</button>
