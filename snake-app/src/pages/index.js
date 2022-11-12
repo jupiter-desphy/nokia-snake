@@ -1,3 +1,3 @@
-import { MainPage } from "./main.page";
+import { SnakeII } from "./snake2";
 
-export { MainPage };
+export { SnakeII };
