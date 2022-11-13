@@ -1,12 +1,14 @@
 import logo from './logo.svg';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SnakeII } from "./pages";
+import { SnakeI, SnakeII } from "./pages";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SnakeII />} />
+        
+        <Route path="/snake1" element={<SnakeI />} />
+        <Route path="/snake2" element={<SnakeII />} />
       </Routes>
     </BrowserRouter>
   );

@@ -6,7 +6,7 @@ import {
 } from '../constants';
 import UseInterval from "../helpers/useinterval.js";
 
-export function MainPage(props) {
+export function SnakeI(props) {
 
     /* Gameboard 2D Array */
     const columns = 20;
