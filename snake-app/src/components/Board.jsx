@@ -10,7 +10,7 @@ export default function Board({ theGrid, snakeArr, food, prevFood, gameOver, bli
             if (currentItem[0] === snakeArr[i][0] && currentItem[1] === snakeArr[i][1]) {
                 if (gameOver && blinkOn)
                     return "";
-
+                // Tail 
                 if (i === snakeArr.length - 1) {
                     if (currentItem[0] === snakeArr[snakeArr.length - 2][0] - 1 && snakeArr[snakeArr.length - 1][1] === snakeArr[snakeArr.length - 2][1])
                         return "right-tail";

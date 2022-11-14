@@ -34,24 +34,16 @@ export function SnakeII(props) {
         setSpeed(270);
         setGameOver(false);
         setScore(0);
-
-        // blinkSnake();
     }
 
     const endGame = () => {
         setSpeed(null);
         setGameOver(true);
-        // blinkSnake();
-        // UseInterval(() => blinkSnake(), 500);
     }
 
     const blink = () => {
-        if (blinkOn) {
-            setBlinkOn(false)
-        } else if (!blinkOn) {
-            setBlinkOn(true)
-        }
-    }
+        setBlinkOn(!blinkOn)
+}
 
     UseInterval(() => blink(), 400);
 
@@ -93,6 +85,15 @@ export function SnakeII(props) {
         return false;
     };
 
+    const foodEaten = newSnake => {
+        if(newSnake[0][0] === food[0] && newSnake[0][1] === food[1]) {
+            let newFood = randomizeFood();
+            while (checkCollision(newFood, newSnake)) {
+                newFood = randomizeFood();
+            }
+        }
+    }
+
 
 
     const gameLoop = () => {
@@ -103,16 +104,16 @@ export function SnakeII(props) {
             return endGame()
         };
 
-        if (direction[0] == 0 && direction[1] == 1) {
+        if (direction[0] === 0 && direction[1] === 1) {
             newSnakeHead[2] = 'D'
         }
-        if (direction[0] == -1 && direction[1] == 0) {
+        if (direction[0] === -1 && direction[1] === 0) {
             newSnakeHead[2] = 'L'
         }
-        if (direction[0] == 0 && direction[1] == -1) {
+        if (direction[0] === 0 && direction[1] === -1) {
             newSnakeHead[2] = 'U'
         }
-        if (direction[0] == 1 && direction[1] == 0) {
+        if (direction[0] === 1 && direction[1] === 0) {
             newSnakeHead[2] = 'R'
         }
 
@@ -123,55 +124,40 @@ export function SnakeII(props) {
 
         if (snakeCopy[0][0] === food[0] && snakeCopy[0][1] === food[1]) {
             setSnakeArr(snakeCopy);
-            setPrevFood(food)
-            randomizeFood();
+            setPrevFood(food);
+            let newFood = randomizeFood();
+            while (checkCollision(newFood, snakeCopy)) {
+                newFood = randomizeFood();
+            }
             setScore((prevScore) => prevScore + 10);
-            setSpeed((prevSpeed) => prevSpeed - 3);
+            setSpeed((prevSpeed) => prevSpeed - 1);
         } else snakeCopy.pop();
 
 
         setSnakeArr(snakeCopy);
     };
 
-    // const moveSnake = ({ keyCode }) => {
-    //     keyCode >= 37 && keyCode <= 40 && setDirection(DIRECTIONS[keyCode]);
-    //     const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
-    //     const nextHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1]];
-    //     if (checkCollision(nextHead)) endGame();
-    // }
 
     const moveLeft = () => {
         if (prevDirection[0] != 1 && prevDirection[1] != 0) {
             setDirection([-1, 0]);
-            // const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
-            // const nextHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1]];
-            // if (checkCollision(nextHead)) endGame();
         }
     }
 
     const moveUp = () => {
         if (prevDirection[0] != 0 && prevDirection[1] != 1) {
             setDirection([0, -1]);
-            // const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
-            // const nextHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1]];
-            // if (checkCollision(nextHead)) endGame();
         }
     }
 
     const moveRight = () => {
         if (prevDirection[0] != -1 && prevDirection[1] != 0) {
             setDirection([1, 0]);
-            // const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
-            // const nextHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1]];
-            // if (checkCollision(nextHead)) endGame();
         }
     }
     const moveDown = () => {
         if (prevDirection[0] != 0 && prevDirection[1] != -1) {
             setDirection([0, 1]);
-            // const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
-            // const nextHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1]];
-            // if (checkCollision(nextHead)) endGame();
         }
     }
 
@@ -245,34 +231,3 @@ export function SnakeII(props) {
         </div>
     )
 }
-
-    // function moveRight() {
-    //     const head = snakeArr[snakeArr.length - 1]
-    //     const lunch = food
-    //     if (direction != 'left') {
-    //         if (head == lunch) {
-    //             // console.log('log1', snakeArr)
-    //             setSnakeArr(prevSnakeArr => {
-    //                 return [
-    //                     prevSnakeArr,
-    //                     (Number([prevSnakeArr[prevSnakeArr.length - 1]]) + 10)
-    //                 ].flat()
-    //             });
-    //             console.log('before randomizefood', snakeArr)
-    //             randomizeFood()
-    //             console.log('after randomize', snakeArr)
-    //         } else {
-    //             setSnakeArr(prevSnakeArr => {
-    //                 let tempThing = prevSnakeArr.slice(1);
-    //                 tempThing.push(Number([prevSnakeArr[prevSnakeArr.length - 1]]) + 10);
-    //                 return tempThing;
-
-    //             });
-    //         }
-
-    //         if (snakeArr[snakeArr.length - 1] > 190) {
-    //             setGameOver(true)
-    //         };
-    //         setDirection('right');
-    //     }
-    // }

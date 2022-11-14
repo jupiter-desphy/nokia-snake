@@ -34,8 +34,6 @@ export function SnakeI(props) {
         setSpeed(270);
         setGameOver(false);
         setScore(0);
-
-        // blinkSnake();
     }
 
     const endGame = () => {
@@ -46,14 +44,10 @@ export function SnakeI(props) {
     }
 
     const blink = () => {
-        if (blinkOn) {
-            setBlinkOn(false)
-        } else if (!blinkOn) {
-            setBlinkOn(true)
-        }
+            setBlinkOn(!blinkOn)
     }
 
-    UseInterval(() => blink(), 400);
+    UseInterval(() => blink(), 375);
 
     const randomizeFood = () => {
         let snakeClone = snakeArr
@@ -103,16 +97,16 @@ export function SnakeI(props) {
             return endGame()
         };
 
-        if (direction[0] == 0 && direction[1] == 1) {
+        if (direction[0] === 0 && direction[1] === 1) {
             newSnakeHead[2] = 'D'
         }
-        if (direction[0] == -1 && direction[1] == 0) {
+        if (direction[0] === -1 && direction[1] === 0) {
             newSnakeHead[2] = 'L'
         }
-        if (direction[0] == 0 && direction[1] == -1) {
+        if (direction[0] === 0 && direction[1] === -1) {
             newSnakeHead[2] = 'U'
         }
-        if (direction[0] == 1 && direction[1] == 0) {
+        if (direction[0] === 1 && direction[1] === 0) {
             newSnakeHead[2] = 'R'
         }
 
@@ -141,7 +135,7 @@ export function SnakeI(props) {
     // }
 
     const moveLeft = () => {
-        if (prevDirection[0] != 1 && prevDirection[1] != 0) {
+        if (prevDirection[0] !== 1 && prevDirection[1] !== 0) {
             setDirection([-1, 0]);
             // const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
             // const nextHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1]];
@@ -150,7 +144,7 @@ export function SnakeI(props) {
     }
 
     const moveUp = () => {
-        if (prevDirection[0] != 0 && prevDirection[1] != 1) {
+        if (prevDirection[0] !== 0 && prevDirection[1] !== 1) {
             setDirection([0, -1]);
             // const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
             // const nextHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1]];
@@ -159,7 +153,7 @@ export function SnakeI(props) {
     }
 
     const moveRight = () => {
-        if (prevDirection[0] != -1 && prevDirection[1] != 0) {
+        if (prevDirection[0] !== -1 && prevDirection[1] !== 0) {
             setDirection([1, 0]);
             // const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
             // const nextHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1]];
@@ -167,7 +161,7 @@ export function SnakeI(props) {
         }
     }
     const moveDown = () => {
-        if (prevDirection[0] != 0 && prevDirection[1] != -1) {
+        if (prevDirection[0] !== 0 && prevDirection[1] !== -1) {
             setDirection([0, 1]);
             // const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
             // const nextHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1]];
@@ -249,7 +243,7 @@ export function SnakeI(props) {
     // function moveRight() {
     //     const head = snakeArr[snakeArr.length - 1]
     //     const lunch = food
-    //     if (direction != 'left') {
+    //     if (direction !== 'left') {
     //         if (head == lunch) {
     //             // console.log('log1', snakeArr)
     //             setSnakeArr(prevSnakeArr => {
