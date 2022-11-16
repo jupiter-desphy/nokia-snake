@@ -26,6 +26,7 @@ export function SnakeII(props) {
     const [prevFood, setPrevFood] = useState([]);
     const [blinkOn, setBlinkOn] = useState(false);
     const [prey, setPrey] = useState(PREY_START);
+    const [preyTimer, setPreyTimer] = useState(0);
 
     /* FUNCTIONS */
 
@@ -87,6 +88,7 @@ export function SnakeII(props) {
             creature = 'caterpillar';
         }
         setPrey([prey0, prey1, creature]);
+        setPreyTimer(30);
     }
 
     useEffect(() => {
@@ -221,6 +223,8 @@ export function SnakeII(props) {
                 setScore((prevScore) => prevScore + 50);
                 setSpeed((prevSpeed) => prevSpeed - 1);
             } else snakeCopy.pop();
+
+            preyTimer === 0 ? setPrey(PREY_START) : setPreyTimer((prevPreyTimer) => prevPreyTimer - 1)
     
             setSnakeArr(snakeCopy);
         };
@@ -237,6 +241,9 @@ export function SnakeII(props) {
             </div>
             <div className="foodCount">
                 foodCount: {foodCount}
+            </div>
+            <div className="preyTimer">
+                preyTimer: {preyTimer}
             </div>
 
 
