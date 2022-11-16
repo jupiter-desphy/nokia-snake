@@ -55,7 +55,13 @@ body {
 .full-n-e .f-n-e,
 .full-n-w .f-n-w,
 .full-s-e .f-s-e,
-.full-s-w .f-s-w {
+.full-s-w .f-s-w,
+.caterpillar1 .cp1,
+.caterpillar2 .cp2,
+.fish1 .fs1,
+.fish2 .fs2,
+.spider1 .sp1,
+.spider2 .sp2 {
   background-color: rgb(35, 35, 35);
   border: .01rem solid rgb(95, 164, 95);
 }

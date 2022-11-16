@@ -119,8 +119,8 @@ export function SnakeI(props) {
             setSnakeArr(snakeCopy);
             setPrevFood(food)
             randomizeFood();
-            setScore((prevScore) => prevScore + 10);
-            setSpeed((prevSpeed) => prevSpeed - 3);
+            setScore((prevScore) => prevScore + 5);
+            setSpeed((prevSpeed) => prevSpeed - 1);
         } else snakeCopy.pop();
 
 

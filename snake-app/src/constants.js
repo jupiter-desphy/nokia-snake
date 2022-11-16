@@ -11,7 +11,9 @@ const SNAKE_START = [
     // [2, 4],
     // [1, 4],
     // [0, 4]
-]
+];
+
+const PREY_START = [[null, null], [null, null], null];
 
 const DIRECTIONS = {
     37: [-1, 0], //left
@@ -20,4 +22,6 @@ const DIRECTIONS = {
     40: [0, 1] //down
 }
 
-export { DIRECTIONS, SNAKE_START }
+
+
+export { DIRECTIONS, SNAKE_START, PREY_START }

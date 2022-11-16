@@ -2,7 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import Board from "../components/Board.jsx";
 // import useInterval from "../helpers/useinterval.js";
 import {
-    SNAKE_START
+    SNAKE_START,
+    PREY_START
 } from '../constants';
 import UseInterval from "../helpers/useinterval.js";
 
@@ -18,11 +19,13 @@ export function SnakeII(props) {
     const [gameOver, setGameOver] = useState(false);
     const [score, setScore] = useState(0);
     const [food, setFood] = useState([Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)]);
+    const [foodCount, setFoodCount] = useState(0);
     const [direction, setDirection] = useState([1, 0]);
     const [speed, setSpeed] = useState(null);
     const [prevDirection, setPrevDirection] = useState([]);
     const [prevFood, setPrevFood] = useState([]);
     const [blinkOn, setBlinkOn] = useState(false);
+    const [prey, setPrey] = useState(PREY_START);
 
     /* FUNCTIONS */
 
@@ -34,6 +37,8 @@ export function SnakeII(props) {
         setSpeed(270);
         setGameOver(false);
         setScore(0);
+        setFoodCount(0);
+        setPrey(PREY_START);
     }
 
     const endGame = () => {
@@ -64,6 +69,32 @@ export function SnakeII(props) {
         setFood(foodCoordinates);
     }
 
+    const randomizePrey = () => {
+        let snakeClone = snakeArr
+        let prey0 = [Math.floor(Math.random() * (columns-1)), Math.floor(Math.random() * rows)];
+        for (const segment of snakeClone) {
+            while (prey0[0] === segment[0] && prey0[1] === segment[1]) {
+                prey0 = [Math.floor(Math.random() * (columns-1)), Math.floor(Math.random() * rows)];
+            }
+        }
+        let prey1 = [prey0[0]+1, prey0[1]];
+        let creature = prey[2];
+        if ((creature === 'caterpillar') || (creature === null)){
+            creature = 'fish';
+        } else if (creature === 'fish'){
+            creature = 'spider';
+        } else if (creature === 'spider'){
+            creature = 'caterpillar';
+        }
+        setPrey([prey0, prey1, creature]);
+    }
+
+    useEffect(() => {
+        randomizeFood();
+        if (foodCount > 1 && foodCount % 5 === 0){
+            randomizePrey();
+        }
+    }, [foodCount]);
 
     const checkCollision = (piece, snk = snakeArr) => {
         if (
@@ -95,89 +126,48 @@ export function SnakeII(props) {
     }
 
 
-
-    const gameLoop = () => {
-        const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
-        const newSnakeHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1], snakeCopy[0][2]];
-
-        if (checkCollision(newSnakeHead)) {
-            return endGame()
-        };
-
-        if (direction[0] === 0 && direction[1] === 1) {
-            newSnakeHead[2] = 'D'
-        }
-        if (direction[0] === -1 && direction[1] === 0) {
-            newSnakeHead[2] = 'L'
-        }
-        if (direction[0] === 0 && direction[1] === -1) {
-            newSnakeHead[2] = 'U'
-        }
-        if (direction[0] === 1 && direction[1] === 0) {
-            newSnakeHead[2] = 'R'
-        }
-
-        snakeCopy.unshift(newSnakeHead);
-
-        const logDirection = [direction[0], direction[1]];
-        setPrevDirection(logDirection);
-
-        if (snakeCopy[0][0] === food[0] && snakeCopy[0][1] === food[1]) {
-            setSnakeArr(snakeCopy);
-            setPrevFood(food);
-            let newFood = randomizeFood();
-            while (checkCollision(newFood, snakeCopy)) {
-                newFood = randomizeFood();
-            }
-            setScore((prevScore) => prevScore + 10);
-            setSpeed((prevSpeed) => prevSpeed - 1);
-        } else snakeCopy.pop();
-
-
-        setSnakeArr(snakeCopy);
-    };
-
-
+    
+    
     const moveLeft = () => {
-        if (prevDirection[0] != 1 && prevDirection[1] != 0) {
+        if (prevDirection[0] !== 1 && prevDirection[1] !== 0) {
             setDirection([-1, 0]);
         }
     }
-
+    
     const moveUp = () => {
-        if (prevDirection[0] != 0 && prevDirection[1] != 1) {
+        if (prevDirection[0] !== 0 && prevDirection[1] !== 1) {
             setDirection([0, -1]);
         }
     }
-
+    
     const moveRight = () => {
-        if (prevDirection[0] != -1 && prevDirection[1] != 0) {
+        if (prevDirection[0] !== -1 && prevDirection[1] !== 0) {
             setDirection([1, 0]);
         }
     }
     const moveDown = () => {
-        if (prevDirection[0] != 0 && prevDirection[1] != -1) {
+        if (prevDirection[0] !== 0 && prevDirection[1] !== -1) {
             setDirection([0, 1]);
         }
     }
-
+    
     const moveSnake = ({ keyCode }) => {
         // keyCode >= 37 && keyCode <= 40 && 
         switch (keyCode) {
             case 37: moveLeft();
-                break;
+            break;
             case 38: moveUp();
-                break;
+            break;
             case 39: moveRight();
-                break;
+            break;
             case 40: moveDown();
-                break;
+            break;
             default: ;
         }
     }
-
+    
     const gameBoard = useRef([]);
-
+    
     function designBoard(game) {
         for (let i = 0; i < rows; i++) {
             game.push(new Array(rows))
@@ -186,20 +176,71 @@ export function SnakeII(props) {
             }
         }
     }
+    
+        const gameLoop = () => {
+            const snakeCopy = JSON.parse(JSON.stringify(snakeArr));
+            const newSnakeHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1], snakeCopy[0][2]];
+    
+            if (checkCollision(newSnakeHead)) {
+                return endGame()
+            };
+    
+            if (direction[0] === 0 && direction[1] === 1) {
+                newSnakeHead[2] = 'D'
+            }
+            if (direction[0] === -1 && direction[1] === 0) {
+                newSnakeHead[2] = 'L'
+            }
+            if (direction[0] === 0 && direction[1] === -1) {
+                newSnakeHead[2] = 'U'
+            }
+            if (direction[0] === 1 && direction[1] === 0) {
+                newSnakeHead[2] = 'R'
+            }
+    
+            snakeCopy.unshift(newSnakeHead);
+    
+            const logDirection = [direction[0], direction[1]];
+            setPrevDirection(logDirection);
+    
+            if (snakeCopy[0][0] === food[0] && snakeCopy[0][1] === food[1]) {
+                setSnakeArr(snakeCopy);
+                setPrevFood(food);
+                // randomizeFood();
+                setFoodCount(foodCount + 1)
+                // let newFood = randomizeFood();
+                // while (checkCollision(newFood, snakeCopy)) {
+                //     newFood = randomizeFood();
+                // }
+                setScore((prevScore) => prevScore + 5);
 
-
+                setSpeed((prevSpeed) => prevSpeed - 1);
+            } else if ((snakeCopy[0][0] === prey[0][0] && snakeCopy[0][1] === prey[0][1]) || (snakeCopy[0][0] === prey[1][0] && snakeCopy[0][1] === prey[1][1])) {
+                setSnakeArr(snakeCopy);
+                // setPrevFood(food)
+                setScore((prevScore) => prevScore + 50);
+                setSpeed((prevSpeed) => prevSpeed - 1);
+            } else snakeCopy.pop();
+    
+            setSnakeArr(snakeCopy);
+        };
+    
+    
     designBoard(gameBoard.current);
-
+    
     UseInterval(() => gameLoop(), speed);
-
+    
     return (
         <div role="button" tabIndex="0" onKeyDown={e => moveSnake(e)}>
             <div className="score">
                 SCORE: {score}
             </div>
+            <div className="foodCount">
+                foodCount: {foodCount}
+            </div>
 
 
-            <div>
+            {/* <div>
                 <button onClick={gameLoop}>GAME LOOP</button>
             </div>
             <div>
@@ -211,10 +252,10 @@ export function SnakeII(props) {
             </div>
             <div>
                 <button onClick={moveDown}>Move Down</button>
-            </div>
+            </div> */}
 
             <div className="screen">
-                <Board theGrid={gameBoard.current} snakeArr={snakeArr} food={food} prevFood={prevFood} gameOver={gameOver} blinkOn={blinkOn} />
+                <Board theGrid={gameBoard.current} snakeArr={snakeArr} food={food} prevFood={prevFood} gameOver={gameOver} blinkOn={blinkOn} prey={prey} />
             </div>
             <div>
                 <button onClick={startGame}>START GAME</button>

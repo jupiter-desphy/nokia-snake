@@ -1,7 +1,7 @@
 import Tile from "./SingleGridItem.jsx";
 import { useState } from "react";
 
-export default function Board({ theGrid, snakeArr, food, prevFood, gameOver, blinkOn }) {
+export default function Board({ theGrid, snakeArr, food, prevFood, gameOver, blinkOn, prey }) {
 
     function generateGridState(currentItem) {
 
@@ -88,6 +88,23 @@ export default function Board({ theGrid, snakeArr, food, prevFood, gameOver, bli
 
         if (currentItem[0] === food[0] && currentItem[1] === food[1]) {
             return "food";
+        };
+
+        if (currentItem[0] === prey[0][0] && currentItem[1] === prey[0][1]) {
+            if (prey[2] === 'caterpillar')
+            return "caterpillar1";
+            if (prey[2] === 'fish')
+            return "fish1";
+            if (prey[2] === 'spider')
+            return 'spider1';
+        };
+        if (currentItem[0] === prey[1][0] && currentItem[1] === prey[1][1]) {
+            if (prey[2] === 'caterpillar')
+            return "caterpillar2";
+            if (prey[2] === 'fish')
+            return "fish2";
+            if (prey[2] === 'spider')
+            return 'spider2'
         };
     }
 
