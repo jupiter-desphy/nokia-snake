@@ -7,7 +7,7 @@ import {
     SNAKE_START,
     PREY_START
 } from '../constants';
-import UseInterval from "../helpers/useinterval.js";
+import useInterval from "../helpers/useinterval.js";
 
 export function SnakeI(props) {
 
@@ -39,14 +39,14 @@ export function SnakeI(props) {
         setSpeed(null);
         setGameOver(true);
         // blinkSnake();
-        // UseInterval(() => blinkSnake(), 500);
+        // useInterval(() => blinkSnake(), 500);
     }
 
     const blink = () => {
             setBlinkOn(!blinkOn)
     }
 
-    UseInterval(() => blink(), 375);
+    useInterval(() => blink(), 375);
 
     const randomizeFood = () => {
         let snakeClone = snakeArr
@@ -197,7 +197,7 @@ export function SnakeI(props) {
 
     designBoard(gameBoard.current);
 
-    UseInterval(() => gameLoop(), speed);
+    useInterval(() => gameLoop(), speed);
 
     return (
         <div role="button" tabIndex="0" onKeyDown={e => moveSnake(e)}>

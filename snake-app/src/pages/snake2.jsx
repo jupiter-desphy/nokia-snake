@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import Board from "../components/Board.jsx";
-// import useInterval from "../helpers/useinterval.js";
+import Marquee from "../components/Marquee.jsx";
+import useInterval from "../helpers/useinterval.js";
 import {
     COLUMNS,
     ROWS,
     SNAKE_START,
     PREY_START
 } from '../constants';
-import UseInterval from "../helpers/useinterval.js";
 
 export function SnakeII(props) {
 
@@ -24,10 +24,34 @@ export function SnakeII(props) {
     const [blinkOn, setBlinkOn] = useState(false);
     const [prey, setPrey] = useState(PREY_START);
     const [preyTimer, setPreyTimer] = useState(0);
+    const [paused, setPaused] = useState(false);
+    const [pausedSpeed, setPausedSpeed] = useState(null);
 
     /* FUNCTIONS */
 
+    const gameBoard = useRef([]);
+    const scoreBoard = useRef([]);
 
+    const designBoard = (game) => {
+        for (let i = 0; i < ROWS; i++) {
+            game.push(new Array(ROWS))
+            for (let j = 0; j < COLUMNS; j++) {
+                game[i][j] = [j, i, null];
+            }
+        }
+    }
+
+    const layScoreBoard = (game) => {
+        for (let i = 0; i < 2; i++) {
+            game.push(new Array(2))
+            for (let j = 0; j < COLUMNS; j++) {
+                game[i][j] = [j, i, null];
+            }
+        }
+    }
+
+    designBoard(gameBoard.current);
+    layScoreBoard(scoreBoard.current);
 
     const startGame = () => {
         setSnakeArr(SNAKE_START);
@@ -45,11 +69,23 @@ export function SnakeII(props) {
         setGameOver(true);
     }
 
+    const pause = () => {
+        setPaused(!paused);
+        if (paused) {
+            setPausedSpeed(speed);
+            setSpeed(0);
+        }
+        if (!paused) {
+            setSpeed(pausedSpeed)
+        }
+    }
+
+
     const blink = () => {
         setBlinkOn(!blinkOn)
     }
 
-    UseInterval(() => blink(), 400);
+    useInterval(() => blink(), 400);
 
     const randomizeFood = () => {
         let snakeClone = snakeArr;
@@ -165,18 +201,8 @@ export function SnakeII(props) {
                 break;
             case 40: moveDown();
                 break;
+            case 32: pause();
             default: ;
-        }
-    }
-
-    const gameBoard = useRef([]);
-
-    function designBoard(game) {
-        for (let i = 0; i < ROWS; i++) {
-            game.push(new Array(ROWS))
-            for (let j = 0; j < COLUMNS; j++) {
-                game[i][j] = [j, i, null];
-            }
         }
     }
 
@@ -185,10 +211,6 @@ export function SnakeII(props) {
         // const bellyCopy = JSON.parse(JSON.stringify(fullBelly));
         const newSnakeHead = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1], snakeCopy[0][2], snakeCopy[0][3]];
         // const newFood = [food[0], food[1]];
-
-        if (didCollide(newSnakeHead)) {
-            return endGame()
-        };
 
         if (newSnakeHead[0] >= COLUMNS - 1) newSnakeHead[0] = 1;
         if (newSnakeHead[0] < 1) newSnakeHead[0] = COLUMNS - 2;
@@ -208,6 +230,10 @@ export function SnakeII(props) {
         if (direction[0] === 1 && direction[1] === 0) {
             newSnakeHead[2] = 'R'
         }
+
+        if (didCollide(newSnakeHead)) {
+            return endGame()
+        };
 
         snakeCopy.unshift(newSnakeHead);
 
@@ -234,27 +260,27 @@ export function SnakeII(props) {
             newSnakeHead[3] = 'hungry';
         }
 
-
         preyTimer === 0 ? setPrey((prevPrey) => [[null, null], [null, null], prevPrey[2]]) : setPreyTimer((prevPreyTimer) => prevPreyTimer - 1);
 
         setSnakeArr(snakeCopy);
     };
 
 
-    designBoard(gameBoard.current);
 
-    UseInterval(() => gameLoop(), speed);
+
+    useInterval(() => gameLoop(), speed);
 
     return (
         <div role="button" tabIndex="0" onKeyDown={e => moveSnake(e)}>
-            <div className="score">
-                SCORE: {score}
+
+            <div className="scoreboard">
+                <Marquee layOut={scoreBoard.current} score={score} prey={prey} preyTimer={preyTimer} gameOver={gameOver} />
             </div>
-            <div className="foodCount">
-                foodCount: {foodCount}
+            <div className="screen">
+                <Board theGrid={gameBoard.current} snakeArr={snakeArr} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={prey} />
             </div>
-            <div className="preyTimer">
-                preyTimer: {preyTimer}
+            <div>
+                <button onClick={startGame}>START GAME</button>
             </div>
 
 
@@ -272,15 +298,9 @@ export function SnakeII(props) {
                 <button onClick={moveDown}>Move Down</button>
             </div> */}
 
-            <div className="screen">
-                <Board theGrid={gameBoard.current} snakeArr={snakeArr} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={prey} />
-            </div>
-            <div>
-                <button onClick={startGame}>START GAME</button>
-            </div>
-            <div>
+            {/* <div>
                 {gameOver ? 'GAMEOVER' : ''}
-            </div>
+            </div> */}
         </div>
     )
 }

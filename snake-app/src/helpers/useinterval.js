@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 
 // import { useIsomorphicLayoutEffect } from 'usehooks-ts'
 
-export default function UseInterval(callback, delay) {
+export default function useInterval(callback, delay) {
   const savedCallback = useRef();
 
   // Remember the latest callback if it changes.
