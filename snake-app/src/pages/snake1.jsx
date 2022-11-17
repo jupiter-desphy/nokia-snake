@@ -2,22 +2,21 @@ import { useState, useRef, useEffect } from "react";
 import Board from "../components/Board.jsx";
 // import useInterval from "../helpers/useinterval.js";
 import {
-    SNAKE_START
+    COLUMNS,
+    ROWS,
+    SNAKE_START,
+    PREY_START
 } from '../constants';
 import UseInterval from "../helpers/useinterval.js";
 
 export function SnakeI(props) {
-
-    /* Gameboard 2D Array */
-    const columns = 20;
-    const rows = 10;
 
 
     /* STATE */
     const [snakeArr, setSnakeArr] = useState(SNAKE_START);
     const [gameOver, setGameOver] = useState(false);
     const [score, setScore] = useState(0);
-    const [food, setFood] = useState([Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)]);
+    const [food, setFood] = useState([Math.floor(Math.random() * COLUMNS), Math.floor(Math.random() * ROWS)]);
     const [direction, setDirection] = useState([1, 0]);
     const [speed, setSpeed] = useState(null);
     const [prevDirection, setPrevDirection] = useState([]);
@@ -51,10 +50,10 @@ export function SnakeI(props) {
 
     const randomizeFood = () => {
         let snakeClone = snakeArr
-        let foodCoordinates = [Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)];
+        let foodCoordinates = [Math.floor(Math.random() * COLUMNS), Math.floor(Math.random() * ROWS)];
         for (const segment of snakeClone) {
             while (foodCoordinates[0] === segment[0] && foodCoordinates[1] === segment[1]) {
-                foodCoordinates = [Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)];
+                foodCoordinates = [Math.floor(Math.random() * COLUMNS), Math.floor(Math.random() * ROWS)];
             }
         }
         // let foodCoordinates = [Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)];
@@ -69,10 +68,10 @@ export function SnakeI(props) {
 
     const checkCollision = (piece, snk = snakeArr) => {
         if (
-            piece[0] >= columns ||
-            piece[0] < 0 ||
-            piece[1] >= rows ||
-            piece[1] < 0
+            piece[0] >= COLUMNS - 1 ||
+            piece[0] < 1 ||
+            piece[1] >= ROWS -1 ||
+            piece[1] < 1
         )
             return true;
 
@@ -187,9 +186,9 @@ export function SnakeI(props) {
     const gameBoard = useRef([]);
 
     function designBoard(game) {
-        for (let i = 0; i < rows; i++) {
-            game.push(new Array(rows))
-            for (let j = 0; j < columns; j++) {
+        for (let i = 0; i < ROWS; i++) {
+            game.push(new Array(ROWS))
+            for (let j = 0; j < COLUMNS; j++) {
                 game[i][j] = [j, i, null];
             }
         }
@@ -222,7 +221,8 @@ export function SnakeI(props) {
             </div>
 
             <div className="screen">
-                <Board theGrid={gameBoard.current} snakeArr={snakeArr} food={food} prevFood={prevFood} gameOver={gameOver} blinkOn={blinkOn} />
+                <Board theGrid={gameBoard.current} snakeArr={snakeArr} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={PREY_START} />
+
             </div>
             <div>
                 <button onClick={startGame}>START GAME</button>

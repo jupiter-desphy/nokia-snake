@@ -7,21 +7,23 @@
 body {
   justify-content: center;
   display: flex;
-  background-color: rgb(181, 181, 181);
+  /* background-color: rgb(181, 181, 181); */
+    background-color: rgb(126, 189, 141);
+
 }
 
 .screen {
   width: 80vw;
   height: 40vw;
   display: grid;
-  grid-template-columns: repeat(20, 1fr);
-  grid-template-rows: repeat(10, 1fr);
-  border: .5rem solid rgb(23, 23, 23);
+  grid-template-columns: repeat(22, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  /* border: .5rem solid rgb(23, 23, 23); */
 }
 
 .pixel {
   /* border: .01rem solid rgb(95, 164, 95); */
-  background-color: rgb(126, 189, 126);
+  /* background-color: rgb(126, 189, 126); */
   font-size: .5rem;
   color: black;
   display: grid;
@@ -34,6 +36,14 @@ body {
   border: .01rem solid rgb(95, 164, 95);
 } */
 
+.nw-border .nwb,
+.ne-border .neb,
+.sw-border .swb,
+.se-border .seb,
+.left-border .lb,
+.right-border .rb,
+.upper-border .ub,
+.bottom-border .bb,
 .snake-right .right,
 .snake-down .down,
 .snake-left .left,
@@ -63,7 +73,7 @@ body {
 .spider1 .sp1,
 .spider2 .sp2 {
   background-color: rgb(35, 35, 35);
-  border: .01rem solid rgb(95, 164, 95);
+  border: .01rem solid rgb(126, 189, 141);
 }
 
 span {

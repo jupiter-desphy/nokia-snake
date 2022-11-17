@@ -1,9 +1,32 @@
 import Tile from "./SingleGridItem.jsx";
-import { useState } from "react";
+import { COLUMNS, ROWS } from "../constants.js";
 
-export default function Board({ theGrid, snakeArr, food, prevFood, gameOver, blinkOn, prey }) {
+export default function Board({ theGrid, snakeArr, food, gameOver, blinkOn, prey }) {
+
 
     function generateGridState(currentItem) {
+
+        if (currentItem[0] === 0) {
+            if (currentItem[1] === 0) {
+                return "nw-border";
+            } else
+                if (currentItem[1] === ROWS - 1) {
+                    return "sw-border";
+                } else return "left-border";
+        }
+        if (currentItem[0] === COLUMNS - 1) {
+            if (currentItem[1] === 0) {
+                return "ne-border";
+            } else if (currentItem[1] === ROWS - 1) {
+                return "se-border";
+            } else return "right-border";
+        }
+        if (currentItem[1] === 0) {
+            return "upper-border";
+        }
+        if (currentItem[1] === ROWS - 1) {
+            return "bottom-border";
+        }
 
 
         for (let i = 0; i < snakeArr.length; i++) {
@@ -24,64 +47,73 @@ export default function Board({ theGrid, snakeArr, food, prevFood, gameOver, bli
 
                 if (i !== 0) {
                     if ((snakeArr[i - 1][2] === 'D' && snakeArr[i][2] === 'R') || (snakeArr[i - 1][2] === 'L' && snakeArr[i][2] === 'U')) {
-                        if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
+                        if (snakeArr[i][3] === 'full') {
                             return "full-n-e northeast";
-                        } else return "northeast";
+                        }
+                        return "northeast";
                     }
+
                     if ((snakeArr[i - 1][2] === 'D' && snakeArr[i][2] === 'L') || (snakeArr[i - 1][2] === 'R' && snakeArr[i][2] === 'U')) {
-                        if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
+                        if (snakeArr[i][3] === 'full') {
                             return "full-n-w northwest";
-                        } else return "northwest";
+                        } return "northwest";
                     }
                     if ((snakeArr[i - 1][2] === 'U' && snakeArr[i][2] === 'R') || (snakeArr[i - 1][2] === 'L' && snakeArr[i][2] === 'D')) {
-                        if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
+                        if (snakeArr[i][3] === 'full') {
                             return "full-s-e southeast";
-                        } else return "southeast";
+                        } return "southeast";
                     }
                     if ((snakeArr[i - 1][2] === 'U' && snakeArr[i][2] === 'L') || (snakeArr[i - 1][2] === 'R' && snakeArr[i][2] === 'D')) {
-                        if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
+                        if (snakeArr[i][3] === 'full') {
                             return "full-s-w southwest";
-                        } else return "southwest";
+                        } return "southwest";
                     }
                 }
 
+
                 if (snakeArr[i][2] === 'D') {
                     if (currentItem[0] === snakeArr[0][0] && currentItem[1] === snakeArr[0][1]) {
-                        if (currentItem[0] === food[0] && currentItem[1] === food[1] - 1) {
+                        if ((currentItem[0] === food[0] && currentItem[1] === food[1] - 1) || (currentItem[0] === prey[0][0] && currentItem[1] === prey[0][1] - 1) || (currentItem[0] === prey[1][0] && currentItem[1] === prey[1][1] - 1)) {
                             return "down-feed";
                         } else return "down-head";
                     }
-                    if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
-                        return "full snake-down";
-                    } else return "snake-down";
+                    if (snakeArr[i][3] === 'full') {
+                            return "full snake-down";
+                        }
+                    return "snake-down";
                 }
                 if (snakeArr[i][2] === 'R') {
                     if (currentItem[0] === snakeArr[0][0] && currentItem[1] === snakeArr[0][1]) {
-                        if (currentItem[0] === food[0] - 1 && currentItem[1] === food[1]) {
+                        if ((currentItem[0] === food[0] - 1 && currentItem[1] === food[1]) || (currentItem[0] === prey[0][0] - 1 && currentItem[1] === prey[0][1]) || (currentItem[0] === prey[1][0] - 1 && currentItem[1] === prey[1][1])) {
                             return "right-feed";
                         } else return "right-head";
                     }
-                    if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
-                        return "full snake-right";
-                    } else return "snake-right";
+                    if (snakeArr[i][3] === 'full') {
+                            return "full snake-right";
+                    }
+                    return "snake-right";
                 }
                 if (snakeArr[i][2] === 'L') {
                     if (currentItem[0] === snakeArr[0][0] && currentItem[1] === snakeArr[0][1]) {
-                        if (currentItem[0] === food[0] + 1 && currentItem[1] === food[1]) {
+                        if ((currentItem[0] === food[0] + 1 && currentItem[1] === food[1]) || (currentItem[0] === prey[0][0] + 1 && currentItem[1] === prey[0][1]) || (currentItem[0] === prey[1][0] + 1 && currentItem[1] === prey[1][1])) {
                             return "left-feed";
                         } else return "left-head";
-                    } else if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
-                        return "full snake-left";
-                    } else return "snake-left";
+                    }
+                    if (snakeArr[i][3] === 'full') {
+                            return "full snake-left";
+                    }
+                    return "snake-left";
                 }
                 if (snakeArr[i][2] === 'U') {
                     if (currentItem[0] === snakeArr[0][0] && currentItem[1] === snakeArr[0][1]) {
-                        if (currentItem[0] === food[0] && currentItem[1] === food[1] + 1) {
+                        if ((currentItem[0] === food[0] && currentItem[1] === food[1] + 1) || (currentItem[0] === prey[0][0] && currentItem[1] === prey[0][1] + 1) || (currentItem[0] === prey[1][0] && currentItem[1] === prey[1][1] + 1)) {
                             return "up-feed";
                         } else return "up-head";
-                    } else if (currentItem[0] === prevFood[0] && currentItem[1] === prevFood[1]) {
-                        return "full snake-up";
-                    } else return "snake-up";
+                    }
+                    if (snakeArr[i][3] === 'full') {
+                            return "full snake-up";
+                    }
+                    return "snake-up";
                 }
             }
         }
@@ -92,19 +124,19 @@ export default function Board({ theGrid, snakeArr, food, prevFood, gameOver, bli
 
         if (currentItem[0] === prey[0][0] && currentItem[1] === prey[0][1]) {
             if (prey[2] === 'caterpillar')
-            return "caterpillar1";
+                return "caterpillar1";
             if (prey[2] === 'fish')
-            return "fish1";
+                return "fish1";
             if (prey[2] === 'spider')
-            return 'spider1';
+                return 'spider1';
         };
         if (currentItem[0] === prey[1][0] && currentItem[1] === prey[1][1]) {
             if (prey[2] === 'caterpillar')
-            return "caterpillar2";
+                return "caterpillar2";
             if (prey[2] === 'fish')
-            return "fish2";
+                return "fish2";
             if (prey[2] === 'spider')
-            return 'spider2'
+                return 'spider2'
         };
     }
 
