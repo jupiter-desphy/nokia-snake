@@ -1,3 +1,8 @@
+:root {
+  --screen-green: rgb(126, 189, 141);
+  --dark-hole-charcoal: rgba(35, 35, 35, 0.832);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,26 +12,24 @@
 body {
   justify-content: center;
   display: flex;
-  /* background-color: rgb(181, 181, 181); */
-    background-color: rgb(126, 189, 141);
+  background-color: var(--screen-green)
 
 }
 
 .screen {
-  width: 80vw;
-  height: 40vw;
+  width: 84vw;
+  height: 42vw;
   display: grid;
   grid-template-columns: repeat(22, 1fr);
   grid-template-rows: repeat(12, 1fr);
-  /* border: .5rem solid rgb(23, 23, 23); */
 }
 
 .scoreboard {
-  width: 80vw;
-  height: 8vw;
+  width: 84vw;
+  height: 7vw;
   display: grid;
   grid-template-columns: repeat(22, 1fr);
-  grid-template-rows: repeat(1, 2fr);
+  grid-template-rows: 1;
 }
 
 .marquee-piece {
@@ -35,20 +38,13 @@ body {
   grid-template-rows: repeat(8, 1fr);
 }
 
-.pixel {
-  /* border: .01rem solid rgb(95, 164, 95); */
-  /* background-color: rgb(126, 189, 126); */
-  /* font-size: .5rem; */
-  /* color: black; */
+.tile {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
 }
 
-/* .snake .scale {
-  background-color: rgb(35, 35, 35);
-  border: .01rem solid rgb(95, 164, 95);
-} */
+.snake .scale
 .m,
 .zero .n0,
 .one .n1,
@@ -96,17 +92,11 @@ body {
 .fish2 .fs2,
 .spider1 .sp1,
 .spider2 .sp2 {
-  background-color: rgb(35, 35, 35);
-  border: .01rem solid rgb(126, 189, 141);
+  background-color: var(--dark-hole-charcoal);
+  border: .01rem solid var(--screen-green);
 }
 
 .erase-left .xl,
 .erase-right .xr {
-  background-color: rgb(126, 189, 141);
-}
-
-span {
-  display: flex;
-  max-width: 600px;
-  flex-wrap: wrap;
+  background-color: var(--screen-green);
 }

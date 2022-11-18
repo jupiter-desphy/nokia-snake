@@ -7,7 +7,7 @@ import {
     SNAKE_START,
     PREY_START
 } from '../constants';
-import useInterval from "../helpers/useinterval.js";
+import useInterval from "../helpers/useInterval.js";
 
 export function SnakeI(props) {
 
@@ -228,7 +228,7 @@ export function SnakeI(props) {
                 <button onClick={startGame}>START GAME</button>
             </div>
             <div>
-                {gameOver ? 'GAMEOVER' : ''}
+                {gameOver ? 'GAME OVER' : ''}
             </div>
             {/* <span>
                 SNAKE ARRAY: {snakeArr + ''}

@@ -5,7 +5,6 @@ export default function Marquee({ layOut, score, prey, preyTimer, gameOver }) {
 
 
     function chooseMarqueeTile(currentTile) {
-        console.log(prey)
 
         const scoreByChar = `${score}`.split('');
         const timerByChar = `${preyTimer}`.split('');

@@ -1,6 +1,6 @@
 export default function TilePattern({pixelState: tileClass}){
     return (
-        <div className={`pixel ${tileClass}`}>
+        <div className={`tile ${tileClass}`}>
 
             <div className="cp1 fs2 sp2 f-s-e d-f d-h r-h r-f"></div>
             <div className="seb rb fs2 sp2 f l-f s-w s-e u-t up down food-pixel"></div>
