@@ -44,7 +44,24 @@ body {
   grid-template-rows: repeat(4, 1fr);
 }
 
-.snake .scale
+.horizontal .scl,
+.horizontal .h,
+.vertical .scl, 
+.vertical .v, 
+.head .scl,
+.NW1 .scl,
+.NW1 .h,
+.NW1 .v,
+.NE1 .scl,
+.NE1 .v,
+.SW1 .scl,
+.SW1 .h,
+.SE1 .scl,
+.sw-border1 .swb1,
+.s-border1 .sb1,
+.se-border1 .seb1,
+.ne-border1 .neb1,
+.e-border1 .eb1,
 .m,
 .zero .n0,
 .one .n1,
