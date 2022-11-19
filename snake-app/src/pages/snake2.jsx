@@ -25,8 +25,8 @@ export function SnakeII() {
     const [blinkOn, setBlinkOn] = useState(false);
     const [prey, setPrey] = useState(PREY_START);
     const [preyTimer, setPreyTimer] = useState(0);
-    // const [paused, setPaused] = useState(false);
-    // const [pausedSpeed, setPausedSpeed] = useState(null);
+    const [paused, setPaused] = useState(false);
+    const [pausedSpeed, setPausedSpeed] = useState(null);
 
     /* FUNCTIONS */
 
@@ -61,17 +61,18 @@ export function SnakeII() {
         setGameOver(true);
     }
 
-    // const pause = () => {
-    //     if (paused) {
-    //         setPausedSpeed(speed);
-    //         setSpeed(0);
-    //     }
+    const pauseGame = () => {
+        setPaused(!paused);
+    }
 
-    //     if (!paused) {
-    //         setSpeed(pausedSpeed)
-    //     }
-    //     setPaused(!paused);
-    // }
+            // if (paused) {
+        //     setPausedSpeed(speed);
+        //     setSpeed(0);
+        // }
+
+        // if (!paused) {
+        //     setSpeed(pausedSpeed)
+        // }
 
 
     const blink = () => {
@@ -167,7 +168,7 @@ export function SnakeII() {
                 break;
             case 40: moveDown();
                 break;
-            case 32: startGame();
+            case 32: pauseGame();
                 break;
             default: ;
         }

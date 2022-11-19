@@ -12,10 +12,10 @@ const SNAKE_II_START = [
     [7, 6, 'R', 'hungry'],
     [6, 6, 'R', 'hungry']
 ];
-const SPEED_START = 250;
+const SPEED_START = 200;
 const PREY_START = [[null, null], [null, null], null];
 const PREY_NA = [['N/A', 'N/A'], ['N/A', 'N/A'], 'N/A'];
-const COLUMNS = 22;
-const ROWS = 12;
+const COLUMNS = 25;
+const ROWS = 15;
 
 export { SNAKE_I_START, SNAKE_II_START, SPEED_START, PREY_START, PREY_NA, COLUMNS, ROWS }

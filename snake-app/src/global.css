@@ -17,18 +17,18 @@ body {
 }
 
 .screen {
-  width: 84vw;
-  height: 42vw;
+  width: 90vw;
+  height: 54vw;
   display: grid;
-  grid-template-columns: repeat(22, 1fr);
-  grid-template-rows: repeat(12, 1fr);
+  grid-template-columns: repeat(25, 1fr);
+  grid-template-rows: repeat(15, 1fr);
 }
 
 .scoreboard {
-  width: 84vw;
-  height: 7vw;
+  width: 90vw;
+  height: 7.2vw;
   display: grid;
-  grid-template-columns: repeat(22, 1fr);
+  grid-template-columns: repeat(25, 1fr);
   grid-template-rows: 1;
 }
 
