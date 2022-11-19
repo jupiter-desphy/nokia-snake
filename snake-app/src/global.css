@@ -1,6 +1,9 @@
 :root {
   --screen-green: rgb(126, 189, 141);
   --dark-hole-charcoal: rgba(35, 35, 35, 0.832);
+  --width: 80vw;
+  --columns: 25;
+  --rows: 15;
 }
 
 * {
@@ -17,19 +20,25 @@ body {
 }
 
 .screen {
-  width: 90vw;
-  height: 54vw;
+  width: var(--width);
+  height: calc(var(--width) * var(--rows) / var(--columns));
   display: grid;
-  grid-template-columns: repeat(25, 1fr);
-  grid-template-rows: repeat(15, 1fr);
+  grid-template-columns: repeat(var(--columns), 1fr);
 }
 
 .scoreboard {
-  width: 90vw;
-  height: 7.2vw;
+  width: var(--width);
+  height: calc(var(--width) / var(--columns) * 2);
   display: grid;
-  grid-template-columns: repeat(25, 1fr);
-  grid-template-rows: 1;
+  grid-template-columns: .5fr repeat(calc(var(--columns) - 1), 1fr) .5fr;
+}
+
+.menu-slide {
+  width: var(--width);
+  height: calc(var(--width) / 8);
+  display: grid;
+  grid-template-columns: repeat(80, 1fr);
+  grid-template-rows: repeat(10, 1fr);
 }
 
 .marquee-piece {
@@ -115,5 +124,5 @@ body {
 
 .erase-left .xl,
 .erase-right .xr {
-  background-color: var(--screen-green);
+  background-color: transparent;
 }
