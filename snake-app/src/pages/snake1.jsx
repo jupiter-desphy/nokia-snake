@@ -52,13 +52,15 @@ export function SnakeI(props) {
     useInterval(() => blink(), 400);
 
     const randomizeFood = () => {
-        let snakeClone = snake;
-        let foodCoordinates = [Math.floor(Math.random() * (COLUMNS - 2)) + 1, Math.floor(Math.random() * (ROWS - 2)) + 1];
-        for (const segment of snakeClone) {
-            while (foodCoordinates[0] === segment[0] && foodCoordinates[1] === segment[1]) {
-                foodCoordinates = [Math.floor(Math.random() * (COLUMNS - 2)) + 1, Math.floor(Math.random() * (ROWS - 2)) + 1];
-            }
-        }
+        let snakeCopy = snake;
+        let foodCoordinates = [null, null];
+
+        const overlapsSnake = (segment) => {
+            return foodCoordinates[0] === segment[0] && foodCoordinates[1] === segment[1] }
+
+        do { foodCoordinates = [Math.floor(Math.random() * (COLUMNS - 2)) + 1, Math.floor(Math.random() * (ROWS - 2)) + 1];
+        } while (snakeCopy.find(overlapsSnake));
+
         setFood(foodCoordinates);
     }
 

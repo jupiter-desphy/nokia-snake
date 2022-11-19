@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Board from "../components/Board.jsx";
 import Marquee from "../components/Marquee.jsx";
 import useInterval from "../helpers/useInterval.js";
@@ -27,6 +27,7 @@ export function SnakeII() {
     const [preyTimer, setPreyTimer] = useState(0);
     const [paused, setPaused] = useState(false);
     const [pausedSpeed, setPausedSpeed] = useState(null);
+    const snakeRef = useRef([])
 
     /* FUNCTIONS */
 
@@ -65,14 +66,14 @@ export function SnakeII() {
         setPaused(!paused);
     }
 
-            // if (paused) {
-        //     setPausedSpeed(speed);
-        //     setSpeed(0);
-        // }
+    // if (paused) {
+    //     setPausedSpeed(speed);
+    //     setSpeed(0);
+    // }
 
-        // if (!paused) {
-        //     setSpeed(pausedSpeed)
-        // }
+    // if (!paused) {
+    //     setSpeed(pausedSpeed)
+    // }
 
 
     const blink = () => {
@@ -82,34 +83,30 @@ export function SnakeII() {
     useInterval(() => blink(), 400);
 
     const randomizeFood = () => {
-        let snakeClone = snake;
-        let foodCoordinates = [Math.floor(Math.random() * (COLUMNS - 2)) + 1, Math.floor(Math.random() * (ROWS - 2)) + 1];
-        for (const segment of snakeClone) {
-            while (foodCoordinates[0] === segment[0] && foodCoordinates[1] === segment[1]) {
-                foodCoordinates = [Math.floor(Math.random() * (COLUMNS - 2)) + 1, Math.floor(Math.random() * (ROWS - 2)) + 1];
-            }
+        let snakeOrPrey = [...snake, prey];
+        let foodCoordinates = [null, null];
+
+        function overlapsSnake(segment) {
+            return foodCoordinates[0] === segment[0] && foodCoordinates[1] === segment[1]
         }
-        // let foodCoordinates = [Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)];
-        // for (let i = 0; i < snakeArr.length; i++) {
-        //     while (snakeArr[i][0] == foodCoordinates[0] && snakeArr[i][0]) {
-        //         foodCoordinates = [Math.floor(Math.random() * columns), Math.floor(Math.random() * rows)];
-        //     }
-        // }
+
+        do { foodCoordinates = [Math.floor(Math.random() * (COLUMNS - 2)) + 1, Math.floor(Math.random() * (ROWS - 2)) + 1];
+        } while (snakeOrPrey.find(overlapsSnake));
+
         setFood(foodCoordinates);
     }
 
     const randomizePrey = () => {
-        let snakeClone = snake
-        let prey0 = [Math.floor(Math.random() * (COLUMNS - 3)) + 1, Math.floor(Math.random() * (ROWS - 2) + 1)];
-        for (const segment of snakeClone) {
-            while ((prey0[0] === segment[0] && prey0[1] === segment[1])
-            || (prey0[0] + 1 === segment[0] && prey0[1] === segment[1])
-            || (prey0[0] === food[0] && prey0[1] === food[1])
-            || (prey0[0] + 1 === food[0] && prey0[1] === food[1])
-            ) {
-                prey0 = [Math.floor(Math.random() * (COLUMNS - 3)) + 1, Math.floor(Math.random() * (ROWS - 2) + 1)];
-            }
+        let snakeOrFood = [...snake, food];
+        let prey0 = [];
+        
+        const overlapsSnakeOrFood = (segment) => {
+            return (prey0[0] === segment[0] && prey0[1] === segment[1]) || (prey0[0] + 1 === segment[0] && prey0[1] === segment[1])
         }
+
+        do { prey0 = [Math.floor(Math.random() * (COLUMNS - 3)) + 1, Math.floor(Math.random() * (ROWS - 2) + 1)];
+        } while (snakeOrFood.find(overlapsSnakeOrFood));
+
         let prey1 = [prey0[0] + 1, prey0[1]];
         let creature = prey[2];
         if ((creature === 'caterpillar') || (creature === null)) {

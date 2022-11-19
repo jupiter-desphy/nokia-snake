@@ -1,7 +1,7 @@
 :root {
   --screen-green: rgb(126, 189, 141);
   --dark-hole-charcoal: rgba(35, 35, 35, 0.832);
-  --width: 80vw;
+  --width: 75vw;
   --columns: 25;
   --rows: 15;
 }
