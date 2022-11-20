@@ -23,6 +23,7 @@ export function SnakeI(props) {
     const [speed, setSpeed] = useState(null);
     const [prevDirection, setPrevDirection] = useState([]);
     const [blinkOn, setBlinkOn] = useState(false);
+    const [pausedSpeed, setPausedSpeed] = useState(SPEED_START);
 
     /* FUNCTIONS */
 
@@ -33,11 +34,22 @@ export function SnakeI(props) {
     layMatrix(scoreBoard, COLUMNS, 1);
 
     const startGame = () => {
-        setSnake(SNAKE_I_START);
-        setDirection([1, 0]);
-        setSpeed(SPEED_START);
-        setGameOver(false);
-        setScore(0);
+        if (gameOver) {
+            setSnake(SNAKE_I_START);
+            setDirection([1, 0]);
+            setSpeed(SPEED_START);
+            setGameOver(false);
+            setScore(0);
+        }
+        else pauseGame();
+    }
+
+    const pauseGame = () => {
+        if (speed !== null) {
+            setPausedSpeed(speed);
+            setSpeed(null);
+        } else
+            setSpeed(pausedSpeed);
     }
 
     const endGame = () => {
@@ -53,12 +65,14 @@ export function SnakeI(props) {
 
     const randomizeFood = () => {
         let snakeCopy = snake;
-        let foodCoordinates = [null, null];
+        let foodCoordinates = [];
 
         const overlapsSnake = (segment) => {
-            return foodCoordinates[0] === segment[0] && foodCoordinates[1] === segment[1] }
+            return foodCoordinates[0] === segment[0] && foodCoordinates[1] === segment[1]
+        }
 
-        do { foodCoordinates = [Math.floor(Math.random() * (COLUMNS - 2)) + 1, Math.floor(Math.random() * (ROWS - 2)) + 1];
+        do {
+            foodCoordinates = [Math.floor(Math.random() * (COLUMNS - 2)) + 1, Math.floor(Math.random() * (ROWS - 2)) + 1];
         } while (snakeCopy.find(overlapsSnake));
 
         setFood(foodCoordinates);

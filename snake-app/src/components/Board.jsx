@@ -159,6 +159,8 @@ export default function Board({ theGrid, snake, food, gameOver, blinkOn, prey })
                 return "fish1";
             if (prey[2] === 'spider')
                 return 'spider1';
+            if (prey[2] === 'chameleon')
+                return 'chameleon1';
         };
         if (currentTile[0] === prey[1][0] && currentTile[1] === prey[1][1]) {
             if (prey[2] === 'caterpillar')
@@ -167,6 +169,8 @@ export default function Board({ theGrid, snake, food, gameOver, blinkOn, prey })
                 return "fish2";
             if (prey[2] === 'spider')
                 return 'spider2'
+            if (prey[2] === 'chameleon')
+                return 'chameleon2'
         };
     }
 

@@ -117,7 +117,9 @@ body {
 .fish1 .fs1,
 .fish2 .fs2,
 .spider1 .sp1,
-.spider2 .sp2 {
+.spider2 .sp2,
+.chameleon1 .cm1,
+.chameleon2 .cm2 {
   background-color: var(--dark-hole-charcoal);
   border: .01rem solid var(--screen-green);
 }
