@@ -153,24 +153,10 @@ export default function Board({ theGrid, snake, food, gameOver, blinkOn, prey })
 
         /* ----- PREY ----- */
         if (currentTile[0] === prey[0][0] && currentTile[1] === prey[0][1]) {
-            if (prey[2] === 'caterpillar')
-                return "caterpillar1";
-            if (prey[2] === 'fish')
-                return "fish1";
-            if (prey[2] === 'spider')
-                return 'spider1';
-            if (prey[2] === 'chameleon')
-                return 'chameleon1';
+            return prey[2] + '1';
         };
         if (currentTile[0] === prey[1][0] && currentTile[1] === prey[1][1]) {
-            if (prey[2] === 'caterpillar')
-                return "caterpillar2";
-            if (prey[2] === 'fish')
-                return "fish2";
-            if (prey[2] === 'spider')
-                return 'spider2'
-            if (prey[2] === 'chameleon')
-                return 'chameleon2'
+            return prey[2] + '2';
         };
     }
 

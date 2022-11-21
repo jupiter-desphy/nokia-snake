@@ -203,14 +203,6 @@ export function SnakeII() {
         preyTimer === 0 ? setPrey((prevPrey) => [[null, null], [null, null], prevPrey[2]]) : setPreyTimer((prevPreyTimer) => prevPreyTimer - 1);
 
         setSnake(snakeCopy);
-
-        // if (paused === false) {
-        //     setSpeed(0);
-        // }
-        // if (paused === true) {
-        //     setPausedSpeed(speed);
-        //     setSpeed(pausedSpeed)
-        // }
     };
 
     useInterval(() => gameLoop(), speed);
@@ -219,7 +211,7 @@ export function SnakeII() {
         <div role="button" tabIndex="0" onKeyDown={e => moveSnake(e)}>
 
             <div className="scoreboard">
-                <Marquee layOut={scoreBoard} score={score} prey={prey} preyTimer={preyTimer} gameOver={gameOver} />
+                <Marquee layOut={scoreBoard} score={score} prey={prey} preyTimer={preyTimer} />
             </div>
             <div className="screen">
                 <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={prey} />
@@ -235,7 +227,8 @@ export function SnakeII() {
             </div>
 
 
-            {/* <div>
+            {/* TESTING DATA
+            <div>
                 <button onClick={gameLoop}>GAME LOOP</button>
             </div>
             <div>

@@ -1,7 +1,7 @@
 import MarqueeTile from "./MarqueeTile.jsx";
 import { COLUMNS } from "../constants.js";
 
-export default function Marquee({ layOut, score, prey, preyTimer, gameOver }) {
+export default function Marquee({ layOut, score, prey, preyTimer}) {
 
 
     function chooseMarqueeTile(currentTile) {
@@ -90,50 +90,12 @@ export default function Marquee({ layOut, score, prey, preyTimer, gameOver }) {
             return "erase-left";
         }
 
-        // if (currentTile[0] === COLUMNS -1) {
-        //     return "erase-right";
-        // }
-
-        /* ----- BORDER TILES ----- */
-        // if (currentTile[0] === 0) {
-        //     if (currentTile[1] === 0) {
-        //         return "nw-border";
-        //     } else if (currentTile[1] === 0) {
-        //         return "sw-border";
-        //     } else return "left-border";
-        // }
-        // if (currentTile[0] === COLUMNS - 1) {
-        //     if (currentTile[1] === 0) {
-        //         return "ne-border";
-        //     } else if (currentTile[1] === 0) {
-        //         return "se-border";
-        //     } else return "right-border";
-        // }
-        // if (currentTile[1] === 0) {
-        //     return "upper-border";
-        // }
-        // if (currentTile[1] === 0) {
-        //     return "bottom-border";
-        // }
-
         /* ----- PREY ----- */
         if (currentTile[0] === prey[0][0] && currentTile[1] === prey[0][1]) {
             return prey[2] + '1';
-            // if (prey[2] === 'caterpillar')
-            //     return "caterpillar1";
-            // if (prey[2] === 'fish')
-            //     return "fish1";
-            // if (prey[2] === 'spider')
-            //     return 'spider1';
         };
         if (currentTile[0] === prey[1][0] && currentTile[1] === prey[1][1]) {
             return prey[2] + '2';
-            // if (prey[2] === 'caterpillar')
-            //     return "caterpillar2";
-            // if (prey[2] === 'fish')
-            //     return "fish2";
-            // if (prey[2] === 'spider')
-            //     return 'spider2'
         };
     }
 

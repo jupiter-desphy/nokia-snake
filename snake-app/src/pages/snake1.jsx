@@ -115,7 +115,7 @@ export function SnakeI(props) {
                 break;
             case 40: moveDown();
                 break;
-            case 32: startGame();
+            case 32: pauseGame();
                 break;
             default: ;
         }
@@ -151,7 +151,7 @@ export function SnakeI(props) {
     return (
         <div role="button" tabIndex="0" onKeyDown={e => moveSnake(e)}>
             <div className="scoreboard">
-                {/* <Marquee layOut={scoreBoard} score={score} prey={null} preyTimer={null} gameOver={gameOver} /> */}
+                <Marquee layOut={scoreBoard} score={score} prey={PREY_NA} preyTimer={null} />
             </div>
             <div className="screen">
                 <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={PREY_NA} />
