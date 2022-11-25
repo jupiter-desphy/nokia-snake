@@ -1,7 +1,18 @@
-import React from 'react'
+import React from 'react';
+import MenuSlide from '../components/MenuSlide';
 
 export function Menu() {
+
+
   return (
-    <div>Menu</div>
+    <div>
+      <div>
+      <MenuSlide optionName='Continue'/>
+      </div>
+      <div>
+      <MenuSlide optionName='Contiiinnnue'/>
+      </div>
+      {/* <MenuSlide optionName='New game'/> */}
+    </div>
   )
 }

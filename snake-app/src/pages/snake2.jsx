@@ -1,7 +1,4 @@
-import { useState, useEffect, useRef } from "react";
-import Board from "../components/Board.jsx";
-import Marquee from "../components/Marquee.jsx";
-import useInterval from "../helpers/useInterval.js";
+import { useState, useEffect } from "react";
 import {
     COLUMNS,
     ROWS,
@@ -9,6 +6,9 @@ import {
     SPEED_START,
     PREY_START
 } from '../constants';
+import Board from "../components/Board.jsx";
+import Marquee from "../components/Marquee.jsx";
+import useInterval from "../helpers/useInterval.js";
 import layMatrix from "../helpers/layMatrix.js";
 
 export function SnakeII() {
@@ -20,25 +20,14 @@ export function SnakeII() {
     const [food, setFood] = useState([Math.floor(Math.random() * (COLUMNS - 2)) + 1, Math.floor(Math.random() * (ROWS - 2)) + 1]);
     const [foodCount, setFoodCount] = useState(0);
     const [direction, setDirection] = useState([1, 0]);
-    const [speed, setSpeed] = useState(null);
     const [prevDirection, setPrevDirection] = useState([]);
+    const [speed, setSpeed] = useState(null);
     const [blinkOn, setBlinkOn] = useState(false);
     const [prey, setPrey] = useState(PREY_START);
     const [preyTimer, setPreyTimer] = useState(0);
     const [pausedSpeed, setPausedSpeed] = useState(SPEED_START);
-
+    
     /* FUNCTIONS */
-
-
-    useEffect(() => {
-        randomizeFood();
-        if (foodCount > 1 && foodCount % 5 === 0) randomizePrey();
-    }, [foodCount]);
-
-    useEffect(() => {
-
-    }, []);
-
 
     const gameBoard = [];
     const scoreBoard = [];
@@ -83,15 +72,13 @@ export function SnakeII() {
 
     const randomizeFood = () => {
         let snakeOrPrey = [...snake, prey[0], prey[1]];
-        console.log(snakeOrPrey)
         let foodCoordinates = [];
 
         function overlapsSnake(segment) {
             return foodCoordinates[0] === segment[0] && foodCoordinates[1] === segment[1]
         }
 
-        do {
-            foodCoordinates = [Math.floor(Math.random() * (COLUMNS - 2)) + 1, Math.floor(Math.random() * (ROWS - 2)) + 1];
+        do { foodCoordinates = [Math.floor(Math.random() * (COLUMNS - 2)) + 1, Math.floor(Math.random() * (ROWS - 2)) + 1];
         } while (snakeOrPrey.find(overlapsSnake));
 
         setFood(foodCoordinates);
@@ -105,8 +92,7 @@ export function SnakeII() {
             return (prey0[0] === segment[0] && prey0[1] === segment[1]) || (prey0[0] + 1 === segment[0] && prey0[1] === segment[1])
         }
 
-        do {
-            prey0 = [Math.floor(Math.random() * (COLUMNS - 3)) + 1, Math.floor(Math.random() * (ROWS - 2) + 1)];
+        do { prey0 = [Math.floor(Math.random() * (COLUMNS - 3)) + 1, Math.floor(Math.random() * (ROWS - 2) + 1)];
         } while (snakeOrFood.find(overlapsSnakeOrFood));
 
         let prey1 = [prey0[0] + 1, prey0[1]];
@@ -121,7 +107,7 @@ export function SnakeII() {
             creature = 'caterpillar';
         }
         setPrey([prey0, prey1, creature]);
-        setPreyTimer(30);
+        setPreyTimer(28);
     }
 
     const didCollide = (piece, snk = snake) => {
@@ -207,6 +193,12 @@ export function SnakeII() {
 
     useInterval(() => gameLoop(), speed);
 
+    useEffect(() => {
+        randomizeFood();
+        if (foodCount > 1 && foodCount % 5 === 0) randomizePrey();
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [foodCount]);
+
     return (
         <div role="button" tabIndex="0" onKeyDown={e => moveSnake(e)}>
 
@@ -240,10 +232,9 @@ export function SnakeII() {
             </div>
             <div>
                 <button onClick={moveDown}>Move Down</button>
-            </div> */}
-
-            {/* <div>
-                {gameOver ? 'GAMEOVER' : ''}
+            </div>
+            <div>
+                {gameOver ? 'GAME OVER' : ''}
             </div> */}
         </div>
     )

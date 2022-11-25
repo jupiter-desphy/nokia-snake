@@ -3,7 +3,6 @@ import { COLUMNS, ROWS } from "../constants.js";
 
 export default function Board({ theGrid, snake, food, gameOver, blinkOn, prey }) {
 
-
     function generateTileClass(currentTile) {
 
         /* ----- BORDER TILES ----- */

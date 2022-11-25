@@ -33,12 +33,44 @@ body {
   grid-template-columns: .5fr repeat(calc(var(--columns) - 1), 1fr) .5fr;
 }
 
-.menu-slide {
+.menu-option {
   width: var(--width);
   height: calc(var(--width) / 8);
   display: grid;
-  grid-template-columns: repeat(80, 1fr);
+  grid-template-columns: repeat(80, auto);
+}
+
+.menu-option:hover .posi-space {
+  background-color: transparent;
+}
+
+/* .menu-option:hover .negi-space {
+  background-color: var(--dark-hole-charcoal);
+} */
+
+/* .menu-tile-8 {
+  width: calc(var(--width) / 80 / 8);
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(10, 1fr);
+  grid-column: span 8;
+}
+
+.menu-tile-6 {
+  width: calc(var(--width) / 80 / 6);
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  grid-column: span 6;
+} */
+
+.menu-tile {
+  display: grid;
+  grid-template-rows: repeat(10, 1fr);
+}
+
+.pixel {
+  width: calc(var(--width) / 80);
 }
 
 .marquee-piece {
@@ -53,6 +85,8 @@ body {
   grid-template-rows: repeat(4, 1fr);
 }
 
+.menu-option:hover .negi-space,
+.posi-space,
 .horizontal .scl,
 .horizontal .h,
 .vertical .scl, 
@@ -121,10 +155,15 @@ body {
 .chameleon1 .cm1,
 .chameleon2 .cm2 {
   background-color: var(--dark-hole-charcoal);
-  border: .01rem solid var(--screen-green);
+  border: .00001rem solid var(--screen-green);
 }
 
+.negi-space,
 .erase-left .xl,
 .erase-right .xr {
   background-color: transparent;
 }
+
+/* .pixel {
+  background-color: black;
+} */

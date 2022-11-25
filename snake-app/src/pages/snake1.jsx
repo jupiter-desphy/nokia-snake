@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Board from "../components/Board.jsx";
 import Marquee from "../components/Marquee.jsx";
 import useInterval from "../helpers/useInterval.js";
@@ -11,7 +11,7 @@ import {
 } from '../constants';
 import layMatrix from "../helpers/layMatrix.js";
 
-export function SnakeI(props) {
+export function SnakeI() {
 
 
     /* STATE */
