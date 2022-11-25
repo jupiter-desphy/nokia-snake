@@ -9,10 +9,12 @@ export function Menu() {
       <div>
       <MenuSlide optionName='Continue'/>
       </div>
-      <div>
+      {/* <div>
       <MenuSlide optionName='Contiiinnnue'/>
+      </div> */}
+      <div>
+      <MenuSlide optionName='New game'/>
       </div>
-      {/* <MenuSlide optionName='New game'/> */}
     </div>
   )
 }

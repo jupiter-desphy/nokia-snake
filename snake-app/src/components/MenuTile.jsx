@@ -9,12 +9,32 @@ export default function MenuTile({ layOut, letter, width }) {
         let p = 'posi-space';
         let n = 'negi-space';
 
+        if (letter !== 'g')
         if (y < 1 || y > 7) return n;
 
         if (letter === 'C') {
             if (x === 2 && y > 1 && y < 7) return p;
             if (x === 3) return p;
             if (x > 3 && x < 7 && (y === 1 || y === 7)) return p;
+            return n;
+        }
+
+        if (letter === 'N') {
+            if ((x === 2 || x === 7)
+                || (x === 3 && y > 1)
+                || (x === 4 && y > 2 && y < 5)
+                || (x === 5 && y > 3 && y < 6)
+                || (x === 6 && y < 7)) return p;
+            return n;
+        }
+
+        if (letter === 'a') {
+            if (y < 3) return n;
+            if ((x === 0 && y === 6)
+                || (x === 1 && y !== 4)
+                || (x === 2 && y % 2)
+                || (x === 3)
+                || (x === 4 && y > 3)) return p;
             return n;
         }
 
@@ -28,8 +48,26 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
+        if (letter === 'g') {
+            if (y < 3 || y > 8) return n;
+            if ((x === 0 && y > 3 && y < 6)
+                || (x === 1 && y !== 7)
+                || (x === 2 && (y === 3 || y === 6 || y > 7)) 
+                || (x === 3)
+                || (x === 4 && y !== 8)) return p;
+            return n;
+        }
+
         if (letter === 'i') {
             if (x < 2 && y !== 2) return p;
+            return n;
+        }
+
+        if (letter === 'm') {
+            if (y < 3) return n;
+            if ((x === 0 || x === 1 || x === 3 || x === 4 || x === 6)
+                || ((x === 2 || x === 5) && y === 3)
+                || (x === 7 && y !== 3)) return p;
             return n;
         }
 
@@ -63,6 +101,19 @@ export default function MenuTile({ layOut, letter, width }) {
                 || (x === 1 || x === 3 || x === 4)
                 || (x === 2 && y === 7)
             ) return p;
+            return n;
+        }
+
+        if (letter === 'w') {
+            if (y < 3) return n;
+            if (((x === 0 || x === 6) && y < 6)
+                || (x === 1 || x === 5)
+                || ((x === 2 || x === 4) && y > 5)
+                || (x === 3 && y > 3 && y !== 7)) return p;
+            return n;
+        }
+
+        if (letter === ' ') {
             return n;
         }
 

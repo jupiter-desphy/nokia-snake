@@ -13,11 +13,23 @@ export default function MenuSlide({ optionName }) {
             case 'C':
                 width = 8;
                 break;
+            case 'N':
+                width = 9;
+                break;
+            case 'a':
+                width = 6;
+                break;
             case 'e':
+                width = 6;
+                break;
+            case 'g':
                 width = 6;
                 break;
             case 'i':
                 width = 3;
+                break;
+            case 'm':
+                width = 9;
                 break;
             case 'n':
                 width = 6;
@@ -30,6 +42,12 @@ export default function MenuSlide({ optionName }) {
                 break;
                 case 'u':
                     width = 6;
+                    break;
+                case 'w':
+                    width = 8;
+                    break;
+                case ' ':
+                    width = 2;
                     break;
             default: ;
         }
