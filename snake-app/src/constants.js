@@ -7,6 +7,7 @@ const SNAKE_I_START = [
     [7, 7, 'R'],
     [6, 7, 'R']
 ];
+
 const SNAKE_II_START = [
     [12, 7, 'R', 'hungry'],
     [11, 7, 'R', 'hungry'],

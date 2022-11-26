@@ -13,18 +13,31 @@ export default function MenuTile({ layOut, letter, width }) {
         if (y < 1 || y > 7) return n;
 
         if (letter === 'C') {
-            if (x === 2 && y > 1 && y < 7) return p;
-            if (x === 3) return p;
-            if (x > 3 && x < 7 && (y === 1 || y === 7)) return p;
+            if (x === 0 && y > 1 && y < 7) return p;
+            if (x === 1) return p;
+            if (x > 1 && x < 5 && (y === 1 || y === 7)) return p;
+            return n;
+        }
+
+        if (letter === 'I') {
+            if (x < 2) return p;
             return n;
         }
 
         if (letter === 'N') {
-            if ((x === 2 || x === 7)
-                || (x === 3 && y > 1)
-                || (x === 4 && y > 2 && y < 5)
-                || (x === 5 && y > 3 && y < 6)
-                || (x === 6 && y < 7)) return p;
+            if ((x === 0 || x === 5)
+                || (x === 1 && y > 1)
+                || (x === 2 && y > 2 && y < 5)
+                || (x === 3 && y > 3 && y < 6)
+                || (x === 4 && y < 7)) return p;
+            return n;
+        }
+
+        if (letter === 'S') {
+            if ((x < 1 && (y === 2 || y === 3 || y === 7))
+                || (x === 1 && (y < 5 || y === 7))
+                || (x === 2 && (y > 3 || y < 2))
+                || (x === 3 && (y < 2 || y > 4 && y < 7))) return p;
             return n;
         }
 
@@ -60,6 +73,14 @@ export default function MenuTile({ layOut, letter, width }) {
 
         if (letter === 'i') {
             if (x < 2 && y !== 2) return p;
+            return n;
+        }
+
+        if (letter === 'k') {
+            if ((x < 2)
+                || (x === 2 && y > 3 && y < 7)
+                || (x === 3 && y > 2 && y !== 5)
+                || (x === 4 && (y === 3 || y === 7))) return p;
             return n;
         }
 
@@ -114,6 +135,10 @@ export default function MenuTile({ layOut, letter, width }) {
         }
 
         if (letter === ' ') {
+            return n;
+        }
+
+        if (letter === 'remainder') {
             return n;
         }
 

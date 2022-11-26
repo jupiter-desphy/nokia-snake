@@ -5,16 +5,11 @@ export function Menu() {
 
 
   return (
-    <div>
-      <div>
-      <MenuSlide optionName='Continue'/>
-      </div>
-      {/* <div>
-      <MenuSlide optionName='Contiiinnnue'/>
-      </div> */}
-      <div>
-      <MenuSlide optionName='New game'/>
-      </div>
-    </div>
+    <>
+      <MenuSlide optionName=' Continue'/>
+      <MenuSlide optionName=' New game'/>
+      <MenuSlide optionName=' Snake I'/>
+      <MenuSlide optionName=' Snake II'/>
+    </>
   )
 }
