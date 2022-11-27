@@ -143,6 +143,11 @@ body {
   background-color: transparent;
 }
 
+.hidden-button {
+  background-color: transparent;
+  border-style: none;
+}
+
 /* .pixel {
   background-color: black;
   border: .00001rem solid var(--screen-green);

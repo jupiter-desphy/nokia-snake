@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
     COLUMNS,
     ROWS,
@@ -8,6 +9,7 @@ import {
 } from '../constants';
 import Board from "../components/Board.jsx";
 import Marquee from "../components/Marquee.jsx";
+import MenuSlide from "../components/MenuSlide";
 import useInterval from "../helpers/useInterval.js";
 import layMatrix from "../helpers/layMatrix.js";
 
@@ -25,8 +27,9 @@ export function SnakeII() {
     const [blinkOn, setBlinkOn] = useState(false);
     const [prey, setPrey] = useState(PREY_START);
     const [preyTimer, setPreyTimer] = useState(0);
+    const [paused, setPaused] = useState(false)
     const [pausedSpeed, setPausedSpeed] = useState(SPEED_START);
-    
+
     /* FUNCTIONS */
 
     const gameBoard = [];
@@ -36,16 +39,18 @@ export function SnakeII() {
     layMatrix(scoreBoard, COLUMNS, 1);
 
     const startGame = () => {
-        if (gameOver !== false) {
+        if (gameOver !== false || paused) {
             setSnake(SNAKE_II_START);
             setDirection([1, 0]);
-            setSpeed(SPEED_START);
             setGameOver(false);
             setScore(0);
             setFoodCount(0);
             setPrey(PREY_START);
             setPreyTimer(0);
-        } else pauseGame();
+            setPaused(false);
+        }
+        !paused ? setSpeed(pausedSpeed) : setSpeed(SPEED_START)
+        // else pauseGame();
     }
 
     const endGame = () => {
@@ -54,11 +59,23 @@ export function SnakeII() {
     }
 
     const pauseGame = () => {
+        // if (speed !== null) {
+            setPausedSpeed(speed);
+            setSpeed(null);
+            setPaused(true)
+        // } else {
+        //     setPaused(false);
+        // }
+    }
+
+    const unpauseGame = () => {
         if (speed !== null) {
             setPausedSpeed(speed);
             setSpeed(null);
-        } else
-            setSpeed(pausedSpeed);
+            setPaused(true)
+        } else {
+            setPaused(false);
+        }
     }
 
 
@@ -78,7 +95,8 @@ export function SnakeII() {
             return foodCoordinates[0] === segment[0] && foodCoordinates[1] === segment[1]
         }
 
-        do { foodCoordinates = [Math.floor(Math.random() * (COLUMNS - 2)) + 1, Math.floor(Math.random() * (ROWS - 2)) + 1];
+        do {
+            foodCoordinates = [Math.floor(Math.random() * (COLUMNS - 2)) + 1, Math.floor(Math.random() * (ROWS - 2)) + 1];
         } while (snakeOrPrey.find(overlapsSnake));
 
         setFood(foodCoordinates);
@@ -92,7 +110,8 @@ export function SnakeII() {
             return (prey0[0] === segment[0] && prey0[1] === segment[1]) || (prey0[0] + 1 === segment[0] && prey0[1] === segment[1])
         }
 
-        do { prey0 = [Math.floor(Math.random() * (COLUMNS - 3)) + 1, Math.floor(Math.random() * (ROWS - 2) + 1)];
+        do {
+            prey0 = [Math.floor(Math.random() * (COLUMNS - 3)) + 1, Math.floor(Math.random() * (ROWS - 2) + 1)];
         } while (snakeOrFood.find(overlapsSnakeOrFood));
 
         let prey1 = [prey0[0] + 1, prey0[1]];
@@ -200,28 +219,57 @@ export function SnakeII() {
     }, [foodCount]);
 
     return (
-        <div role="button" tabIndex="0" onKeyDown={e => moveSnake(e)}>
+        <div role="button" tabIndex="0" onKeyDown={e => speed ? moveSnake(e) : startGame()}>
+            {paused ?
+                <>
+                    <div>
+                        <button className='hidden-button' onClick={pauseGame}>
+                            <MenuSlide optionName=' Continue' />
+                        </button>
+                    </div>
+                    <div>
+                        <button className='hidden-button' onClick={startGame}>
+                            <MenuSlide optionName=' New game' />
+                        </button>
+                    </div>
+                </>
+                :
+                <>
+                    <div className="scoreboard">
+                        <Marquee layOut={scoreBoard} score={score} prey={prey} preyTimer={preyTimer} />
+                    </div>
+                    <div className="screen">
+                        <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={prey} />
+                    </div>
+                </>
+            }
 
-            <div className="scoreboard">
-                <Marquee layOut={scoreBoard} score={score} prey={prey} preyTimer={preyTimer} />
-            </div>
-            <div className="screen">
-                <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={prey} />
-            </div>
             <div>
-                <button onClick={startGame}>START GAME</button>
+                <div>
+                <button className='hidden-button' onClick={startGame}>
+                {paused ?
+                        <MenuSlide optionName=' New game' />
+                        :
+                        'START GAME'
+                    }
+                </button>
+                </div>
+                <button className="hidden-button" onClick={unpauseGame}>
+                    {paused ?
+                        <MenuSlide optionName=' Continue' />
+                        :
+                        'PAUSE GAME'
+                    }
+                </button>
             </div>
-            <div>
-                <button onClick={pauseGame}>PAUSE GAME</button>
-            </div>
-            <div>
-                {pausedSpeed}
-            </div>
+
+
 
 
             {/* TESTING DATA
+
             <div>
-                <button onClick={gameLoop}>GAME LOOP</button>
+            <button onClick={gameLoop}>GAME LOOP</button>
             </div>
             <div>
                 <button onClick={moveUp}>Move Up</button>
