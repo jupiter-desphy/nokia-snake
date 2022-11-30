@@ -5,6 +5,7 @@ import {
     ROWS,
     SNAKE_II_START,
     SPEED_START,
+    DIRECTION_START,
     PREY_START
 } from '../constants';
 import Board from "../components/Board.jsx";
@@ -21,8 +22,8 @@ export function SnakeII() {
     const [score, setScore] = useState(0);
     const [food, setFood] = useState([Math.floor(Math.random() * (COLUMNS - 2)) + 1, Math.floor(Math.random() * (ROWS - 2)) + 1]);
     const [foodCount, setFoodCount] = useState(0);
-    const [direction, setDirection] = useState([1, 0]);
-    const [prevDirection, setPrevDirection] = useState([]);
+    const [direction, setDirection] = useState(DIRECTION_START);
+    const [prevDirection, setPrevDirection] = useState(DIRECTION_START);
     const [speed, setSpeed] = useState(null);
     const [blinkOn, setBlinkOn] = useState(false);
     const [prey, setPrey] = useState(PREY_START);
@@ -39,18 +40,17 @@ export function SnakeII() {
     layMatrix(scoreBoard, COLUMNS, 1);
 
     const startGame = () => {
-        if (gameOver !== false || paused) {
+        // if (gameOver) {
             setSnake(SNAKE_II_START);
-            setDirection([1, 0]);
             setGameOver(false);
             setScore(0);
             setFoodCount(0);
             setPrey(PREY_START);
             setPreyTimer(0);
+            setSpeed(SPEED_START);
+            setDirection(DIRECTION_START);
             setPaused(false);
-        }
-        !paused ? setSpeed(pausedSpeed) : setSpeed(SPEED_START)
-        // else pauseGame();
+        // }
     }
 
     const endGame = () => {
@@ -59,20 +59,33 @@ export function SnakeII() {
         setDirection([1, 0]);
     }
 
+    const goSnake2Menu = () => {
+            if (speed) setPausedSpeed(speed);
+            setSpeed(null);
+            setPaused(true);
+    }
+
     const pauseGame = () => {
         if (speed !== null) {
-        setPausedSpeed(speed);
-        setSpeed(null);
-        setPaused(true)
+            goSnake2Menu();
+        } else if (!paused) {
+            nudgeSnake();
         } else {
-            setPaused(false);
+            returnToGame();
         }
     }
 
-    // const unpauseGame = () => {
-    //     setPaused(false);
-    // }
+    const nudgeSnake = () => {
+        // setPaused(false);
+        if (!gameOver)
+        setSpeed(pausedSpeed)
 
+        // !paused && !speed ? setSpeed(pausedSpeed) : setPaused(false);
+    }
+
+    const returnToGame = () => {
+        setPaused(false);
+    }
 
 
 
@@ -134,20 +147,28 @@ export function SnakeII() {
 
 
     const moveLeft = () => {
-        if (prevDirection[0] !== 1 && prevDirection[1] !== 0) setDirection([-1, 0]);
-        if (!speed) startGame();
+        if (!paused) {
+            if (prevDirection[0] !== 1 && prevDirection[1] !== 0) setDirection([-1, 0]);
+            if (!speed) nudgeSnake();
+        }
     }
     const moveUp = () => {
-        if (prevDirection[0] !== 0 && prevDirection[1] !== 1) setDirection([0, -1]);
-        if (!speed) startGame();
+        if (!paused) {
+            if (prevDirection[0] !== 0 && prevDirection[1] !== 1) setDirection([0, -1]);
+            if (!speed) nudgeSnake();
+        }
     }
     const moveRight = () => {
-        if (prevDirection[0] !== -1 && prevDirection[1] !== 0) setDirection([1, 0]);
-        if (!speed) startGame();
+        if (!paused) {
+            if (prevDirection[0] !== -1 && prevDirection[1] !== 0) setDirection([1, 0]);
+            if (!speed) nudgeSnake();
+        }
     }
     const moveDown = () => {
-        if (prevDirection[0] !== 0 && prevDirection[1] !== -1) setDirection([0, 1]);
-        if (!speed) startGame();
+        if (!paused) {
+            if (prevDirection[0] !== 0 && prevDirection[1] !== -1) setDirection([0, 1]);
+            if (!speed) nudgeSnake();
+        }
     }
 
     const useKey = (key, cb) => {
@@ -173,12 +194,11 @@ export function SnakeII() {
     //     console.log('Nice!')
     // }
 
-    useKey ('ArrowLeft', moveLeft);
-    useKey ('ArrowRight', moveRight);
-    useKey ('ArrowUp', moveUp);
-    useKey ('ArrowDown', moveDown);
-    useKey ('Enter', pauseGame);
-    useKey ('Space', pauseGame);
+    useKey('ArrowLeft', moveLeft);
+    useKey('ArrowRight', moveRight);
+    useKey('ArrowUp', moveUp);
+    useKey('ArrowDown', moveDown);
+    useKey('Space', pauseGame);
 
     // const moveSnake = ({ keyCode }) => {
     //     switch (keyCode) {
@@ -248,7 +268,8 @@ export function SnakeII() {
     }, [foodCount]);
 
     return (
-        <div role="button" tabIndex="0" 
+        <div
+        // role="button" tabIndex="0"
         // onKeyDown={e => speed ? moveSnake(e) : startGame()}
         >
             {paused ?
@@ -285,17 +306,21 @@ export function SnakeII() {
                         }
                     </button>
                 </div>
-                <button className="hidden-button" onClick={pauseGame}>
                     {paused ?
+                <button className="hidden-button" onClick={returnToGame}>
                         <MenuSlide optionName=' Continue' />
-                        :
-                        'PAUSE GAME'
-                    }
                 </button>
+                        :
+                        <button className="hidden-button" onClick={goSnake2Menu}>
+                        <MenuSlide optionName=' enu' />
+                </button>
+                    }
             </div>
 
 
-
+            <div>
+                {pausedSpeed}
+            </div>
 
             {/* TESTING DATA
 
