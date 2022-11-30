@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
     COLUMNS,
@@ -56,27 +56,22 @@ export function SnakeII() {
     const endGame = () => {
         setSpeed(null);
         setGameOver(true);
+        setDirection([1, 0]);
     }
 
     const pauseGame = () => {
-        // if (speed !== null) {
-            setPausedSpeed(speed);
-            setSpeed(null);
-            setPaused(true)
-        // } else {
-        //     setPaused(false);
-        // }
-    }
-
-    const unpauseGame = () => {
         if (speed !== null) {
-            setPausedSpeed(speed);
-            setSpeed(null);
-            setPaused(true)
+        setPausedSpeed(speed);
+        setSpeed(null);
+        setPaused(true)
         } else {
             setPaused(false);
         }
     }
+
+    // const unpauseGame = () => {
+    //     setPaused(false);
+    // }
 
 
 
@@ -140,32 +135,66 @@ export function SnakeII() {
 
     const moveLeft = () => {
         if (prevDirection[0] !== 1 && prevDirection[1] !== 0) setDirection([-1, 0]);
+        if (!speed) startGame();
     }
     const moveUp = () => {
         if (prevDirection[0] !== 0 && prevDirection[1] !== 1) setDirection([0, -1]);
+        if (!speed) startGame();
     }
     const moveRight = () => {
         if (prevDirection[0] !== -1 && prevDirection[1] !== 0) setDirection([1, 0]);
+        if (!speed) startGame();
     }
     const moveDown = () => {
         if (prevDirection[0] !== 0 && prevDirection[1] !== -1) setDirection([0, 1]);
+        if (!speed) startGame();
     }
 
-    const moveSnake = ({ keyCode }) => {
-        switch (keyCode) {
-            case 37: moveLeft();
-                break;
-            case 38: moveUp();
-                break;
-            case 39: moveRight();
-                break;
-            case 40: moveDown();
-                break;
-            case 32: startGame();
-                break;
-            default: ;
-        }
+    const useKey = (key, cb) => {
+        const callbackRef = useRef(cb);
+
+        useEffect(() => {
+            callbackRef.current = cb;
+        });
+
+        useEffect(() => {
+            const handle = (event) => {
+                if (event.code === key) {
+                    callbackRef.current(event);
+                };
+                if (event.code === 'Space') event.preventDefault();
+            }
+            document.addEventListener("keydown", handle);
+            return () => document.removeEventListener("keydown", handle)
+        }, [key]);
     }
+
+    // const keyIsWorking = () => {
+    //     console.log('Nice!')
+    // }
+
+    useKey ('ArrowLeft', moveLeft);
+    useKey ('ArrowRight', moveRight);
+    useKey ('ArrowUp', moveUp);
+    useKey ('ArrowDown', moveDown);
+    useKey ('Enter', pauseGame);
+    useKey ('Space', pauseGame);
+
+    // const moveSnake = ({ keyCode }) => {
+    //     switch (keyCode) {
+    //         case 37: moveLeft();
+    //             break;
+    //         case 38: moveUp();
+    //             break;
+    //         case 39: moveRight();
+    //             break;
+    //         case 40: moveDown();
+    //             break;
+    //         case 32: startGame();
+    //             break;
+    //         default: ;
+    //     }
+    // }
 
     const gameLoop = () => {
 
@@ -219,10 +248,12 @@ export function SnakeII() {
     }, [foodCount]);
 
     return (
-        <div role="button" tabIndex="0" onKeyDown={e => speed ? moveSnake(e) : startGame()}>
+        <div role="button" tabIndex="0" 
+        // onKeyDown={e => speed ? moveSnake(e) : startGame()}
+        >
             {paused ?
                 <>
-                    <div>
+                    {/* <div>
                         <button className='hidden-button' onClick={pauseGame}>
                             <MenuSlide optionName=' Continue' />
                         </button>
@@ -231,7 +262,7 @@ export function SnakeII() {
                         <button className='hidden-button' onClick={startGame}>
                             <MenuSlide optionName=' New game' />
                         </button>
-                    </div>
+                    </div> */}
                 </>
                 :
                 <>
@@ -246,15 +277,15 @@ export function SnakeII() {
 
             <div>
                 <div>
-                <button className='hidden-button' onClick={startGame}>
-                {paused ?
-                        <MenuSlide optionName=' New game' />
-                        :
-                        'START GAME'
-                    }
-                </button>
+                    <button className='hidden-button' onClick={startGame}>
+                        {paused ?
+                            <MenuSlide optionName=' New game' />
+                            :
+                            'START GAME'
+                        }
+                    </button>
                 </div>
-                <button className="hidden-button" onClick={unpauseGame}>
+                <button className="hidden-button" onClick={pauseGame}>
                     {paused ?
                         <MenuSlide optionName=' Continue' />
                         :

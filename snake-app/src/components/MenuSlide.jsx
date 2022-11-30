@@ -31,7 +31,6 @@ export default function MenuSlide({ optionName }) {
     const convertLetter = (char) => {
         let letterArr = [];
 
-        console.log(char, determineWidth(char))
         let letterWidth = determineWidth(char);
 
         layMatrix(letterArr, letterWidth, 10);
