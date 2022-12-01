@@ -46,14 +46,18 @@ export default function Board({ theGrid, snake, food, gameOver, blinkOn, prey })
 
                 /* ----- TAIL ----- */
                 if (prey[2] !== 'N/A' && i === snake.length - 1) {
-                    if (currentTile[0] === snake[snake.length - 2][0] - 1 && snake[snake.length - 1][1] === snake[snake.length - 2][1])
+                    if ((currentTile[0] === snake[snake.length - 2][0] - 1 && snake[snake.length - 1][1] === snake[snake.length - 2][1])
+                        || (snake[snake.length - 2][0] === 1 && currentTile[0] === COLUMNS - 2)) //coming through other side
                         return "right-tail";
-                    if (currentTile[0] === snake[snake.length - 2][0] + 1 && snake[snake.length - 1][1] === snake[snake.length - 2][1])
+                    if ((currentTile[0] === snake[snake.length - 2][0] + 1 && snake[snake.length - 1][1] === snake[snake.length - 2][1])
+                        || (currentTile[0] < snake[snake.length - 2][0]))
                         return "left-tail";
-                    if (currentTile[0] === snake[snake.length - 2][0] && currentTile[1] === snake[snake.length - 2][1] - 1)
+                    if ((currentTile[0] === snake[snake.length - 2][0] && currentTile[1] === snake[snake.length - 2][1] - 1)
+                        || (snake[snake.length - 2][1] === 1 && currentTile[1] === ROWS - 2))
                         return "down-tail";
-                    if (currentTile[0] === snake[snake.length - 2][0] && currentTile[1] === snake[snake.length - 2][1] + 1)
-                        return "up-tail";
+                    if ((currentTile[0] === snake[snake.length - 2][0] && currentTile[1] === snake[snake.length - 2][1] + 1)
+                        || (currentTile[1] < snake[snake.length - 2][1]))
+                    return "up-tail";
                 }
 
                 /* ----- BODY CORNERS ----- */

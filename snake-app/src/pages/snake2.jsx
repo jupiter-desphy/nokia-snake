@@ -41,15 +41,15 @@ export function SnakeII() {
 
     const startGame = () => {
         // if (gameOver) {
-            setSnake(SNAKE_II_START);
-            setGameOver(false);
-            setScore(0);
-            setFoodCount(0);
-            setPrey(PREY_START);
-            setPreyTimer(0);
-            setSpeed(SPEED_START);
-            setDirection(DIRECTION_START);
-            setPaused(false);
+        setSnake(SNAKE_II_START);
+        setGameOver(false);
+        setScore(0);
+        setFoodCount(0);
+        setPrey(PREY_START);
+        setPreyTimer(0);
+        setSpeed(SPEED_START);
+        setDirection(DIRECTION_START);
+        setPaused(false);
         // }
     }
 
@@ -60,9 +60,9 @@ export function SnakeII() {
     }
 
     const goSnake2Menu = () => {
-            if (speed) setPausedSpeed(speed);
-            setSpeed(null);
-            setPaused(true);
+        if (speed) setPausedSpeed(speed);
+        setSpeed(null);
+        setPaused(true);
     }
 
     const pauseGame = () => {
@@ -76,11 +76,8 @@ export function SnakeII() {
     }
 
     const nudgeSnake = () => {
-        // setPaused(false);
         if (!gameOver)
-        setSpeed(pausedSpeed)
-
-        // !paused && !speed ? setSpeed(pausedSpeed) : setPaused(false);
+            setSpeed(pausedSpeed)
     }
 
     const returnToGame = () => {
@@ -180,41 +177,34 @@ export function SnakeII() {
 
         useEffect(() => {
             const handle = (event) => {
-                if (event.code === key) {
+                if (event.key === key) {
                     callbackRef.current(event);
                 };
-                if (event.code === 'Space') event.preventDefault();
+                if (event.key === ' ' || event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+                    event.preventDefault();
+                }
             }
             document.addEventListener("keydown", handle);
             return () => document.removeEventListener("keydown", handle)
         }, [key]);
     }
 
-    // const keyIsWorking = () => {
-    //     console.log('Nice!')
-    // }
+    const keyIsWorking = () => {
+        console.log('Nice!')
+    }
+
+    const focusNext = () => {
+
+    }
+
 
     useKey('ArrowLeft', moveLeft);
     useKey('ArrowRight', moveRight);
     useKey('ArrowUp', moveUp);
     useKey('ArrowDown', moveDown);
-    useKey('Space', pauseGame);
-
-    // const moveSnake = ({ keyCode }) => {
-    //     switch (keyCode) {
-    //         case 37: moveLeft();
-    //             break;
-    //         case 38: moveUp();
-    //             break;
-    //         case 39: moveRight();
-    //             break;
-    //         case 40: moveDown();
-    //             break;
-    //         case 32: startGame();
-    //             break;
-    //         default: ;
-    //     }
-    // }
+    useKey(' ', pauseGame);
+    useKey('Escape', goSnake2Menu);
+    useKey('z', keyIsWorking);
 
     const gameLoop = () => {
 
@@ -274,16 +264,15 @@ export function SnakeII() {
         >
             {paused ?
                 <>
-                    {/* <div>
-                        <button className='hidden-button' onClick={pauseGame}>
-                            <MenuSlide optionName=' Continue' />
-                        </button>
-                    </div>
-                    <div>
-                        <button className='hidden-button' onClick={startGame}>
+                <div>
+                    <button className='hidden-button' onClick={startGame}>
                             <MenuSlide optionName=' New game' />
-                        </button>
-                    </div> */}
+                    </button>
+                </div>
+                <button className="hidden-button" onClick={returnToGame}>
+                        <MenuSlide optionName=' Continue' />
+                    </button>
+
                 </>
                 :
                 <>
@@ -293,37 +282,21 @@ export function SnakeII() {
                     <div className="screen">
                         <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={prey} />
                     </div>
+                    <button className="hidden-button" onClick={goSnake2Menu}>
+                        <MenuSlide optionName=' enu' />
+                    </button>
                 </>
             }
 
-            <div>
-                <div>
-                    <button className='hidden-button' onClick={startGame}>
-                        {paused ?
-                            <MenuSlide optionName=' New game' />
-                            :
-                            'START GAME'
-                        }
-                    </button>
-                </div>
-                    {paused ?
-                <button className="hidden-button" onClick={returnToGame}>
-                        <MenuSlide optionName=' Continue' />
-                </button>
-                        :
-                        <button className="hidden-button" onClick={goSnake2Menu}>
-                        <MenuSlide optionName=' enu' />
-                </button>
-                    }
-            </div>
 
 
+
+
+
+            {/* TESTING DATA
             <div>
                 {pausedSpeed}
             </div>
-
-            {/* TESTING DATA
-
             <div>
             <button onClick={gameLoop}>GAME LOOP</button>
             </div>

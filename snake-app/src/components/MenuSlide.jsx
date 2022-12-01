@@ -41,7 +41,7 @@ export default function MenuSlide({ optionName }) {
         let remainderArr = [];
         remainingWidth = optionByChar.reduce((a, c,) => {
             return a - determineWidth(c);
-        }, 80);
+        }, 100);
 
         layMatrix(remainderArr, remainingWidth, 10);
 

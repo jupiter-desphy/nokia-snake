@@ -34,13 +34,9 @@ body {
 
 .menu-option {
   width: var(--width);
-  height: calc(var(--width) / 8);
+  height: calc(var(--width) / 10);
   display: grid;
-  grid-template-columns: repeat(80, 1fr);
-}
-
-.menu-option:hover .posi-space {
-  background-color: transparent;
+  grid-template-columns: repeat(100, 1fr);
 }
 
 .menu-tile {
@@ -49,7 +45,7 @@ body {
 }
 
 .pixel {
-  width: calc(var(--width) / 80);
+  width: calc(var(--width) / 100);
 }
 
 .marquee-piece {
@@ -65,6 +61,7 @@ body {
 }
 
 .menu-option:hover .negi-space,
+/* :focus .negi-space, */
 .posi-space,
 .horizontal .scl,
 .horizontal .h,
@@ -137,6 +134,8 @@ body {
   border: .00001rem solid var(--screen-green);
 }
 
+.menu-option:hover .posi-space,
+/* :focus .posi-space, */
 .negi-space,
 .erase-left .xl,
 .erase-right .xr {
@@ -146,6 +145,26 @@ body {
 .hidden-button {
   background-color: transparent;
   border-style: none;
+}
+
+:focus {
+  outline: var(--dark-hole-charcoal);
+}
+
+@supports selector(:focus-visible){
+
+  :focus-visible .negi-space {
+    background-color: var(--dark-hole-charcoal);
+    border: .00001rem solid var(--screen-green);
+  }
+
+  :focus-visible .posi-space {
+    background-color: transparent;
+  }
+
+  :focus {
+    outline: transparent;
+  }
 }
 
 /* .pixel {
