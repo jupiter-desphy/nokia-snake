@@ -300,7 +300,7 @@ export function SnakeII() {
                         <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={prey} />
                     </div>
                     <button className="hidden-button" onClick={goSnake2Menu}>
-                        <MenuSlide optionName='            Menu' />
+                        <MenuSlide optionName='    qp        Menu' />
                     </button>
                 </>
             }

@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuSlide from '../components/MenuSlide';
+import MenuHeader from '../components/MenuHeader';
 import { Link } from 'react-router-dom';
 
 export function Menu() {
@@ -7,6 +8,10 @@ export function Menu() {
 
   return (
     <>
+      <MenuHeader optionName=' DT' />
+      <MenuHeader optionName=' abcdefghijklm' />
+      <MenuHeader optionName=' nopqrstuvwyz' />
+      <MenuSlide optionName=' DT' />
       <Link to={`/snake1`}>
         <MenuSlide optionName=' Snake I' />
       </Link>
