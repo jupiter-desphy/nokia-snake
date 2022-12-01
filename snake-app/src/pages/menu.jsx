@@ -15,6 +15,10 @@ export function Menu() {
       <Link to={`/snake2`}>
       <MenuSlide optionName=' Snake II' />
       </Link>
+      <MenuSlide optionName=' Settings' />
+      <MenuSlide optionName=' Contact' />
+      <MenuSlide optionName=' LinkedIn' />
+      <MenuSlide optionName=' Github' />
     </>
   )
 }

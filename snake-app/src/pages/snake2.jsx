@@ -264,14 +264,31 @@ export function SnakeII() {
         >
             {paused ?
                 <>
-                <div>
-                    <button className='hidden-button' onClick={startGame}>
+                    <div>
+                        <button className='hidden-button' onClick={startGame}>
                             <MenuSlide optionName=' New game' />
-                    </button>
-                </div>
-                <button className="hidden-button" onClick={returnToGame}>
-                        <MenuSlide optionName=' Continue' />
-                    </button>
+                        </button>
+                    </div>
+                    <div>
+                        <button className="hidden-button" onClick={returnToGame}>
+                            <MenuSlide optionName=' Continue' />
+                        </button>
+                    </div>
+                    <div>
+                        <button className="hidden-button" onClick={returnToGame}>
+                            <MenuSlide optionName=' Level' />
+                        </button>
+                    </div>
+                    <div>
+                        <button className="hidden-button" onClick={returnToGame}>
+                            <MenuSlide optionName=' Instructions' />
+                        </button>
+                    </div>
+                    <div>
+                        <button className="hidden-button" onClick={returnToGame}>
+                            <MenuSlide optionName=' Settings' />
+                        </button>
+                    </div>
 
                 </>
                 :
@@ -283,7 +300,7 @@ export function SnakeII() {
                         <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={prey} />
                     </div>
                     <button className="hidden-button" onClick={goSnake2Menu}>
-                        <MenuSlide optionName=' enu' />
+                        <MenuSlide optionName='            Menu' />
                     </button>
                 </>
             }

@@ -6,21 +6,36 @@ export default function MenuSlide({ optionName }) {
     const optionByChar = `${optionName}`.split('');
     
     const letterWidths = [
+        ['B', 6],
         ['C', 6],
+        ['G', 6],
         ['I', 3],
+        ['L', 5],
+        ['M', 8],
         ['N', 7],
         ['S', 5],
+        ['T', 5],
         ['a', 6],
+        ['b', 6],
+        ['c', 5],
+        ['d', 6],
         ['e', 6],
         ['g', 6],
+        ['h', 6],
         ['i', 3],
         ['k', 6],
+        ['l', 3],
         ['m', 9],
         ['n', 6],
         ['o', 6],
+        ['p', 6],
+        ['r', 5],
+        ['s', 5],
         ['t', 4],
         ['u', 6],
+        ['v', 6],
         ['w', 8],
+        ['y', 6],
         [' ', 3]
     ]
 
