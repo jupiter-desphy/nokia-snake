@@ -7,18 +7,20 @@ export function Menu() {
 
   return (
     <>
-      <MenuSlide optionName=' Continue' />
-      <MenuSlide optionName=' New game' />
       <Link to={`/snake1`}>
         <MenuSlide optionName=' Snake I' />
       </Link>
       <Link to={`/snake2`}>
-      <MenuSlide optionName=' Snake II' />
+        <MenuSlide optionName=' Snake II' />
       </Link>
       <MenuSlide optionName=' Settings' />
       <MenuSlide optionName=' Contact' />
-      <MenuSlide optionName=' LinkedIn' />
-      <MenuSlide optionName=' Github' />
+      <a href="https://linkedin.com/in/jupiterdesphy" >
+        <MenuSlide optionName=' LinkedIn' />
+      </a>
+      <a href="https://github.com/jupiter-desphy" >
+        <MenuSlide optionName=' Github' />
+      </a>
     </>
   )
 }

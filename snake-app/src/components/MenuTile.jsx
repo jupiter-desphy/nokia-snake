@@ -27,6 +27,16 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
+        if (letter === 'G') {
+            if ((x === 0 && y > 1 && y < 7)
+            || (x === 1)
+            || (x === 2 && (y === 1 || y === 7))
+            || (x === 3 && y !== 2 & y !== 3)
+            || (x === 4 && y > 3)
+            ) return p;
+            return n;
+        }
+
         if (letter === 'I' || letter === 'l') {
             if (x < 2) return p;
             return n;
@@ -72,6 +82,16 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
+        if (letter === 'b') {
+            if (y < 3 && x > 1) return n;
+            if ((x < 2)
+                || (x === 1 || x === 3)
+                || (x === 2 && (y > 6 || y < 4))
+                || (x === 4 && y > 3 && y < 7)
+                ) return p;
+            return n;
+        }
+
         if (letter === 'c') {
             if (y < 3) return n;
             if ((x === 0 && y > 3 && y < 7)
@@ -107,6 +127,16 @@ export default function MenuTile({ layOut, letter, width }) {
                 || (x === 2 && (y === 3 || y === 6 || y > 7)) 
                 || (x === 3)
                 || (x === 4 && y !== 8)) return p;
+            return n;
+        }
+
+        if (letter === 'h') {
+            if (y < 3 && x > 1) return n;
+            if ((x < 2)
+                || (x === 1 || x === 3)
+                || (x === 2 && y < 4)
+                || (x === 4 && y > 3)
+                ) return p;
             return n;
         }
 
