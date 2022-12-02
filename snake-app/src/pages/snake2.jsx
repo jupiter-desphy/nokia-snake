@@ -11,6 +11,8 @@ import {
 import Board from "../components/Board.jsx";
 import Marquee from "../components/Marquee.jsx";
 import MenuSlide from "../components/MenuSlide";
+import MenuHeader from "../components/MenuHeader";
+import Level from "../components/Level";
 import useInterval from "../helpers/useInterval.js";
 import layMatrix from "../helpers/layMatrix.js";
 
@@ -264,6 +266,9 @@ export function SnakeII() {
         >
             {paused ?
                 <>
+                    <br></br>
+                    <br></br>
+                        <MenuHeader optionName='---------- Snake II ----------' />
                     <div>
                         <button className='hidden-button' onClick={startGame}>
                             <MenuSlide optionName=' New game' />
@@ -290,6 +295,8 @@ export function SnakeII() {
                         </button>
                     </div>
 
+                    <Level level={null}/>
+
                 </>
                 :
                 <>
@@ -300,7 +307,7 @@ export function SnakeII() {
                         <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={prey} />
                     </div>
                     <button className="hidden-button" onClick={goSnake2Menu}>
-                        <MenuSlide optionName='    qp        Menu' />
+                        <MenuSlide optionName='            Menu' />
                     </button>
                 </>
             }

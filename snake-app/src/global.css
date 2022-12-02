@@ -39,6 +39,13 @@ body {
   grid-template-columns: repeat(100, 1fr);
 }
 
+.menu-header {
+  width: var(--width);
+  height: calc(var(--width) / 10);
+  display: grid;
+  grid-template-columns: repeat(100, 1fr);
+}
+
 .menu-tile {
   display: grid;
   grid-template-rows: repeat(10, 1fr);
@@ -61,7 +68,6 @@ body {
 }
 
 .menu-option:hover .negi-space,
-/* :focus .negi-space, */
 .posi-space,
 .horizontal .scl,
 .horizontal .h,
@@ -135,7 +141,6 @@ body {
 }
 
 .menu-option:hover .posi-space,
-/* :focus .posi-space, */
 .negi-space,
 .erase-left .xl,
 .erase-right .xr {

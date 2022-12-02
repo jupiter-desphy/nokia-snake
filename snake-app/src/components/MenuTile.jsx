@@ -176,10 +176,9 @@ export default function MenuTile({ layOut, letter, width }) {
         }
 
         if (letter === 'V') {
-            if (((x < 1 || x === 5) && y < 4)
-                || ((x === 1 || x === 4) && y < 6)
-                // || ((x === 2 || x === 4) && y > 2 && y < 6)
-                || ((x === 2 || x === 3)&& y > 3)
+            if (((x < 1 || x === 4) && y < 6)
+                || ((x === 1 || x === 3) && y < 7)
+                || (x === 2 && y > 5)
             ) return p;
             return n;
         }

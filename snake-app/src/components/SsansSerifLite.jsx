@@ -403,6 +403,11 @@ export default function SsansSerifLite({ layOut, letter, width }) {
             return n;
         }
 
+        if (letter === '-' || letter ==='_') {
+            if (y === 4) return p;
+            return n;
+        }
+
         if (letter === ' ') {
             return n;
         }

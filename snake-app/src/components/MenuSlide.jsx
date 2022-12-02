@@ -27,7 +27,7 @@ export default function MenuSlide({ optionName }) {
         ['S', 5],
         ['T', 7],
         ['U', 6],
-        ['V', 7],
+        ['V', 6],
         ['W', 8],
         ['X', 6],
         ['Y', 7],
@@ -58,6 +58,8 @@ export default function MenuSlide({ optionName }) {
         ['x', 6],
         ['y', 6],
         ['z', 6],
+        ['-', 3],
+        ['_', 1],
         [' ', 3]
     ]
 

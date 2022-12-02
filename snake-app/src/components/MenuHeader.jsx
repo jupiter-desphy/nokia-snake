@@ -6,32 +6,32 @@ export default function MenuHeader({ optionName }) {
     const optionByChar = `${optionName}`.split('');
     
     const letterWidths = [
-        ['A', 6],//?
+        ['A', 6],
         ['B', 5],
         ['C', 5],
-        ['D', 5],//
-        ['E', 5],//?
-        ['F', 5],//?
+        ['D', 5],
+        ['E', 5],
+        ['F', 5],
         ['G', 5],
-        ['H', 5],//?
-        ['I', 2],//
-        ['J', 5],//?
-        ['K', 6],//?
+        ['H', 5],
+        ['I', 2],
+        ['J', 5],
+        ['K', 6],
         ['L', 5],
         ['M', 6],
         ['N', 6],
-        ['O', 6],//?
-        ['P', 5],//?
-        ['Q', 6],//?
-        ['R', 5],//?
+        ['O', 6],
+        ['P', 5],
+        ['Q', 6],
+        ['R', 5],
         ['S', 5],
         ['T', 6],
-        ['U', 5],//?
-        ['V', 6],//?
-        ['W', 6],//?
-        ['X', 6],//?
-        ['Y', 6],//?
-        ['Z', 6],//?
+        ['U', 5],
+        ['V', 6],
+        ['W', 6],
+        ['X', 6],
+        ['Y', 6],
+        ['Z', 6],
         ['a', 5],
         ['b', 5],
         ['c', 4],
@@ -41,10 +41,10 @@ export default function MenuHeader({ optionName }) {
         ['g', 5],
         ['h', 5],
         ['i', 2],
-        ['j', 4],//?
+        ['j', 4],
         ['k', 5],
         ['l', 2],
-        ['m', 8],// ?
+        ['m', 8],
         ['n', 5],
         ['o', 5],
         ['p', 5],
@@ -58,10 +58,11 @@ export default function MenuHeader({ optionName }) {
         ['x', 6],
         ['y', 5],
         ['z', 5],
+        ['-', 3],
         [' ', 3]
     ]
 
-    let remainingWidth = null;
+    // let remainingWidth = null;
     
     const determineWidth = (character) => (letterWidths.find(ele => ele[0] === character))[1];
 
@@ -74,24 +75,24 @@ export default function MenuHeader({ optionName }) {
         return letterArr;
     }
 
-    const layOutRemainder = () => {
-        let remainderArr = [];
-        remainingWidth = optionByChar.reduce((a, c) => {
-            return a - determineWidth(c);
-        }, 100);
+    // const layOutRemainder = () => {
+    //     let remainderArr = [];
+    //     remainingWidth = optionByChar.reduce((a, c) => {
+    //         return a - determineWidth(c);
+    //     }, 100);
 
-        layMatrix(remainderArr, remainingWidth, 10);
+    //     layMatrix(remainderArr, remainingWidth, 10);
 
-        return remainderArr;
-    }
+    //     return remainderArr;
+    // }
 
 
     return (
-        <span className="menu-option">
+        <div className="menu-header">
             {optionByChar.map((i, ind) => {
                 return <SsansSerifLite layOut={convertLetter(i)} letter={i} width={determineWidth(i)} key={`${i} + ${ind}`} />
             })}
-            <SsansSerifLite layOut={layOutRemainder()} letter=' ' width={remainingWidth} />
-        </span>
+            {/* <SsansSerifLite layOut={layOutRemainder()} letter=' ' width={remainingWidth} /> */}
+        </div>
     )
 }

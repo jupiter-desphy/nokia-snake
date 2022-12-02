@@ -22,7 +22,7 @@ export function Menu() {
       <Link to={`/snake2`}>
         <MenuSlide optionName=' Snake II' />
       </Link>
-      <MenuSlide optionName=' Settings' />
+      <MenuSlide optionName=' Website' />
       <MenuSlide optionName=' Contact' />
       <a href="https://linkedin.com/in/jupiterdesphy" >
         <MenuSlide optionName=' LinkedIn' />
