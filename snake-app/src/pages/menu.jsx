@@ -8,10 +8,14 @@ export function Menu() {
 
   return (
     <>
-      <MenuHeader optionName=' DT' />
+      <MenuHeader optionName=' ABCDEFGHIJKLM' />
+      <MenuHeader optionName=' NOPQRSTUVWXYZ' />
       <MenuHeader optionName=' abcdefghijklm' />
-      <MenuHeader optionName=' nopqrstuvwyz' />
-      <MenuSlide optionName=' DT' />
+      <MenuHeader optionName=' nopqrstuvwxyz' />
+      <MenuSlide optionName=' ABCDEFGHIJKLM' />
+      <MenuSlide optionName=' NOPQRSTUVWXYZ' />
+      <MenuSlide optionName=' abcdefghijklm' />
+      <MenuSlide optionName=' nopqrstuvwxyz' />
       <Link to={`/snake1`}>
         <MenuSlide optionName=' Snake I' />
       </Link>
