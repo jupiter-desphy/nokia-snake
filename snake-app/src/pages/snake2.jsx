@@ -33,6 +33,9 @@ export function SnakeII() {
     const [paused, setPaused] = useState(false)
     const [pausedSpeed, setPausedSpeed] = useState(SPEED_START);
 
+    const [levelView, setLevelView] = useState(false);
+    const [level, setLevel] = useState(7);
+
     /* FUNCTIONS */
 
     const gameBoard = [];
@@ -191,14 +194,9 @@ export function SnakeII() {
         }, [key]);
     }
 
-    const keyIsWorking = () => {
-        console.log('Nice!')
-    }
-
-    const focusNext = () => {
-
-    }
-
+    // const keyIsWorking = () => {
+    //     console.log('Nice!')
+    // }
 
     useKey('ArrowLeft', moveLeft);
     useKey('ArrowRight', moveRight);
@@ -206,7 +204,7 @@ export function SnakeII() {
     useKey('ArrowDown', moveDown);
     useKey(' ', pauseGame);
     useKey('Escape', goSnake2Menu);
-    useKey('z', keyIsWorking);
+    // useKey('z', keyIsWorking);
 
     const gameLoop = () => {
 
@@ -232,8 +230,8 @@ export function SnakeII() {
 
         if (snakeCopy[0][0] === food[0] && snakeCopy[0][1] === food[1]) {
             setFoodCount(foodCount + 1);
-            setScore((prevScore) => prevScore + 7);
-            setSpeed((prevSpeed) => prevSpeed - .25);
+            setScore((prevScore) => prevScore + level);
+            // setSpeed((prevSpeed) => prevSpeed - .25);
             head[3] = 'full';
         } else if ((snakeCopy[0][0] === prey[0][0] && snakeCopy[0][1] === prey[0][1]) || (snakeCopy[0][0] === prey[1][0] && snakeCopy[0][1] === prey[1][1])) {
             setScore((prevScore) => prevScore + 48);
@@ -266,6 +264,12 @@ export function SnakeII() {
         >
             {paused ?
                 <>
+                {levelView ?
+                <>
+                <Level level={null}/>
+                </>
+                    :
+                    <>
                     <br></br>
                     <br></br>
                         <MenuHeader optionName='---------- Snake II ----------' />
@@ -280,7 +284,7 @@ export function SnakeII() {
                         </button>
                     </div>
                     <div>
-                        <button className="hidden-button" onClick={returnToGame}>
+                        <button className="hidden-button" onClick={setLevelView}>
                             <MenuSlide optionName=' Level' />
                         </button>
                     </div>
@@ -294,9 +298,9 @@ export function SnakeII() {
                             <MenuSlide optionName=' Settings' />
                         </button>
                     </div>
+                    </>
 
-                    <Level level={null}/>
-
+                }
                 </>
                 :
                 <>
