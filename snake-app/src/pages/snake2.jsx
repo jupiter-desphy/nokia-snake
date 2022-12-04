@@ -97,9 +97,10 @@ export function SnakeII() {
 
 
     const blink = () => {
+        if (gameOver)
         setBlinkOn(!blinkOn)
     }
-
+    
     useInterval(() => blink(), 400);
 
     const randomizeFood = () => {
@@ -264,6 +265,7 @@ export function SnakeII() {
 
     const levelOption = () => {setLevelView(true); setMenuView (false);}
     const instructionsOption = () => {setInstructionsView(true); setMenuView (false);}
+    console.log( snake)
 
     return (
         <div
