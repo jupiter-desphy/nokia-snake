@@ -1,6 +1,6 @@
 import Pixel from "./Pixel";
 
-export default function MenuTile({ layOut, letter, width }) {
+export default function MenuTile({ layOut, letter: char, width }) {
     // given letter and layOut, choose which pixels are positive or negative space
 
     function drawLetter(currentPixel) {
@@ -9,10 +9,10 @@ export default function MenuTile({ layOut, letter, width }) {
         let p = 'posi-space';
         let n = 'negi-space';
 
-        if (letter !== 'g' && letter !== 'j' && letter !== 'p' && letter !== 'q' && letter !== 'y')
+        if (char !== 'g' && char !== 'j' && char !== 'p' && char !== 'q' && char !== 'y')
             if (y < 1 || y > 7) return n;
 
-        if (letter === 'A') {
+        if (char === 'A') {
             if (((x === 0 || x === 4) && y > 2)
                 || ((x === 1 || x === 3) && y > 1)
                 || ((x === 2) && (y < 3 || y === 5))
@@ -20,7 +20,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'B') {
+        if (char === 'B') {
             if ((x < 2 || x === 3)
                 || (x === 2 && (y === 1 || y === 3 || y === 7))
                 || (x === 4 && y > 1 && y !== 3 && y !== 7)
@@ -28,14 +28,14 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'C') {
+        if (char === 'C') {
             if (x === 0 && y > 1 && y < 7) return p;
             if (x === 1) return p;
             if (x > 1 && x < 5 && (y === 1 || y === 7)) return p;
             return n;
         }
 
-        if (letter === 'D') {
+        if (char === 'D') {
             if ((x < 2 || x === 3)
                 || (x === 2 && (y === 1 || y === 7))
                 || (x === 4 && y > 1 && y !== 7)
@@ -43,21 +43,21 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'E') {
+        if (char === 'E') {
             if ((x < 2)
                 || ((x < 4) && (y === 1 || y === 7 || y === 3))
             ) return p;
             return n;
         }
 
-        if (letter === 'F') {
+        if (char === 'F') {
             if ((x < 2)
                 || ((x < 4) && (y === 1 || y === 3))
             ) return p;
             return n;
         }
 
-        if (letter === 'G') {
+        if (char === 'G') {
             if ((x === 0 && y > 1 && y < 7)
                 || (x === 1)
                 || (x === 2 && (y === 1 || y === 7))
@@ -67,19 +67,19 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'H') {
+        if (char === 'H') {
             if ((x < 5 && x !== 2)
                 || (x === 2 && y === 3)
             ) return p;
             return n;
         }
 
-        if (letter === 'I' || letter === 'l') {
+        if (char === 'I' || char === 'l') {
             if (x < 2) return p;
             return n;
         }
 
-        if (letter === 'J') {
+        if (char === 'J') {
             if ((x === 0 && y > 4 && y < 7)
                 || (x === 1 && y > 4)
                 || (x === 2 && y === 7)
@@ -88,7 +88,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'K') {
+        if (char === 'K') {
             if ((x < 2)
                 || (x === 2 && y === 4)
                 || (x === 3 && y !== 4)
@@ -96,12 +96,12 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'L') {
+        if (char === 'L') {
             if (x < 2 || (x < 4 && y === 7)) return p;
             return n;
         }
 
-        if (letter === 'M') {
+        if (char === 'M') {
             if ((x === 0 || x === 6)
                 || ((x === 1 || x === 5) && y > 1)
                 || ((x === 2 || x === 4) && y > 2 && y < 5)
@@ -109,7 +109,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'N') {
+        if (char === 'N') {
             if ((x === 0 || x === 5)
                 || (x === 1 && y > 1)
                 || (x === 2 && y > 2 && y < 5)
@@ -118,7 +118,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'O') {
+        if (char === 'O') {
             if (((x === 0 || x === 4) && y > 1 && y !== 7)
                 || (x === 1 || x === 3)
                 || (x === 2 && (y === 1 || y === 7))
@@ -126,7 +126,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'P') {
+        if (char === 'P') {
             if ((x < 2)
             || (x < 4 && (y === 1 || y === 5))
             || (x > 2 && x < 5 && y > 1 && y > 1 && y < 5)
@@ -134,7 +134,7 @@ export default function MenuTile({ layOut, letter, width }) {
         return n;
         }
 
-        if (letter === 'Q') {
+        if (char === 'Q') {
             if (((x === 0) && y > 1 && y !== 7)
                 || (x > 0 && x < 3 && (y === 1 || y === 7))
                 || (x === 1)
@@ -144,7 +144,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'R') {
+        if (char === 'R') {
             if ((x < 2 || x === 3)
             || (x < 4 && (y === 1 || y === 5))
             || (x > 2 && x < 5 && y > 1 && y > 1 && y < 5)
@@ -153,7 +153,7 @@ export default function MenuTile({ layOut, letter, width }) {
         return n;
         }
 
-        if (letter === 'S') {
+        if (char === 'S') {
             if ((x < 1 && (y === 2 || y === 3 || y === 7))
                 || (x === 1 && (y < 5 || y === 7))
                 || (x === 2 && (y > 3 || y < 2))
@@ -161,13 +161,13 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'T') {
+        if (char === 'T') {
             if ((x < 6 && y === 1)
                 || (x === 2 || x === 3)) return p;
             return n;
         }
 
-        if (letter === 'U') {
+        if (char === 'U') {
             if (((x < 1 || x === 4) && y !== 7)
                 || ( x === 1 || x === 3)
                 || ( x === 2 && y === 7)
@@ -175,7 +175,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'V') {
+        if (char === 'V') {
             if (((x < 1 || x === 4) && y < 6)
                 || ((x === 1 || x === 3) && y < 7)
                 || (x === 2 && y > 5)
@@ -183,7 +183,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'W') {
+        if (char === 'W') {
             if (((x === 0 || x === 6) && y < 6)
                 || (x === 1 || x === 5)
                 || ((x === 2 || x === 4) && y > 4)
@@ -191,21 +191,21 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'X') {
+        if (char === 'X') {
             if (((x === 0 || x === 4) && (y < 3 || y > 5))
                 || ((x === 1 || x === 3) && y !== 4)
                 || (x === 2 && y > 2 && y <6)) return p;
             return n;
         }
 
-        if (letter === 'Y') {
+        if (char === 'Y') {
             if (((x === 0 || x === 5) && y < 3)
                 || ((x === 1 || x === 4) && y < 4)
                 || ((x === 2 || x === 3) && y > 2)) return p;
             return n;
         }
 
-        if (letter === 'Z') {
+        if (char === 'Z') {
             if ((x < 5 && (y === 1 || y === 7))
                 || (x === 0 && y > 4)
                 || (x === 1 && y > 3)
@@ -215,7 +215,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'a') {
+        if (char === 'a') {
             if (y < 3) return n;
             if ((x === 0 && y === 6)
                 || (x === 1 && y !== 4)
@@ -225,7 +225,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'b') {
+        if (char === 'b') {
             if (y < 3 && x > 1) return n;
             if ((x < 2)
                 || (x === 1 || x === 3)
@@ -235,7 +235,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'c') {
+        if (char === 'c') {
             if (y < 3) return n;
             if ((x === 0 && y > 3 && y < 7)
                 || (x === 1)
@@ -244,7 +244,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'd') {
+        if (char === 'd') {
             if (y < 3 && x < 3) return n;
             if ((x === 0 && y > 3 && y < 7)
                 || (x === 1 || x === 3 || x === 4)
@@ -253,7 +253,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'e') {
+        if (char === 'e') {
             if (y < 3) return n;
             if ((x === 0 && y > 3 && y < 7)
                 || (x === 1)
@@ -263,14 +263,14 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'f') {
+        if (char === 'f') {
             if ((x === 0 && y !== 1)
                 || (x === 1)
                 || (x === 2 && (y === 1 || y === 3))) return p;
             return n;
         }
 
-        if (letter === 'g') {
+        if (char === 'g') {
             if (y < 3 || y > 8) return n;
             if ((x === 0 && y > 3 && y < 6)
                 || (x === 1 && y !== 7)
@@ -280,7 +280,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'h') {
+        if (char === 'h') {
             if (y < 3 && x > 1) return n;
             if ((x < 2)
                 || (x === 1 || x === 3)
@@ -290,19 +290,19 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'i') {
+        if (char === 'i') {
             if (x < 2 && y !== 2) return p;
             return n;
         }
 
-        if (letter === 'j') {
+        if (char === 'j') {
             if (y > 8) return n;
             if (((x < 3) && y > 7)
                 || (x > 1 && x < 4 && y !== 0 && y !== 2 && y !== 8)) return p;
             return n;
         }
 
-        if (letter === 'k') {
+        if (char === 'k') {
             if ((x < 2)
                 || (x === 2 && y > 3 && y < 7)
                 || (x === 3 && y > 2 && y !== 5)
@@ -310,7 +310,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'm') {
+        if (char === 'm') {
             if (y < 3) return n;
             if ((x === 0 || x === 1 || x === 3 || x === 4 || x === 6)
                 || ((x === 2 || x === 5) && y === 3)
@@ -318,7 +318,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'n') {
+        if (char === 'n') {
             if (y < 3) return n;
             if ((x === 0 || x === 1 || x === 3)
                 || (x === 2 && y === 3)
@@ -327,7 +327,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'o') {
+        if (char === 'o') {
             if (y < 3) return n;
             if (((x === 0 || x === 4) && y > 3 && y < 7)
                 || (x === 1 || x === 3)
@@ -335,7 +335,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'p') {
+        if (char === 'p') {
             if (y < 3 || y > 8) return n;
             if ((x === 4 && y > 3 && y < 6)
                 || (x === 3 && y < 7)
@@ -344,7 +344,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'q') {
+        if (char === 'q') {
             if (y < 3 || y > 8) return n;
             if ((x === 0 && y > 3 && y < 6)
                 || (x === 1 && y < 7)
@@ -353,7 +353,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'r') {
+        if (char === 'r') {
             if (y < 3) return n;
             if ((x === 0 || x === 1)
                 || (x === 2 && y === 4)
@@ -362,7 +362,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 's') {
+        if (char === 's') {
             if (y < 3) return n;
             if ((x === 0 && y !== 6 && y !== 3 && y < 8)
                 || (x === 1 && y !== 6)
@@ -371,14 +371,14 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 't') {
+        if (char === 't') {
             if ((x === 0 && y !== 7)
                 || (x === 1)
                 || (x === 2 && (y === 3 || y === 7))) return p;
             return n;
         }
 
-        if (letter === 'u') {
+        if (char === 'u') {
             if (y < 3) return n;
             if ((x === 0 && y !== 7)
                 || (x === 1 || x === 3 || x === 4)
@@ -387,7 +387,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'v') {
+        if (char === 'v') {
             if (y < 3) return n;
             if (((x === 0 || x === 4) && y < 5)
                 || ((x === 1 || x === 3) && y !== 7)
@@ -396,7 +396,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'w') {
+        if (char === 'w') {
             if (y < 3) return n;
             if (((x === 0 || x === 6) && y < 6)
                 || (x === 1 || x === 5)
@@ -405,7 +405,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'x') {
+        if (char === 'x') {
             if (y < 3) return n;
             if (((x === 0 || x === 4) && (y === 3 || y > 6))
             || ((x === 1 || x === 3) && y !== 5)
@@ -413,7 +413,7 @@ export default function MenuTile({ layOut, letter, width }) {
         return n;
         }
 
-        if (letter === 'y') {
+        if (char === 'y') {
             if (y < 3 || y > 8) return n;
             if ((x === 0 && y < 6)
                 || (x === 1 && y !== 7)
@@ -423,7 +423,7 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === 'z') {
+        if (char === 'z') {
             if (y < 3) return n;
             if ((x === 0 && y !== 4 && y !== 5)
                 || (x === 1 && y !== 4)
@@ -433,11 +433,45 @@ export default function MenuTile({ layOut, letter, width }) {
             return n;
         }
 
-        if (letter === ' ') {
+        if (char === '2') {
+            if ((x === 0 && (y < 2 || y > 4))
+                || (x === 1 && (y < 2 || y > 3))
+                || (x === 2 && (y === 1 || y === 4 || y === 7))
+                || (x === 3 && (y < 5 || y === 7))
+                || (x === 4 && (y === 2 || y === 3 || y === 7))
+                ) return p;
             return n;
         }
 
-        if (letter === 'remainder') {
+        if (char === '4') {
+            if ((x === 0 && y > 3 && y < 6)
+                || (x === 1 && (y === 3 || y === 5))
+                || (x === 2 && (y === 2 || y === 5))
+                || (x > 2 && x < 5)) return p;
+            return n;
+        }
+
+        if (char === '6') {
+            if ((x === 0 && y > 1 && y < 7)
+                || (x === 1)
+                || (x === 2 && (y === 1 || y === 3 || y === 7))
+                || (x === 3 && y !== 2)
+                || (x === 4 && y > 3 && y < 7)) return p;
+            return n;
+        }
+        
+        if (char === '8') {
+            if (((x === 0 || x === 4) && y !== 1 && y !== 4 && y !== 7)
+                || (x === 1 || x === 3)
+                || (x === 2 && (y === 1 || y === 4 || y === 7))) return p;
+            return n;
+        }
+
+        if (char === ' ') {
+            return n;
+        }
+
+        if (char === 'remainder') {
             return n;
         }
 

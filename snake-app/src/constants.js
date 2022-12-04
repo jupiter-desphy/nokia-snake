@@ -28,7 +28,7 @@ const SNAKE_DEMO = [
     [6, 0, 'R', 'hungry']
 ];
 
-const SPEED_START = 200;
+const SPEED_START = 180;
 const DIRECTION_START = [1, 0];
 const PREY_START = [[null, null], [null, null], null];
 const PREY_NA = [['N/A', 'N/A'], ['N/A', 'N/A'], 'N/A'];

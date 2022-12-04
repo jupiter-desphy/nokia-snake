@@ -33,8 +33,10 @@ export function SnakeII() {
     const [paused, setPaused] = useState(false)
     const [pausedSpeed, setPausedSpeed] = useState(SPEED_START);
 
+    const [level, setLevel] = useState(6);
+    const [menuView, setMenuView] = useState(false);
     const [levelView, setLevelView] = useState(false);
-    const [level, setLevel] = useState(7);
+    const [instructionsView, setInstructionsView] = useState(false);
 
     /* FUNCTIONS */
 
@@ -68,6 +70,9 @@ export function SnakeII() {
         if (speed) setPausedSpeed(speed);
         setSpeed(null);
         setPaused(true);
+        setMenuView(true);
+        setLevelView(false);
+        setInstructionsView(false);
     }
 
     const pauseGame = () => {
@@ -257,6 +262,9 @@ export function SnakeII() {
         //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [foodCount]);
 
+    const levelOption = () => {setLevelView(true); setMenuView (false);}
+    const instructionsOption = () => {setInstructionsView(true); setMenuView (false);}
+
     return (
         <div
         // role="button" tabIndex="0"
@@ -264,43 +272,62 @@ export function SnakeII() {
         >
             {paused ?
                 <>
-                {levelView ?
-                <>
-                <Level chooseLevel={(level, pausedSpeed) => {setLevel(level); setPausedSpeed(pausedSpeed)}} levelViewable={(levelView) => setLevelView(levelView)} speed={pausedSpeed} />
-                </>
-                    :
-                    <>
-                    <br></br>
-                    <br></br>
-                        <MenuHeader optionName='---------- Snake II ----------' />
-                    <div>
-                        <button className='hidden-button' onClick={startGame}>
-                            <MenuSlide optionName=' New game' />
+                    {levelView &&
+                        <>
+                            <Level chooseLevel={(level, pausedSpeed) => { setLevel(level); setPausedSpeed(pausedSpeed) }} levelViewable={(levelView) => setLevelView(levelView)} speed={pausedSpeed} />
+                        </>
+                    }
+                    {instructionsView &&
+                        <>
+                            <MenuHeader optionName='-------- Instructions --------' />
+                            <br></br>
+                            <MenuHeader optionName='Use arrow keys on your' />
+                            <MenuHeader optionName='keyboard or numbers' />
+                            <MenuHeader optionName='2,4,6 and 8 on a phone' />
+                            <MenuHeader optionName='to direct the snake to' />
+                            <MenuHeader optionName='food. Make sure it does' />
+                            <MenuHeader optionName='not eat itself!' />
+                        </>
+                    }
+                    {menuView ?
+                        <>
+                            <br></br>
+                            <br></br>
+                            <MenuHeader optionName='---------- Snake II ----------' />
+                            <div>
+                                <button className='hidden-button' onClick={startGame}>
+                                    <MenuSlide optionName=' New game' />
+                                </button>
+                            </div>
+                            <div>
+                                <button className="hidden-button" onClick={returnToGame}>
+                                    <MenuSlide optionName=' Continue' />
+                                </button>
+                            </div>
+                            <div>
+                                <button className="hidden-button" onClick={levelOption}>
+                                    <MenuSlide optionName=' Level' />
+                                </button>
+                            </div>
+                            <div>
+                                <button className="hidden-button" onClick={instructionsOption}>
+                                    <MenuSlide optionName=' Instructions' />
+                                </button>
+                            </div>
+                            <div>
+                                <button className="hidden-button" onClick={returnToGame}>
+                                    <MenuSlide optionName=' Settings' />
+                                </button>
+                            </div>
+                        </>
+                        :
+                        <>
+                        <br></br>
+                        <button className='hidden-button' onClick={goSnake2Menu} >
+                            <MenuSlide optionName={'             Back'} />
                         </button>
-                    </div>
-                    <div>
-                        <button className="hidden-button" onClick={returnToGame}>
-                            <MenuSlide optionName=' Continue' />
-                        </button>
-                    </div>
-                    <div>
-                        <button className="hidden-button" onClick={setLevelView}>
-                            <MenuSlide optionName=' Level' />
-                        </button>
-                    </div>
-                    <div>
-                        <button className="hidden-button" onClick={returnToGame}>
-                            <MenuSlide optionName=' Instructions' />
-                        </button>
-                    </div>
-                    <div>
-                        <button className="hidden-button" onClick={returnToGame}>
-                            <MenuSlide optionName=' Settings' />
-                        </button>
-                    </div>
-                    </>
-
-                }
+                        </>
+                    }
                 </>
                 :
                 <>
@@ -319,7 +346,7 @@ export function SnakeII() {
             level: {level}
             <br></br>
             Speed: {speed}
-            
+
 
 
 

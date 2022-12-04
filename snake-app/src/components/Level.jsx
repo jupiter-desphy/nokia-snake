@@ -47,9 +47,9 @@ export default function Level(props) {
             <div className='demo'>
                 <Board theGrid={tunnel} snake={demoSnake} food={[null, null]} gameOver={null} blinkOn={null} prey={PREY_START} />
             </div>
-            <button className='hidden-button' onClick={() => props.levelViewable(false)} >
+            {/* <button className='hidden-button' onClick={() => props.levelViewable(false)} >
                 <MenuSlide optionName={'             Back'} />
-            </button>
+            </button> */}
         </div>
     )
 }
