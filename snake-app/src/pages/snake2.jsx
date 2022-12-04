@@ -52,7 +52,7 @@ export function SnakeII() {
         setFoodCount(0);
         setPrey(PREY_START);
         setPreyTimer(0);
-        setSpeed(SPEED_START);
+        setSpeed(pausedSpeed);
         setDirection(DIRECTION_START);
         setPaused(false);
         // }
@@ -266,7 +266,7 @@ export function SnakeII() {
                 <>
                 {levelView ?
                 <>
-                <Level level={null}/>
+                <Level chooseLevel={(level, pausedSpeed) => {setLevel(level); setPausedSpeed(pausedSpeed)}} levelViewable={(levelView) => setLevelView(levelView)} speed={pausedSpeed} />
                 </>
                     :
                     <>
@@ -315,6 +315,11 @@ export function SnakeII() {
                     </button>
                 </>
             }
+            <br></br>
+            level: {level}
+            <br></br>
+            Speed: {speed}
+            
 
 
 

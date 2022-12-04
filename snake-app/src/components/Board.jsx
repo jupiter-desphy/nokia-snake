@@ -5,38 +5,7 @@ export default function Board({ theGrid, snake, food, gameOver, blinkOn, prey })
 
     function generateTileClass(currentTile) {
 
-        /* ----- BORDER TILES ----- */
-        if (currentTile[0] === 0) {
-            if (currentTile[1] === 0) return "nw-border";
-            if (currentTile[1] === ROWS - 1) {
-                if (prey[2] === 'N/A') {
-                    return 'sw-border1';
-                } else return "sw-border";
-            } else return "left-border";
-        }
-        if (currentTile[0] === COLUMNS - 1) {
-            if (currentTile[1] === 0) {
-                if (prey[2] === 'N/A') {
-                    return 'ne-border1';
-                }
-                return "ne-border";
-            } else if (currentTile[1] === ROWS - 1) {
-                if (prey[2] === 'N/A') {
-                    return 'se-border1';
-                } else return "se-border";
-            }
-            if (prey[2] === 'N/A') {
-                return 'e-border1';
-            } return "right-border";
-        }
-        if (currentTile[1] === 0) {
-            return "upper-border";
-        }
-        if (currentTile[1] === ROWS - 1) {
-            if (prey[2] === 'N/A') {
-                return 's-border1';
-            } else return "bottom-border";
-        }
+
 
         /* ----- SNAKE  ----- */
         for (let i = 0; i < snake.length; i++) {
@@ -57,7 +26,7 @@ export default function Board({ theGrid, snake, food, gameOver, blinkOn, prey })
                         return "down-tail";
                     if ((currentTile[0] === snake[snake.length - 2][0] && currentTile[1] === snake[snake.length - 2][1] + 1)
                         || (currentTile[1] < snake[snake.length - 2][1]))
-                    return "up-tail";
+                        return "up-tail";
                 }
 
                 /* ----- BODY CORNERS ----- */
@@ -146,6 +115,50 @@ export default function Board({ theGrid, snake, food, gameOver, blinkOn, prey })
                     }
                     return "snake-up";
                 }
+            }
+        }
+
+        /* ----- BORDER TILES ----- */
+        if (currentTile[0] === 0) {
+            if (theGrid.length > 1) {
+                if (currentTile[1] === 0) return "nw-border";
+                if (currentTile[1] === ROWS - 1) {
+                    // if (prey[2] === 'N/A') {
+                    //     return 'sw-border1';
+                    // } else 
+                    return "sw-border";
+                }
+            }
+            return "left-border";
+        }
+        if (currentTile[0] === COLUMNS - 1) {
+            if (theGrid.length > 1) {
+                if (currentTile[1] === 0){
+                    // if (prey[2] === 'N/A') {
+                    //     return 'ne-border1';
+                    // }
+                    return "ne-border";
+                } else if (currentTile[1] === ROWS - 1) {
+                    // if (prey[2] === 'N/A') {
+                    //     return 'se-border1';
+                    // } 
+                    return "se-border";
+                }
+                // if (prey[2] === 'N/A') {
+                //     return 'e-border1';
+                // }
+            } return "right-border";
+        }
+
+        if (theGrid.length > 1) {
+            if (currentTile[1] === 0) {
+                return "upper-border";
+            }
+            if (currentTile[1] === ROWS - 1) {
+                // if (prey[2] === 'N/A') {
+                //     return 's-border1';
+                // } else 
+                return "bottom-border";
             }
         }
 
