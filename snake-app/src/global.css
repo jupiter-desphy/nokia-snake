@@ -1,9 +1,13 @@
 :root {
-  --screen-green: rgb(126, 189, 141);
+  --background: rgb(126, 189, 141);
   --dark-hole-charcoal: rgba(35, 35, 35, 0.832);
   --width: 70vw;
   --columns: 25;
   --rows: 15;
+}
+
+[data-theme='dark'] {
+  --background: rgb(168, 192, 174);
 }
 
 * {
@@ -15,7 +19,7 @@
 body {
   justify-content: center;
   display: flex;
-  background-color: var(--screen-green)
+  background-color: var(--background)
 }
 
 .screen {
@@ -143,7 +147,7 @@ body {
 .chameleon1 .cm1,
 .chameleon2 .cm2 {
   background-color: var(--dark-hole-charcoal);
-  border: .00001rem solid var(--screen-green);
+  border: .00001rem solid var(--background);
 }
 
 .sw-border1 .swb1,
@@ -174,7 +178,7 @@ body {
 
   :focus-visible .negi-space {
     background-color: var(--dark-hole-charcoal);
-    border: .00001rem solid var(--screen-green);
+    border: .00001rem solid var(--background);
   }
 
   :focus-visible .posi-space {
