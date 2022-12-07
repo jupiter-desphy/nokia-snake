@@ -16,6 +16,7 @@ export function Menu() {
       <MenuSlide optionName=' NOPQRSTUVWXYZ' />
       <MenuSlide optionName=' abcdefghijklm' />
       <MenuSlide optionName=' nopqrstuvwxyz' />
+      <MenuSlide optionName=' 0123456789' />
       <Link to={`/snake1`}>
         <MenuSlide optionName=' Snake I' />
       </Link>

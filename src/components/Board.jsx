@@ -6,7 +6,6 @@ export default function Board({ theGrid, snake, food, gameOver, blinkOn, prey })
     function generateTileClass(currentTile) {
 
 
-
         /* ----- SNAKE  ----- */
         for (let i = 0; i < snake.length; i++) {
             if (currentTile[0] === snake[i][0] && currentTile[1] === snake[i][1]) {

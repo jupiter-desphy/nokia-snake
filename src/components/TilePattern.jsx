@@ -2,6 +2,18 @@ export default function TilePattern({pixelState: tileClass}){
     return (
         <div className={`tile ${tileClass}`}>
 
+            {/*
+                    if (tileClass === 'snake-head') {
+            if (y < 3 || y > 8) return n;
+            if ((x === 0 && y < 6)
+                || (x === 1 && y !== 7)
+                || (x === 2 && (y === 6 || y > 7))
+                || (x === 3)
+                || (x === 4 && y !== 8)) return p;
+            return n;
+        }
+            */}
+
             <div className="seb1 eb1 sb1 scl cp1 fs2 sp2 f-s-e d-f d-h r-h r-f"></div>
             <div className="sb1 scl seb rb cm1 cm2 fs2 sp2 f l-f s-w s-e u-t up down food-pixel"></div>
             <div className="swb1 sb1 scl swb lb sp1 f d-f r-f s-w s-e d-h d-t u-t up down"></div>

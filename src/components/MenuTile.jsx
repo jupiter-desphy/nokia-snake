@@ -433,12 +433,27 @@ export default function MenuTile({ layOut, letter: char, width }) {
             return n;
         }
 
+        if (char === '1') {
+            if ((x === 0 && y === 2)
+                || (x > 0 && x < 3)) return p;
+            return n;
+        }
+
         if (char === '2') {
             if ((x === 0 && (y < 2 || y > 4))
                 || (x === 1 && (y < 2 || y > 3))
                 || (x === 2 && (y === 1 || y === 4 || y === 7))
                 || (x === 3 && (y < 5 || y === 7))
                 || (x === 4 && (y === 2 || y === 3 || y === 7))
+                ) return p;
+            return n;
+        }
+
+        if (char === '3') {
+            if ((x === 0 && (y < 2 || y > 6))
+                || ((x === 1 || x === 2) && (y < 2 || y === 4 ||y > 6))
+                || (x === 3)
+                || (x === 4 && (y !== 4 && y > 1 && y < 7))
                 ) return p;
             return n;
         }
@@ -451,7 +466,25 @@ export default function MenuTile({ layOut, letter: char, width }) {
             return n;
         }
 
+        if (char === '5') {
+            if ((x === 0 && y > 1 && y < 7)
+                || (x === 1)
+                || (x === 2 && (y === 1 || y === 3 || y === 7))
+                || (x === 3 && y !== 2)
+                || (x === 4 && y > 3 && y < 7)) return p;
+            return n;
+        }
+
         if (char === '6') {
+            if ((x === 0 && y > 1 && y < 7)
+                || (x === 1)
+                || (x === 2 && (y === 1 || y === 3 || y === 7))
+                || (x === 3 && y !== 2)
+                || (x === 4 && y > 3 && y < 7)) return p;
+            return n;
+        }
+
+        if (char === '7') {
             if ((x === 0 && y > 1 && y < 7)
                 || (x === 1)
                 || (x === 2 && (y === 1 || y === 3 || y === 7))
@@ -464,6 +497,20 @@ export default function MenuTile({ layOut, letter: char, width }) {
             if (((x === 0 || x === 4) && y !== 1 && y !== 4 && y !== 7)
                 || (x === 1 || x === 3)
                 || (x === 2 && (y === 1 || y === 4 || y === 7))) return p;
+            return n;
+        }
+        
+        if (char === '9') {
+            if (((x === 0 || x === 4) && y !== 1 && y !== 4 && y !== 7)
+                || (x === 1 || x === 3)
+                || (x === 2 && (y === 1 || y === 4 || y === 7))) return p;
+            return n;
+        }
+        
+        if (char === '0') {
+            if (((x === 0 || x === 4) && y > 1 && y < 7)
+                || (x === 1 || x === 3)
+                || (x === 2 && (y < 2 || y > 6))) return p;
             return n;
         }
 
