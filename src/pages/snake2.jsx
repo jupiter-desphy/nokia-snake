@@ -272,9 +272,9 @@ export function SnakeII() {
         //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [food]);
 
+    // ------ SNAKE II MENU OPTIONS -------
     const levelOption = () => {setLevelView(true); setMenuView (false);}
     const instructionsOption = () => {setInstructionsView(true); setMenuView (false);}
-    console.log( snake)
 
     return (
         <div >
@@ -322,11 +322,13 @@ export function SnakeII() {
                                     <MenuSlide optionName=' Instructions' />
                                 </button>
                             </div>
-                            <div>
-                                <button className="hidden-button" onClick={returnToGame}>
+                            {/* <div>
+                                <button className="hidden-button" onClick={returnToGame}> */}
+                            <Link to={'/'} >
                                     <MenuSlide optionName=' Settings' />
-                                </button>
-                            </div>
+                            </Link>
+                                {/* </button>
+                            </div> */}
                         </>
                         :
                         <>

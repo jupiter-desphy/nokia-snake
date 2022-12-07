@@ -122,9 +122,9 @@ export default function Board({ theGrid, snake, food, gameOver, blinkOn, prey })
             if (theGrid.length > 1) {
                 if (currentTile[1] === 0) return "nw-border";
                 if (currentTile[1] === ROWS - 1) {
-                    // if (prey[2] === 'N/A') {
-                    //     return 'sw-border1';
-                    // } else 
+                    if (prey[2] === 'N/A') { // prey[2] === 'N/A in snake 1 where border needs to be brought in on right and bottom.
+                        return 'sw-border1';
+                    } else 
                     return "sw-border";
                 }
             }
@@ -133,19 +133,19 @@ export default function Board({ theGrid, snake, food, gameOver, blinkOn, prey })
         if (currentTile[0] === COLUMNS - 1) {
             if (theGrid.length > 1) {
                 if (currentTile[1] === 0){
-                    // if (prey[2] === 'N/A') {
-                    //     return 'ne-border1';
-                    // }
+                    if (prey[2] === 'N/A') {
+                        return 'ne-border1';
+                    }
                     return "ne-border";
                 } else if (currentTile[1] === ROWS - 1) {
-                    // if (prey[2] === 'N/A') {
-                    //     return 'se-border1';
-                    // } 
+                    if (prey[2] === 'N/A') {
+                        return 'se-border1';
+                    } 
                     return "se-border";
                 }
-                // if (prey[2] === 'N/A') {
-                //     return 'e-border1';
-                // }
+                if (prey[2] === 'N/A') {
+                    return 'e-border1';
+                }
             } return "right-border";
         }
 
@@ -154,9 +154,9 @@ export default function Board({ theGrid, snake, food, gameOver, blinkOn, prey })
                 return "upper-border";
             }
             if (currentTile[1] === ROWS - 1) {
-                // if (prey[2] === 'N/A') {
-                //     return 's-border1';
-                // } else 
+                if (prey[2] === 'N/A') {
+                    return 's-border1';
+                } else 
                 return "bottom-border";
             }
         }

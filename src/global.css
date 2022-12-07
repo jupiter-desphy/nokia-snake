@@ -92,11 +92,11 @@ body {
 .SW1 .scl,
 .SW1 .h,
 .SE1 .scl,
-/* .sw-border1 .swb1,
+.sw-border1 .swb1,
 .s-border1 .sb1,
 .se-border1 .seb1,
 .ne-border1 .neb1,
-.e-border1 .eb1, */
+.e-border1 .eb1,
 .m,
 .zero .n0,
 .one .n1,
@@ -149,14 +149,6 @@ body {
 .chameleon2 .cm2 {
   background-color: var(--dark-hole-charcoal);
   border: .00001rem solid var(--background);
-}
-
-.sw-border1 .swb1,
-.s-border1 .sb1,
-.se-border1 .seb1,
-.ne-border1 .neb1,
-.e-border1 .eb1 {
-  background-color: red;
 }
 
 .menu-option:hover .posi-space,

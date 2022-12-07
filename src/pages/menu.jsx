@@ -17,15 +17,15 @@ export function Menu() {
       <Link to={`/snake2`}>
         <MenuSlide optionName=' Snake II' />
       </Link>
-      <MenuSlide optionName=' Website' />
-      <MenuSlide optionName=' Contact' />
+      {/* <MenuSlide optionName=' Website' />
+      <MenuSlide optionName=' Contact' /> */}
       <a href="https://linkedin.com/in/jupiterdesphy" >
         <MenuSlide optionName=' LinkedIn' />
       </a>
       <a href="https://github.com/jupiter-desphy" >
         <MenuSlide optionName=' Github' />
       </a>
-      <MenuHeader optionName=' ABCDEFGHIJKLM' />
+      {/* <MenuHeader optionName=' ABCDEFGHIJKLM' />
       <MenuHeader optionName=' NOPQRSTUVWXYZ' />
       <MenuHeader optionName=' abcdefghijklm' />
       <MenuHeader optionName=' nopqrstuvwxyz' />
@@ -34,7 +34,7 @@ export function Menu() {
       <MenuSlide optionName=' NOPQRSTUVWXYZ' />
       <MenuSlide optionName=' abcdefghijklm' />
       <MenuSlide optionName=' nopqrstuvwxyz' />
-      <MenuSlide optionName=' 0123456789' />
+      <MenuSlide optionName=' 0123456789' /> */}
     </>
   )
 }
