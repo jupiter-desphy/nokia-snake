@@ -403,12 +403,26 @@ export default function SsansSerifLite({ layOut, letter: char, width }) {
             return n;
         }
 
+        if (char === '1') {
+            if ((x === 0 && y === 2)
+                || (x === 1)) return p;
+            return n;
+        }
+
         if (char === '2') {
             if ((x === 0 && (y ===2 || y > 5))
                 || (x === 1 && (y === 1 || y === 5 || y === 7))
                 || (x===2 && (y === 1 || y === 4 || y === 7))
                 || (x === 20 && (y < 5 || y === 7))
                 || (x === 3 && (y === 2 || y === 3 || y === 7))
+                ) return p;
+            return n;
+        }
+
+        if (char === '3') {
+            if ((x === 0 && (y < 2 || y > 6))
+                || ((x === 1 || x === 2) && (y < 2 || y === 4 ||y > 6))
+                || (x === 3 && (y !== 4 && y > 1 && y < 7))
                 ) return p;
             return n;
         }
@@ -421,6 +435,13 @@ export default function SsansSerifLite({ layOut, letter: char, width }) {
             return n;
         }
 
+        if (char === '5') {
+            if ((x === 0 && (y > 6 || y < 4))
+                || ((x === 1 || x === 2) && (y === 1 || y === 3 || y === 7))
+                || (x === 3 && y > 3 && y < 7)) return p;
+            return n;
+        }
+
         if (char === '6') {
             if ((x === 0 && y > 1 && y < 7)
                 || ((x === 1 || x === 2) && (y === 1 || y === 3 || y === 7))
@@ -428,9 +449,29 @@ export default function SsansSerifLite({ layOut, letter: char, width }) {
             return n;
         }
 
+        if (char === '7') {
+            if ((x === 0 && y < 2)
+                || (x === 1 && (y < 2 || y > 4))
+                || (x === 2 && y < 5 && y !== 2)
+                || (x === 3 && y < 3)) return p;
+            return n;
+        }
         if (char === '8') {
             if (((x === 0 || x === 3) && y !== 1 && y !== 4 && y !== 7)
                 || ((x === 1 || x === 2) && (y === 1 || y === 4 || y === 7))) return p;
+            return n;
+        }
+
+        if (char === '9') {
+            if ((x === 0 && y > 1 && y < 5)
+                || ((x === 1 || x === 2) && (y === 1 || y === 5 || y === 7))
+                || (x === 3 && y > 1 && y < 7)) return p;
+            return n;
+        }
+        
+        if (char === '0') {
+            if (((x === 0 || x === 3) && y > 1 && y < 7)
+                || ((x === 1 || x === 2) && (y < 2 || y > 6))) return p;
             return n;
         }
 

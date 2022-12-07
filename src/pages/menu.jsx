@@ -8,15 +8,6 @@ export function Menu() {
 
   return (
     <>
-      <MenuHeader optionName=' ABCDEFGHIJKLM' />
-      <MenuHeader optionName=' NOPQRSTUVWXYZ' />
-      <MenuHeader optionName=' abcdefghijklm' />
-      <MenuHeader optionName=' nopqrstuvwxyz' />
-      <MenuSlide optionName=' ABCDEFGHIJKLM' />
-      <MenuSlide optionName=' NOPQRSTUVWXYZ' />
-      <MenuSlide optionName=' abcdefghijklm' />
-      <MenuSlide optionName=' nopqrstuvwxyz' />
-      <MenuSlide optionName=' 0123456789' />
       <Link to={`/snake1`}>
         <MenuSlide optionName=' Snake I' />
       </Link>
@@ -31,6 +22,16 @@ export function Menu() {
       <a href="https://github.com/jupiter-desphy" >
         <MenuSlide optionName=' Github' />
       </a>
+      <MenuHeader optionName=' ABCDEFGHIJKLM' />
+      <MenuHeader optionName=' NOPQRSTUVWXYZ' />
+      <MenuHeader optionName=' abcdefghijklm' />
+      <MenuHeader optionName=' nopqrstuvwxyz' />
+      <MenuHeader optionName=' 0123456789' />
+      <MenuSlide optionName=' ABCDEFGHIJKLM' />
+      <MenuSlide optionName=' NOPQRSTUVWXYZ' />
+      <MenuSlide optionName=' abcdefghijklm' />
+      <MenuSlide optionName=' nopqrstuvwxyz' />
+      <MenuSlide optionName=' 0123456789' />
     </>
   )
 }
