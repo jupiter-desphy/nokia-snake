@@ -187,12 +187,13 @@ export function SnakeII() {
         });
 
         useEffect(() => {
-            const handle = (event) => {
-                if (event.key === key) {
-                    callbackRef.current(event);
+            const handle = (e) => {
+                if (e.key === key) {
+                    callbackRef.current(e);
                 };
-                if (event.key === ' ' || event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-                    event.preventDefault();
+                // prevents scrolling if the viewport is too short
+                if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                    e.preventDefault();
                 }
             }
             document.addEventListener("keydown", handle);
@@ -204,10 +205,14 @@ export function SnakeII() {
     //     console.log('Nice!')
     // }
 
+    useKey('ArrowUp', moveUp);
     useKey('ArrowLeft', moveLeft);
     useKey('ArrowRight', moveRight);
-    useKey('ArrowUp', moveUp);
     useKey('ArrowDown', moveDown);
+    useKey('2', moveUp);
+    useKey('4', moveLeft);
+    useKey('6', moveRight);
+    useKey('8', moveDown);
     useKey(' ', pauseGame);
     useKey('Escape', goSnake2Menu);
     // useKey('z', keyIsWorking);
@@ -241,7 +246,7 @@ export function SnakeII() {
             head[3] = 'full';
         } else if ((snakeCopy[0][0] === prey[0][0] && snakeCopy[0][1] === prey[0][1]) || (snakeCopy[0][0] === prey[1][0] && snakeCopy[0][1] === prey[1][1])) {
             setScore((prevScore) => prevScore + 48);
-            setSpeed((prevSpeed) => prevSpeed - .25);
+            // setSpeed((prevSpeed) => prevSpeed - .25);
             setPrey((prevPrey) => [[null, null], [null, null], prevPrey[2]]);
             setPreyTimer(1);
             head[3] = 'full';
@@ -259,19 +264,20 @@ export function SnakeII() {
 
     useEffect(() => {
         randomizeFood();
-        if (foodCount > 1 && foodCount % 5 === 0) randomizePrey();
         //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [foodCount]);
+
+    useEffect(() => {
+        if (foodCount > 1 && foodCount % 5 === 0) randomizePrey();
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [food]);
 
     const levelOption = () => {setLevelView(true); setMenuView (false);}
     const instructionsOption = () => {setInstructionsView(true); setMenuView (false);}
     console.log( snake)
 
     return (
-        <div
-        // role="button" tabIndex="0"
-        // onKeyDown={e => speed ? moveSnake(e) : startGame()}
-        >
+        <div >
             {paused ?
                 <>
                     {levelView &&

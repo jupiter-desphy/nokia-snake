@@ -8,6 +8,9 @@ export function Menu() {
 
   return (
     <>
+      <br></br>
+      <br></br>
+      <MenuHeader optionName='------------ Menu ------------' />
       <Link to={`/snake1`}>
         <MenuSlide optionName=' Snake I' />
       </Link>

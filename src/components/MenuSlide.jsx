@@ -38,7 +38,7 @@ export default function MenuSlide({ optionName }) {
         ['d', 6],
         ['e', 6],
         ['f', 4],
-        ['g', 6],//fjx
+        ['g', 6],
         ['h', 6],
         ['i', 3],
         ['j', 5],
