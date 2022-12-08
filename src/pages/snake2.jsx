@@ -353,9 +353,9 @@ export function SnakeII() {
                 </>
             }
             <br></br>
-            level: {level}
+            {/* level: {level}
             <br></br>
-            Speed: {speed}
+            Speed: {speed} */}
 
 
 
