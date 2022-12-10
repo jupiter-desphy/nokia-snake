@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MenuHeader from './MenuHeader';
+import LiteSlide from './LiteSlide';
 import Board from './Board';
 import layMatrix from '../helpers/layMatrix';
 import useInterval from '../helpers/useInterval';
@@ -33,7 +33,7 @@ export default function Level(props) {
 
     return (
         <div>
-            <MenuHeader optionName="------------ Level __-----------" />
+            <LiteSlide optionName="------------ Level __-----------" />
             <button onClick={() => props.chooseLevel(1, levelSpeeds[0])}>0</button>
             <button onClick={() => props.chooseLevel(1, levelSpeeds[1])}>1</button>
             <button onClick={() => props.chooseLevel(2, levelSpeeds[2])}>2</button>

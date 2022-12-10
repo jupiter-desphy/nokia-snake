@@ -11,7 +11,7 @@ import {
 import Board from "../components/Board.jsx";
 import Marquee from "../components/Marquee.jsx";
 import MenuSlide from "../components/MenuSlide";
-import MenuHeader from "../components/MenuHeader";
+import LiteSlide from "../components/LiteSlide";
 import Level from "../components/Level";
 import useInterval from "../helpers/useInterval.js";
 import layMatrix from "../helpers/layMatrix.js";
@@ -287,21 +287,21 @@ export function SnakeII() {
                     }
                     {instructionsView &&
                         <>
-                            <MenuHeader optionName='-------- Instructions --------' />
+                            <LiteSlide optionName='-------- Instructions --------' />
                             <br></br>
-                            <MenuHeader optionName='Use arrow keys on your' />
-                            <MenuHeader optionName='keyboard or numbers' />
-                            <MenuHeader optionName='2,4,6 and 8 on a phone' />
-                            <MenuHeader optionName='to direct the snake to' />
-                            <MenuHeader optionName='food. Make sure it does' />
-                            <MenuHeader optionName='not eat itself!' />
+                            <LiteSlide optionName='Use arrow keys on your' />
+                            <LiteSlide optionName='keyboard or numbers' />
+                            <LiteSlide optionName='2,4,6 and 8 on a phone' />
+                            <LiteSlide optionName='to direct the snake to' />
+                            <LiteSlide optionName='food. Make sure it does' />
+                            <LiteSlide optionName='not eat itself!' />
                         </>
                     }
                     {menuView ?
                         <>
                             <br></br>
                             <br></br>
-                            <MenuHeader optionName='---------- Snake II ----------' />
+                            <LiteSlide optionName='---------- Snake II ----------' />
                             <div>
                                 <button className='hidden-button' onClick={startGame}>
                                     <MenuSlide optionName=' New game' />
@@ -324,9 +324,11 @@ export function SnakeII() {
                             </div>
                             {/* <div>
                                 <button className="hidden-button" onClick={returnToGame}> */}
+                            <div>
                             <Link to={'/'} >
                                     <MenuSlide optionName=' Settings' />
                             </Link>
+                            </div>
                                 {/* </button>
                             </div> */}
                         </>

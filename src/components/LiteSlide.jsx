@@ -1,8 +1,7 @@
 import SsansSerifLite from "./SsansSerifLite.jsx";
 import layMatrix from "../helpers/layMatrix.js";
-import LiteSlide from "./LiteSlide.jsx";
 
-export default function MenuHeader({ optionName }) {
+export default function LiteSlide({ optionName }) {
     
     const optionByChar = `${optionName}`.split('');
     
@@ -103,11 +102,11 @@ export default function MenuHeader({ optionName }) {
 
 
     return (
-        <h1 className="menu-header">
+        <div className="menu-header">
             {optionByChar.map((i, ind) => {
                 return <SsansSerifLite layOut={convertLetter(i)} letter={i} width={determineWidth(i)} key={`${i} + ${ind}`} />
             })}
             {/* <SsansSerifLite layOut={layOutRemainder()} letter=' ' width={remainingWidth} /> */}
-        </h1>
+        </div>
     )
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import MenuSlide from '../components/MenuSlide';
-import MenuHeader from '../components/MenuHeader';
+import LiteSlide from '../components/LiteSlide';
 import { Link } from 'react-router-dom';
 
 export function Menu() {
@@ -10,7 +10,7 @@ export function Menu() {
     <>
       <br></br>
       <br></br>
-      <MenuHeader optionName='------------ Menu ------------' />
+      <LiteSlide optionName='------------ Menu ------------' />
       <Link to={`/snake1`}>
         <MenuSlide optionName=' Snake I' />
       </Link>

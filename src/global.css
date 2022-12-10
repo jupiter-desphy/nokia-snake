@@ -1,6 +1,7 @@
 :root {
   --background: rgb(126, 189, 141);
-  --dark-hole-charcoal: rgba(35, 35, 35, 0.832);
+  --border: rgba(126, 189, 141, .6);
+  --black: rgb(0, 0, 0);
   --width: 70vw;
   --columns: 25;
   --rows: 15;
@@ -147,8 +148,8 @@ body {
 .spider2 .sp2,
 .chameleon1 .cm1,
 .chameleon2 .cm2 {
-  background-color: var(--dark-hole-charcoal);
-  border: .00001rem solid var(--background);
+  background-color: var(--black);
+  border: .0001rem solid var(--border);
 }
 
 .menu-option:hover .posi-space,
@@ -164,14 +165,14 @@ body {
 }
 
 :focus {
-  outline: var(--dark-hole-charcoal);
+  outline: var(--black);
 }
 
 @supports selector(:focus-visible){
 
   :focus-visible .negi-space {
-    background-color: var(--dark-hole-charcoal);
-    border: .00001rem solid var(--background);
+    background-color: var(--black);
+    border: .0001rem solid var(--border);
   }
 
   :focus-visible .posi-space {
