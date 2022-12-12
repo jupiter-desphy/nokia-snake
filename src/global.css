@@ -57,6 +57,13 @@ body {
   grid-template-columns: repeat(100, 1fr);
 }
 
+.lite-slide {
+  /* width: var(--width); */
+  height: calc(var(--width) / 10);
+  display: grid;
+  grid-template-columns: repeat(100, 1fr);
+}
+
 .menu-tile {
   display: grid;
   grid-template-rows: repeat(10, 1fr);

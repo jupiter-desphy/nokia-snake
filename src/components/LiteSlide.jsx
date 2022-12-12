@@ -102,7 +102,7 @@ export default function LiteSlide({ optionName }) {
 
 
     return (
-        <div className="menu-header">
+        <div className="lite-slide">
             {optionByChar.map((i, ind) => {
                 return <SsansSerifLite layOut={convertLetter(i)} letter={i} width={determineWidth(i)} key={`${i} + ${ind}`} />
             })}
