@@ -4,7 +4,7 @@ import Board from './Board';
 import layMatrix from '../helpers/layMatrix';
 import useInterval from '../helpers/useInterval';
 import { PREY_START, SNAKE_DEMO, COLUMNS } from '../constants';
-import MenuSlide from './MenuSlide';
+import LevelBar from './LevelBar';
 
 export default function Level(props) {
 
@@ -34,7 +34,9 @@ export default function Level(props) {
     return (
         <div>
             <LiteSlide optionName="------------ Level __-----------" />
-            <button onClick={() => props.chooseLevel(1, levelSpeeds[0])}>0</button>
+            <button onClick={() => props.chooseLevel(1, levelSpeeds[0])}>
+                <LevelBar number={1}/>
+            </button>
             <button onClick={() => props.chooseLevel(1, levelSpeeds[1])}>1</button>
             <button onClick={() => props.chooseLevel(2, levelSpeeds[2])}>2</button>
             <button onClick={() => props.chooseLevel(3, levelSpeeds[3])}>3</button>

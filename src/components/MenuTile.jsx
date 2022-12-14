@@ -530,7 +530,7 @@ export default function MenuTile({ layOut, letter: char, width }) {
             className={`menu-tile`}
             style={{
                 gridTemplateColumns: `repeat(${width}, 1fr)`,
-                // width: `calc(var(--width) / 80 / ${width})`,
+                width: `calc(var(--width) / 100 / ${width})`,
                 gridColumn: `span ${width}`
             }}
         >
