@@ -71,7 +71,9 @@ body {
 
 .level-bar {
   display: grid;
-  grid-template-rows: repeat(100, 1fr);
+  height: calc(var(--width) / 100 * 30);
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(30, 1fr);
 }
 
 .pixel {

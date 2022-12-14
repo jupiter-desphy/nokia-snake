@@ -34,7 +34,7 @@ export default function Level(props) {
     return (
         <div>
             <LiteSlide optionName="------------ Level __-----------" />
-            <button onClick={() => props.chooseLevel(1, levelSpeeds[0])}>
+            <button className='hidden-button' onClick={() => props.chooseLevel(1, levelSpeeds[0])}>
                 <LevelBar number={1}/>
             </button>
             <button onClick={() => props.chooseLevel(1, levelSpeeds[1])}>1</button>

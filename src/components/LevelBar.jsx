@@ -4,19 +4,16 @@ import layMatrix from "../helpers/layMatrix";
 export default function LevelBar({ number }) {
     // given letter and layOut, choose which pixels are positive or negative space
     let layOut = [];
-    layMatrix(layOut, 10, 100);
+    layMatrix(layOut, 9, 30);
+    console.log(layOut)
 
 
     function drawLetter(currentPixel) {
         let x = currentPixel[0];
         let y = currentPixel[1];
+        console.log (currentPixel)
         let p = 'posi-space';
         let n = 'negi-space';
-
-        if ((number !== 'g' && number !== 'j' && number !== 'p' && number !== 'q' && number !== 'y' && number !== ',')
-            && (y < 1 || y > 7)) return n;
-
-
 
         if (number === '1') {
             if ((x === 0 && y === 2)
@@ -25,16 +22,12 @@ export default function LevelBar({ number }) {
         }
 
         if (number === 1) {
-            if ((x === 0 && (y ===2 || y > 5))
-                || (x === 1 && (y === 1 || y === 5 || y === 7))
-                || (x===2 && (y === 1 || y === 4 || y === 7))
-                || (x === 20 && (y < 5 || y === 7))
-                || (x === 3 && (y === 2 || y === 3 || y === 7))
+            if ((y)
                 ) return p;
             return n;
         }
 
-        if (number === '3') {
+        if (number === 1) {
             if ((x === 0 && (y < 2 || y > 6))
                 || ((x === 1 || x === 2) && (y < 2 || y === 4 ||y > 6))
                 || (x === 3 && (y !== 4 && y > 1 && y < 7))
@@ -123,11 +116,12 @@ export default function LevelBar({ number }) {
 
     return (
         <div
-            className={`menu-tile`}
+            className={`level-bar`}
             style={{
-                gridTemplateColumns: `repeat(10, 1fr)`,
-                // width: `calc(var(--width) / 80 / ${width})`,
-                gridColumn: `span 10`
+                // gridTemplateColumns: `repeat(10, 1fr)`,
+                // gridTemplateRows: `repeat(100, 1fr)`,
+                width: `calc(var(--width) / 100 * 9`,
+                gridColumn: `span 9`
             }}
         >
             {layOut.map((rowArray, ind) => {
