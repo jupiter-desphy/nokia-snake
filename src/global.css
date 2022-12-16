@@ -42,6 +42,7 @@ body {
   height: calc(var(--width) / var(--columns));
   display: grid;
   grid-template-columns: repeat(var(--columns), 1fr);
+  margin-top: .5rem;
 }
 .menu-option {
   width: var(--width);
@@ -67,6 +68,12 @@ body {
 .menu-tile {
   display: grid;
   grid-template-rows: repeat(10, 1fr);
+}
+
+.level {
+  /* width: inherit; */
+  display: flex;
+  justify-content: center;
 }
 
 .level-bar {

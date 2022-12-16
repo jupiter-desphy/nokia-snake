@@ -282,7 +282,7 @@ export function SnakeII() {
                 <>
                     {levelView &&
                         <>
-                            <Level chooseLevel={(level, pausedSpeed) => { setLevel(level); setPausedSpeed(pausedSpeed) }} levelViewable={(levelView) => setLevelView(levelView)} speed={pausedSpeed} />
+                            <Level level={level} chooseLevel={(level, pausedSpeed) => { setLevel(level); setPausedSpeed(pausedSpeed) }} levelViewable={(levelView) => setLevelView(levelView)} speed={pausedSpeed} />
                         </>
                     }
                     {instructionsView &&
