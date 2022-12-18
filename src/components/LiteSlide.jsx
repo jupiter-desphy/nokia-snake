@@ -1,10 +1,15 @@
 import SsansSerifLite from "./SsansSerifLite.jsx";
 import layMatrix from "../helpers/layMatrix.js";
 
-export default function LiteSlide({ optionName }) {
-    
+export default function LiteSlide({ optionName, isHeading }) {
+
     const optionByChar = `${optionName}`.split('');
-    
+
+    if (isHeading) {
+        optionByChar.unshift('_', ' ')
+        optionByChar.push(' ')
+    }
+
     const letterWidths = [
         ['A', 6],
         ['B', 5],
@@ -75,38 +80,45 @@ export default function LiteSlide({ optionName }) {
         ['_', 1],
         [' ', 3]
     ]
-
-    // let remainingWidth = null;
     
     const determineWidth = (character) => (letterWidths.find(ele => ele[0] === character))[1];
-
+    
     const convertLetter = (char) => {
         let letterArr = [];
-
+        
         let letterWidth = determineWidth(char);
-
+        
         layMatrix(letterArr, letterWidth, 10);
         return letterArr;
     }
+    
+        let remainingWidth = (optionByChar.reduce((a, c) => {
+            return a - determineWidth(c);
+        }, 100) / 2);
 
-    // const layOutRemainder = () => {
-    //     let remainderArr = [];
-    //     remainingWidth = optionByChar.reduce((a, c) => {
-    //         return a - determineWidth(c);
-    //     }, 100);
+        let firstWidth = Math.round(remainingWidth);
+        let secondWidth = Math.floor(remainingWidth);
 
-    //     layMatrix(remainderArr, remainingWidth, 10);
+    const layOutRemainder1 = () => {
+        let remainderArr = [];
+        layMatrix(remainderArr, firstWidth, 10);
+        return remainderArr;
+    }
 
-    //     return remainderArr;
-    // }
+    const layOutRemainder2 = () => {
+        let remainderArr = [];
+        layMatrix(remainderArr, secondWidth, 10);
+        return remainderArr;
+    }
 
 
     return (
         <div className="lite-slide">
+            {isHeading && <SsansSerifLite layOut={layOutRemainder1()} letter='-' width={firstWidth} />}
             {optionByChar.map((i, ind) => {
                 return <SsansSerifLite layOut={convertLetter(i)} letter={i} width={determineWidth(i)} key={`${i} + ${ind}`} />
             })}
-            {/* <SsansSerifLite layOut={layOutRemainder()} letter=' ' width={remainingWidth} /> */}
+            {isHeading && <SsansSerifLite layOut={layOutRemainder2()} letter='-' width={secondWidth} /> }
         </div>
     )
 }

@@ -10,7 +10,7 @@ export function Menu() {
     <>
       <br></br>
       <br></br>
-      <LiteSlide optionName='------------ Menu ------------' />
+      <LiteSlide optionName='Menu' isHeading={true}/>
       <Link to={`/snake1`}>
         <MenuSlide optionName=' Snake I' />
       </Link>

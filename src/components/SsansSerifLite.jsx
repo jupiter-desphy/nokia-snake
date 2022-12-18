@@ -475,7 +475,7 @@ export default function SsansSerifLite({ layOut, letter: char, width }) {
             return n;
         }
 
-        if (char === '-' || char ==='_') {
+        if (char === '-') {
             if (y === 4) return p;
             return n;
         }
@@ -496,7 +496,7 @@ export default function SsansSerifLite({ layOut, letter: char, width }) {
             return n;
         }
 
-        if (char === ' ') {
+        if (char === ' ' || char ==='_') {
             return n;
         }
 
@@ -511,7 +511,7 @@ export default function SsansSerifLite({ layOut, letter: char, width }) {
             className={`menu-tile`}
             style={{
                 gridTemplateColumns: `repeat(${width}, 1fr)`,
-                // width: `calc(var(--width) / 80 / ${width})`,
+                width: `calc(var(--width) / 100 / ${width})`,
                 gridColumn: `span ${width}`
             }}
         >

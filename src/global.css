@@ -5,6 +5,7 @@
   --width: 70vw;
   --columns: 25;
   --rows: 15;
+  --pixels: 100;
 }
 
 [data-theme='dark'] {
@@ -21,6 +22,10 @@ body {
   justify-content: center;
   display: flex;
   background-color: var(--background)
+}
+
+#dark {
+  background-color: rgb(168, 192, 174);
 }
 
 .screen {
@@ -42,27 +47,26 @@ body {
   height: calc(var(--width) / var(--columns));
   display: grid;
   grid-template-columns: repeat(var(--columns), 1fr);
-  margin-top: .5rem;
+  margin-top: 1.5rem;
 }
 .menu-option {
   width: var(--width);
   height: calc(var(--width) / 10);
   display: grid;
-  grid-template-columns: repeat(100, 1fr);
+  grid-template-columns: repeat(var(--pixels), 1fr);
 }
 
 .menu-header {
   width: var(--width);
   height: calc(var(--width) / 10);
   display: grid;
-  grid-template-columns: repeat(100, 1fr);
+  grid-template-columns: repeat(var(--pixels), 1fr);
 }
 
 .lite-slide {
-  /* width: var(--width); */
   height: calc(var(--width) / 10);
   display: grid;
-  grid-template-columns: repeat(100, 1fr);
+  grid-template-columns: repeat(var(--pixels), 1fr);
 }
 
 .menu-tile {
@@ -70,21 +74,20 @@ body {
   grid-template-rows: repeat(10, 1fr);
 }
 
-.level {
-  /* width: inherit; */
+.levels {
   display: flex;
   justify-content: center;
 }
 
 .level-bar {
   display: grid;
-  height: calc(var(--width) / 100 * 30);
+  height: calc(var(--width) / var(--pixels) * 30);
   grid-template-columns: repeat(9, 1fr);
   grid-template-rows: repeat(30, 1fr);
 }
 
 .pixel {
-  width: calc(var(--width) / 100);
+  width: calc(var(--width) / var(--pixels));
 }
 
 .marquee-piece {
@@ -182,7 +185,12 @@ body {
 
 .hidden-button {
   background-color: transparent;
-  border-style: none;
+  /* border-style: none; */
+  border: none;
+}
+
+button {
+  border: none;
 }
 
 :focus {

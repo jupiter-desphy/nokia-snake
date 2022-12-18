@@ -13,8 +13,11 @@ import Marquee from "../components/Marquee.jsx";
 import MenuSlide from "../components/MenuSlide";
 import LiteSlide from "../components/LiteSlide";
 import Level from "../components/Level";
+import Settings from "../components/Settings";
+import { useTheme, useThemeUpdate } from "../components/ThemeContext";
 import useInterval from "../helpers/useInterval.js";
 import layMatrix from "../helpers/layMatrix.js";
+import Instructions from "../components/Instructions";
 
 export function SnakeII() {
 
@@ -37,6 +40,7 @@ export function SnakeII() {
     const [menuView, setMenuView] = useState(false);
     const [levelView, setLevelView] = useState(false);
     const [instructionsView, setInstructionsView] = useState(false);
+    const [settingsView, setSettingsView] = useState(false);
 
     /* FUNCTIONS */
 
@@ -73,6 +77,7 @@ export function SnakeII() {
         setMenuView(true);
         setLevelView(false);
         setInstructionsView(false);
+        setSettingsView(false);
     }
 
     const pauseGame = () => {
@@ -275,33 +280,18 @@ export function SnakeII() {
     // ------ SNAKE II MENU OPTIONS -------
     const levelOption = () => {setLevelView(true); setMenuView (false);}
     const instructionsOption = () => {setInstructionsView(true); setMenuView (false);}
+    const settingsOption = () => {setSettingsView(true); setMenuView (false);}
 
     return (
-        <div >
+        <div>
             {paused ?
                 <>
-                    {levelView &&
-                        <>
-                            <Level level={level} chooseLevel={(level, pausedSpeed) => { setLevel(level); setPausedSpeed(pausedSpeed) }} levelViewable={(levelView) => setLevelView(levelView)} speed={pausedSpeed} />
-                        </>
-                    }
-                    {instructionsView &&
-                        <>
-                            <LiteSlide optionName='-------- Instructions --------' />
-                            <br></br>
-                            <LiteSlide optionName='Use arrow keys on your' />
-                            <LiteSlide optionName='keyboard or numbers' />
-                            <LiteSlide optionName='2,4,6 and 8 on a phone' />
-                            <LiteSlide optionName='to direct the snake to' />
-                            <LiteSlide optionName='food. Make sure it does' />
-                            <LiteSlide optionName='not eat itself!' />
-                        </>
-                    }
+                    {levelView && <Level level={level} chooseLevel={(level, pausedSpeed) => { setLevel(level); setPausedSpeed(pausedSpeed) }} levelViewable={(levelView) => setLevelView(levelView)} speed={pausedSpeed} />}
+                    {instructionsView && <Instructions />}
+                    {settingsView && <Settings/>}
                     {menuView ?
                         <>
-                            <br></br>
-                            <br></br>
-                            <LiteSlide optionName='---------- Snake II ----------' />
+                            <LiteSlide optionName='Snake II' isHeading={true} />
                             <div>
                                 <button className='hidden-button' onClick={startGame}>
                                     <MenuSlide optionName=' New game' />
@@ -325,9 +315,9 @@ export function SnakeII() {
                             {/* <div>
                                 <button className="hidden-button" onClick={returnToGame}> */}
                             <div>
-                            <Link to={'/'} >
+                            <button className="hidden-button" onClick={settingsOption}>
                                     <MenuSlide optionName=' Settings' />
-                            </Link>
+                            </button>
                             </div>
                                 {/* </button>
                             </div> */}
@@ -335,7 +325,7 @@ export function SnakeII() {
                         :
                         <>
                         <br></br>
-                        <button className='hidden-button' onClick={goSnake2Menu} >
+                        <button className='hidden-button' onClick={goSnake2Menu}>
                             <MenuSlide optionName={'             Back'} />
                         </button>
                         </>
