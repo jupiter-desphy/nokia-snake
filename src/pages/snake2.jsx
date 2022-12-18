@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import {
     COLUMNS,
     ROWS,
@@ -103,9 +102,9 @@ export function SnakeII() {
 
     const blink = () => {
         if (gameOver)
-        setBlinkOn(!blinkOn)
+            setBlinkOn(!blinkOn)
     }
-    
+
     useInterval(() => blink(), 400);
 
     const randomizeFood = () => {
@@ -278,9 +277,9 @@ export function SnakeII() {
     }, [food]);
 
     // ------ SNAKE II MENU OPTIONS -------
-    const levelOption = () => {setLevelView(true); setMenuView (false);}
-    const instructionsOption = () => {setInstructionsView(true); setMenuView (false);}
-    const settingsOption = () => {setSettingsView(true); setMenuView (false);}
+    const levelOption = () => { setLevelView(true); setMenuView(false); }
+    const instructionsOption = () => { setInstructionsView(true); setMenuView(false); }
+    const settingsOption = () => { setSettingsView(true); setMenuView(false); }
 
     return (
         <div>
@@ -288,13 +287,13 @@ export function SnakeII() {
                 <>
                     {levelView && <Level level={level} chooseLevel={(level, pausedSpeed) => { setLevel(level); setPausedSpeed(pausedSpeed) }} levelViewable={(levelView) => setLevelView(levelView)} speed={pausedSpeed} />}
                     {instructionsView && <Instructions />}
-                    {settingsView && <Settings/>}
+                    {settingsView && <Settings />}
                     {menuView ?
                         <>
                             <LiteSlide optionName='Snake II' isHeading={true} />
                             <div>
                                 <button className='hidden-button' onClick={startGame}>
-                                    <MenuSlide optionName=' New game' />
+                                    <MenuSlide optionName=' New game' onClick={startGame} />
                                 </button>
                             </div>
                             <div>
@@ -312,22 +311,18 @@ export function SnakeII() {
                                     <MenuSlide optionName=' Instructions' />
                                 </button>
                             </div>
-                            {/* <div>
-                                <button className="hidden-button" onClick={returnToGame}> */}
                             <div>
-                            <button className="hidden-button" onClick={settingsOption}>
+                                <button className="hidden-button" onClick={settingsOption}>
                                     <MenuSlide optionName=' Settings' />
-                            </button>
+                                </button>
                             </div>
-                                {/* </button>
-                            </div> */}
                         </>
                         :
                         <>
-                        <br></br>
-                        <button className='hidden-button' onClick={goSnake2Menu}>
-                            <MenuSlide optionName={'             Back'} />
-                        </button>
+                            <br></br>
+                            <button className='hidden-button' onClick={goSnake2Menu}>
+                                <MenuSlide optionName={'             Back'} />
+                            </button>
                         </>
                     }
                 </>

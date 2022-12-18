@@ -1,3 +1,4 @@
+import { PIXEL_WIDTH } from "../constants";
 import Pixel from "./Pixel";
 
 export default function SsansSerifLite({ layOut, letter: char, width }) {
@@ -511,7 +512,7 @@ export default function SsansSerifLite({ layOut, letter: char, width }) {
             className={`menu-tile`}
             style={{
                 gridTemplateColumns: `repeat(${width}, 1fr)`,
-                width: `calc(var(--width) / 100 / ${width})`,
+                width: `calc(var(--width) / ${PIXEL_WIDTH} / ${width})`,
                 gridColumn: `span ${width}`
             }}
         >

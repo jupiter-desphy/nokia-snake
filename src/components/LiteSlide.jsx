@@ -1,5 +1,6 @@
 import SsansSerifLite from "./SsansSerifLite.jsx";
 import layMatrix from "../helpers/layMatrix.js";
+import { LETTER_HEIGHT, PIXEL_WIDTH } from "../constants.js";
 
 export default function LiteSlide({ optionName, isHeading }) {
 
@@ -10,7 +11,7 @@ export default function LiteSlide({ optionName, isHeading }) {
         optionByChar.push(' ')
     }
 
-    const letterWidths = [
+    const liteCharWidths = [
         ['A', 6],
         ['B', 5],
         ['C', 5],
@@ -80,34 +81,34 @@ export default function LiteSlide({ optionName, isHeading }) {
         ['_', 1],
         [' ', 3]
     ]
-    
-    const determineWidth = (character) => (letterWidths.find(ele => ele[0] === character))[1];
-    
-    const convertLetter = (char) => {
+
+    const findCharWidth = (character) => (liteCharWidths.find(ele => ele[0] === character))[1];
+
+    const charAsGrid = (char) => {
         let letterArr = [];
-        
-        let letterWidth = determineWidth(char);
-        
-        layMatrix(letterArr, letterWidth, 10);
+
+        let letterWidth = findCharWidth(char);
+
+        layMatrix(letterArr, letterWidth, LETTER_HEIGHT);
         return letterArr;
     }
-    
-        let remainingWidth = (optionByChar.reduce((a, c) => {
-            return a - determineWidth(c);
-        }, 100) / 2);
 
-        let firstWidth = Math.round(remainingWidth);
-        let secondWidth = Math.floor(remainingWidth);
+    let remainingWidth = (optionByChar.reduce((a, c) => {
+        return a - findCharWidth(c);
+    }, PIXEL_WIDTH));
+
+    let firstWidth = Math.floor(remainingWidth / 2);
+    let secondWidth = Math.round(remainingWidth / 2);
 
     const layOutRemainder1 = () => {
         let remainderArr = [];
-        layMatrix(remainderArr, firstWidth, 10);
+        layMatrix(remainderArr, firstWidth, LETTER_HEIGHT);
         return remainderArr;
     }
 
     const layOutRemainder2 = () => {
         let remainderArr = [];
-        layMatrix(remainderArr, secondWidth, 10);
+        layMatrix(remainderArr, secondWidth, LETTER_HEIGHT);
         return remainderArr;
     }
 
@@ -116,9 +117,9 @@ export default function LiteSlide({ optionName, isHeading }) {
         <div className="lite-slide">
             {isHeading && <SsansSerifLite layOut={layOutRemainder1()} letter='-' width={firstWidth} />}
             {optionByChar.map((i, ind) => {
-                return <SsansSerifLite layOut={convertLetter(i)} letter={i} width={determineWidth(i)} key={`${i} + ${ind}`} />
+                return <SsansSerifLite layOut={charAsGrid(i)} letter={i} width={findCharWidth(i)} key={`${i} + ${ind}`} />
             })}
-            {isHeading && <SsansSerifLite layOut={layOutRemainder2()} letter='-' width={secondWidth} /> }
+            {isHeading && <SsansSerifLite layOut={layOutRemainder2()} letter='-' width={secondWidth} />}
         </div>
     )
 }

@@ -8,8 +8,6 @@ export function Menu() {
 
   return (
     <>
-      <br></br>
-      <br></br>
       <LiteSlide optionName='Menu' isHeading={true}/>
       <Link to={`/snake1`}>
         <MenuSlide optionName=' Snake I' />
