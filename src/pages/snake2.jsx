@@ -9,7 +9,7 @@ import {
 } from '../constants';
 import Board from "../components/Board.jsx";
 import Marquee from "../components/Marquee.jsx";
-import MenuSlide from "../components/MenuSlide";
+import MenuSlide from "../components/MenuOption";
 import LiteSlide from "../components/LiteSlide";
 import Level from "../components/Level";
 import Settings from "../components/Settings";
@@ -50,7 +50,6 @@ export function SnakeII() {
     layMatrix(scoreBoard, COLUMNS, 1);
 
     const startGame = () => {
-        // if (gameOver) {
         setSnake(SNAKE_II_START);
         setGameOver(false);
         setScore(0);
@@ -60,7 +59,6 @@ export function SnakeII() {
         setSpeed(pausedSpeed);
         setDirection(DIRECTION_START);
         setPaused(false);
-        // }
     }
 
     const endGame = () => {
@@ -282,7 +280,7 @@ export function SnakeII() {
     const settingsOption = () => { setSettingsView(true); setMenuView(false); }
 
     return (
-        <div>
+        <div className="snake2">
             {paused ?
                 <>
                     {levelView && <Level level={level} chooseLevel={(level, pausedSpeed) => { setLevel(level); setPausedSpeed(pausedSpeed) }} levelViewable={(levelView) => setLevelView(levelView)} speed={pausedSpeed} />}
@@ -291,36 +289,32 @@ export function SnakeII() {
                     {menuView ?
                         <>
                             <LiteSlide optionName='Snake II' isHeading={true} />
-                            <div>
+                            <ul>
+                                {/* <li> */}
                                 <button className='hidden-button' onClick={startGame}>
-                                    <MenuSlide optionName=' New game' onClick={startGame} />
+                                    <MenuSlide optionName=' New game' />
                                 </button>
-                            </div>
-                            <div>
+                                {/* </li> */}
                                 <button className="hidden-button" onClick={returnToGame}>
                                     <MenuSlide optionName=' Continue' />
                                 </button>
-                            </div>
-                            <div>
                                 <button className="hidden-button" onClick={levelOption}>
                                     <MenuSlide optionName=' Level' />
                                 </button>
-                            </div>
-                            <div>
                                 <button className="hidden-button" onClick={instructionsOption}>
                                     <MenuSlide optionName=' Instructions' />
                                 </button>
-                            </div>
-                            <div>
+                                {/* 
                                 <button className="hidden-button" onClick={settingsOption}>
                                     <MenuSlide optionName=' Settings' />
                                 </button>
-                            </div>
+                                */}
+                            </ul>
                         </>
                         :
                         <>
                             <br></br>
-                            <button className='hidden-button' onClick={goSnake2Menu}>
+                            <button className='menu-button' onClick={goSnake2Menu}>
                                 <MenuSlide optionName={'             Back'} />
                             </button>
                         </>
@@ -334,7 +328,7 @@ export function SnakeII() {
                     <div className="screen">
                         <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={prey} />
                     </div>
-                    <button className="hidden-button" onClick={goSnake2Menu}>
+                    <button className="menu-button" onClick={goSnake2Menu}>
                         <MenuSlide optionName='            Menu' />
                     </button>
                 </>
@@ -347,25 +341,20 @@ export function SnakeII() {
 
 
 
+            <div className="controls">
+
+                <button className="up-button hidden-button" onClick={moveUp}>2</button>
+                <button className="left-button hidden-button" onClick={moveLeft}>4</button>
+                <button className="right-button hidden-button" onClick={moveRight}>6</button>
+                <button className="down-button hidden-button" onClick={moveDown}>8</button>
+
+            </div>
 
 
 
             {/* TESTING DATA
             <div>
                 {pausedSpeed}
-            </div>
-            <div>
-            <button onClick={gameLoop}>GAME LOOP</button>
-            </div>
-            <div>
-                <button onClick={moveUp}>Move Up</button>
-            </div>
-            <div>
-                <button onClick={moveLeft}>Move Left</button>
-                <button onClick={moveRight}>Move Right</button>
-            </div>
-            <div>
-                <button onClick={moveDown}>Move Down</button>
             </div>
             <div>
                 {gameOver ? 'GAME OVER' : ''}

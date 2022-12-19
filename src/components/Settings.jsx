@@ -3,7 +3,7 @@ import MenuHeader from './MenuHeader';
 import { ThemeContext } from '../App';
 import { useTheme, useThemeUpdate } from './ThemeContext';
 import LiteSlide from './LiteSlide';
-import MenuSlide from './MenuSlide';
+import MenuSlide from './MenuOption';
 
 export default function Settings(props) {
     const darkTheme = useTheme();

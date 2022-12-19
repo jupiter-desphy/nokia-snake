@@ -149,7 +149,7 @@ export function SnakeI() {
     useInterval(() => gameLoop(), speed);
 
     return (
-        <div role="button" tabIndex="0" onKeyDown={e => moveSnake(e)}>
+        <div className="snake1" role="button" tabIndex="0" onKeyDown={e => moveSnake(e)}>
             <div className="scoreboard">
                 <Marquee layOut={scoreBoard} score={score} prey={PREY_NA} preyTimer={null} />
             </div>

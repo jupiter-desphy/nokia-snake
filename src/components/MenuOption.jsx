@@ -2,7 +2,7 @@ import MenuTile from "./MenuTile.jsx";
 import layMatrix from "../helpers/layMatrix.js";
 import { LETTER_HEIGHT, PIXEL_WIDTH } from "../constants.js";
 
-export default function MenuSlide({ optionName }) {
+export default function MenuSlide({ optionName, onClick }) {
 
     const optionByChar = `${optionName}`.split('');
     optionByChar.unshift(' ');
@@ -101,11 +101,12 @@ export default function MenuSlide({ optionName }) {
 
 
     return (
-        <div className="menu-option">
+        
+            <li className="menu-option">
             {optionByChar.map((i, ind) => {
                 return <MenuTile layOut={charAsGrid(i)} letter={i} width={findCharWidth(i)} key={`${i} + ${ind}`} />
             })}
             <MenuTile layOut={layOutRemainder()} letter=' ' width={remainingWidth} />
-        </div>
+            </li>
     )
 }

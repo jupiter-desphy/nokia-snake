@@ -33,9 +33,9 @@ export default function Level(props) {
     return (
         <>
             <LiteSlide optionName="Level" isHeading={true} />
-            <div className='levels'>
+            <div className='flex-center'>
                 {levelSpeeds.map((_, ind) => {
-                        return <button className='hidden-button' onClick={() => props.chooseLevel(ind+1, levelSpeeds[ind+1])}><LevelBar number={ind+1} level={props.level} /></button>
+                        return <button className='hidden-button' onClick={() => props.chooseLevel(ind+1, levelSpeeds[ind+1])} key={ind} ><LevelBar number={ind+1} level={props.level} /></button>
                     })}
             </div>
             <div className='demo'>
