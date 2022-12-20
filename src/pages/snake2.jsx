@@ -338,17 +338,14 @@ export function SnakeII() {
             <br></br>
             Speed: {speed} */}
 
+            {/* <div className="controls"> */}
 
+                <button className="up-button hidden-button" onClick={moveUp}></button>
+                <button className="left-button hidden-button" onClick={moveLeft}></button>
+                <button className="right-button hidden-button" onClick={moveRight}></button>
+                <button className="down-button hidden-button" onClick={moveDown}></button>
 
-
-            <div className="controls">
-
-                <button className="up-button hidden-button" onClick={moveUp}>2</button>
-                <button className="left-button hidden-button" onClick={moveLeft}>4</button>
-                <button className="right-button hidden-button" onClick={moveRight}>6</button>
-                <button className="down-button hidden-button" onClick={moveDown}>8</button>
-
-            </div>
+            {/* </div> */}
 
 
 

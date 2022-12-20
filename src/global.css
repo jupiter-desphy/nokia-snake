@@ -233,7 +233,7 @@ li {
 .menu-button, 
 .hidden-button {
   background-color: transparent;
-  border: none;
+  /* border: none; */
 }
 
 :focus {
@@ -251,44 +251,85 @@ li {
     background-position-x: center;
     background-size: 110vw;
     background-color: white;
-    padding-top: 7%;
+    padding-top: 6%;
   }
 
-  .controls {
+  /* .controls {
     margin-top: 14vw;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 38vw 14vw 23vw 15vw;
     grid-column: span 3;
-    /* height: 120vw; */
-  }
+    position: absolute;
+  } */
 
   .menu-button {
     position: absolute;
-    margin-top: 66vw;
-    margin-left: 10vw;
+    margin-top: 63vw;
+    justify-self: center;
+    height: 15vw;
+    width: 46vw;
+    /* border-top-left-radius: 50% 30%;
+    border-top-right-radius: 50% 30%;
+    border-bottom-left-radius: 50% 70%;
+    border-bottom-right-radius: 50% 70%; */
+    border-radius: 50% / 30% 30% 70% 70%;
+  }
+
+  .menu-button * {
+    display: flex;
+    background: none;
+    border: none;
+    content: '';
+    width: 0
   }
 
   .up-button {
-    grid-column: 2;
-    grid-row: 2;
-    height: 15vw;
+    /* grid-column: 2;
+    grid-row: 2; */
+    margin-top: 102vw;
+    height: 15.4vw;
+    width: 26vw;
+    justify-self: center;
+    position: absolute;
+    border-radius: 50% / 40% 40% 60% 60%;
   }
 
   .left-button {
-    grid-column: 1;
-    grid-row: 3;
+    /* grid-column: 1;
+    grid-row: 3; */
+    margin-top: 117vw;
+    margin-left: 6vw;
+    height: 15.4vw;
+    width: 26vw;
+    transform: rotate(18deg);
+    /* justify-self: center; */
+    position: absolute;
+    border-radius: 50% / 40% 40% 60% 60%;
 
   }
 
   .right-button {
-    grid-column: 3;
-    grid-row: 3;
+    /* grid-column: 3;
+    grid-row: 3; */
+    margin-top: 117vw;
+    margin-right: 6vw;
+    justify-self: right;
+    height: 15.4vw;
+    width: 26vw;
+
+    transform: rotate(-18deg);
+    position: absolute;
+    border-radius: 50% / 40% 40% 60% 60%;
   }
 
   .down-button {
-    grid-column: 2;
-    grid-row: 4;
+    margin-top: 139.3vw;
+    height: 15.4vw;
+    width: 26vw;
+    justify-self: center;
+    position: absolute;
+    border-radius: 50% / 40% 40% 60% 60%;
   }
   
 }
