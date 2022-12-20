@@ -265,8 +265,9 @@ li {
 
   .menu-button {
     position: absolute;
-    margin-top: 63vw;
-    justify-self: center;
+    margin: 63vw auto 0;
+    left: 0;
+    right: 0;
     height: 15vw;
     width: 46vw;
     /* border-top-left-radius: 50% 30%;
@@ -287,37 +288,33 @@ li {
   .up-button {
     /* grid-column: 2;
     grid-row: 2; */
-    display: flex;
-    margin-top: 102vw;
+    margin: 102vw auto 0;
+    left: 0;
+    right: 0;
     height: 15.4vw;
     width: 26vw;
-    justify-self: center;
+    
     position: absolute;
     border-radius: 50% / 40% 40% 60% 60%;
   }
 
   .left-button {
-    /* grid-column: 1;
-    grid-row: 3; */
     display: flex;
     margin-top: 117vw;
     margin-left: 6vw;
     height: 15.4vw;
     width: 26vw;
     transform: rotate(18deg);
-    /* justify-self: center; */
     position: absolute;
     border-radius: 50% / 40% 40% 60% 60%;
 
   }
 
   .right-button {
-    /* grid-column: 3;
-    grid-row: 3; */
     display: flex;
     margin-top: 117vw;
     margin-right: 6vw;
-    justify-self: right;
+    right: 0;
     height: 15.4vw;
     width: 26vw;
 
@@ -327,11 +324,11 @@ li {
   }
 
   .down-button {
-    display: flex;
-    margin-top: 139.3vw;
+    margin: 139.3vw auto 0;
+    left: 0;
+    right: 0;
     height: 15.4vw;
     width: 26vw;
-    justify-self: center;
     position: absolute;
     border-radius: 50% / 40% 40% 60% 60%;
   }
