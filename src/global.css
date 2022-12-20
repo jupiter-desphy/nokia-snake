@@ -1,6 +1,6 @@
 :root {
   --background: rgb(126, 189, 141);
-  --border: rgba(126, 189, 141, .6);
+  --border: rgba(126, 189, 141, 0.6);
   --black: rgb(0, 0, 0);
   --width: 72vw;
   --columns: 25;
@@ -21,6 +21,7 @@
 
 body {
   background-color: var(--background);
+  position: relative;
   /* background-size: cover;
   background-repeat: no-repeat;
   background-size: 115vw;
@@ -28,41 +29,34 @@ body {
   background-position-x: center;
   background-position-y: 20%; */
 }
+
 ul {
   display: grid;
-  /* grid-template-rows: repeat(4, 1fr); */
-  /* height: calc(var(--width)/10*4); */
 }
 
 li {
   list-style: none;
-  /* margin: 0;
-  padding: 0;
-  border: 0; */
-  /* display: grid; */
-  /* align-self: flex-start; */
 }
 
 #root > * {
   display: grid;
-  grid-template-columns: calc((100vw - var(--width))/2) var(--width) calc((100vw - var(--width))/2);
+  grid-template-columns: calc((100vw - var(--width)) / 2) var(--width) calc(
+      (100vw - var(--width)) / 2
+    );
 }
 
 #root > * > *:not(.controls) {
- grid-column: 2;
+  grid-column: 2;
 }
 
 /* .starting-menu, .snake1, .snake2 {
 } */
-
-
 
 /* .controls {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 41vw 14vw 23vw 15vw;
 } */
-
 
 #dark {
   background-color: rgb(168, 192, 174);
@@ -84,7 +78,7 @@ li {
   width: var(--width);
   height: calc(var(--width) / var(--columns) * 2);
   display: grid;
-  grid-template-columns: .5fr repeat(calc(var(--columns) - 1), 1fr) .5fr;
+  grid-template-columns: 0.5fr repeat(calc(var(--columns) - 1), 1fr) 0.5fr;
 }
 
 .demo {
@@ -152,8 +146,8 @@ li {
 .posi-space,
 .horizontal .scl,
 .horizontal .hrzn,
-.vertical .scl, 
-.vertical .vert, 
+.vertical .scl,
+.vertical .vert,
 .head .scl,
 .NW1 .scl,
 .NW1 .hrzn,
@@ -191,9 +185,12 @@ li {
 .snake-down .down,
 .snake-left .left,
 .snake-up .up,
-.right-head .r-h, .right-tail .r-t,
-.left-head .l-h, .left-tail .l-t,
-.up-head .u-h, .up-tail .u-t,
+.right-head .r-h,
+.right-tail .r-t,
+.left-head .l-h,
+.left-tail .l-t,
+.up-head .u-h,
+.up-tail .u-t,
 .down-head .d-h,
 .down-tail .d-t,
 .northeast .n-e,
@@ -219,7 +216,7 @@ li {
 .chameleon1 .cm1,
 .chameleon2 .cm2 {
   background-color: var(--black);
-  border: .0001rem solid var(--border);
+  border: 0.0001rem solid var(--border);
 }
 
 .menu-option:hover .posi-space,
@@ -230,10 +227,10 @@ li {
   border: transparent;
 }
 
-.menu-button, 
+.menu-button,
 .hidden-button {
   background-color: transparent;
-  /* border: none; */
+  border: none;
 }
 
 :focus {
@@ -243,8 +240,9 @@ li {
 .menu-button {
   grid-column: 1;
 }
-@media screen and (max-width: 480px){
-  body{
+
+@media screen and (max-width: 480px) {
+  body {
     background-image: url(../public/Phone1080x1920.jpeg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -262,6 +260,12 @@ li {
     grid-column: span 3;
     position: absolute;
   } */
+
+  .menu-button,
+  .controls {
+    border-style: dashed;
+    background-color: transparent;
+  }
 
   .menu-button {
     position: absolute;
@@ -281,8 +285,8 @@ li {
     display: flex;
     background: none;
     border: none;
-    content: '';
-    width: 0
+    content: "";
+    width: 0;
   }
 
   .up-button {
@@ -293,7 +297,7 @@ li {
     right: 0;
     height: 15.4vw;
     width: 26vw;
-    
+
     position: absolute;
     border-radius: 50% / 40% 40% 60% 60%;
   }
@@ -307,7 +311,6 @@ li {
     transform: rotate(18deg);
     position: absolute;
     border-radius: 50% / 40% 40% 60% 60%;
-
   }
 
   .right-button {
@@ -332,14 +335,12 @@ li {
     position: absolute;
     border-radius: 50% / 40% 40% 60% 60%;
   }
-  
 }
 
-@supports selector(:focus-visible){
-
+@supports selector(:focus-visible) {
   :focus-visible .negi-space {
     background-color: var(--black);
-    border: .0001rem solid var(--border);
+    border: 0.0001rem solid var(--border);
   }
 
   :focus-visible .posi-space {
