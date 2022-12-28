@@ -2,12 +2,12 @@ import Pixel from "./Pixel";
 import layMatrix from "../helpers/layMatrix";
 
 export default function LevelBar({ number, level}) {
-    // given letter and layOut, choose which pixels are positive or negative space
+
     let layOut = [];
     layMatrix(layOut, 9, 30);
 
 
-    function drawLetter(currentPixel) {
+    function drawBar(currentPixel) {
         let x = currentPixel[0];
         let y = currentPixel[1];
 
@@ -21,7 +21,7 @@ export default function LevelBar({ number, level}) {
             {layOut.map((rowArray, ind) => {
                 return (
                     rowArray.map((item, i) => {
-                        return <Pixel pixelClass={drawLetter(item)} key={`${ind}+${i}`} />
+                        return <Pixel pixelClass={drawBar(item)} key={`${ind}+${i}`} />
                     })
                 )
             })}

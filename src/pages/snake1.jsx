@@ -23,7 +23,11 @@ export function SnakeI() {
     const [speed, setSpeed] = useState(null);
     const [prevDirection, setPrevDirection] = useState([]);
     const [blinkOn, setBlinkOn] = useState(false);
+    const [paused, setPaused] = useState(false)
     const [pausedSpeed, setPausedSpeed] = useState(SPEED_START);
+    const [menuView, setMenuView] = useState(false);
+    const [instructionsView, setInstructionsView] = useState(false);
+    const [settingsView, setSettingsView] = useState(false);
 
     /* FUNCTIONS */
 
@@ -34,22 +38,40 @@ export function SnakeI() {
     layMatrix(scoreBoard, COLUMNS, 1);
 
     const startGame = () => {
-        if (gameOver) {
-            setSnake(SNAKE_I_START);
-            setDirection([1, 0]);
-            setSpeed(SPEED_START);
-            setGameOver(false);
-            setScore(0);
-        }
-        else pauseGame();
+        setSnake(SNAKE_I_START);
+        setDirection([1, 0]);
+        setSpeed(pausedSpeed);
+        setPaused(false);
+        setGameOver(false);
+        setScore(0);
+    }
+
+    const goSnake2Menu = () => {
+        if (speed) setPausedSpeed(speed);
+        setSpeed(null);
+        setPaused(true);
+        setMenuView(true);
+        setInstructionsView(false);
+        setSettingsView(false);
     }
 
     const pauseGame = () => {
         if (speed !== null) {
-            setPausedSpeed(speed);
-            setSpeed(null);
-        } else
-            setSpeed(pausedSpeed);
+            goSnake2Menu();
+        } else if (!paused) {
+            nudgeSnake();
+        } else {
+            returnToGame();
+        }
+    }
+
+    const nudgeSnake = () => {
+        if (!gameOver)
+            setSpeed(pausedSpeed)
+    }
+
+    const returnToGame = () => {
+        setPaused(false);
     }
 
     const endGame = () => {

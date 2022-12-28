@@ -27,19 +27,20 @@ export function SnakeII() {
     const [food, setFood] = useState([Math.floor(Math.random() * (COLUMNS - 2)) + 1, Math.floor(Math.random() * (ROWS - 2)) + 1]);
     const [foodCount, setFoodCount] = useState(0);
     const [direction, setDirection] = useState(DIRECTION_START);
-    const [prevDirection, setPrevDirection] = useState(DIRECTION_START);
     const [speed, setSpeed] = useState(null);
+    const [prevDirection, setPrevDirection] = useState(DIRECTION_START);
     const [blinkOn, setBlinkOn] = useState(false);
-    const [prey, setPrey] = useState(PREY_START);
-    const [preyTimer, setPreyTimer] = useState(0);
     const [paused, setPaused] = useState(false)
     const [pausedSpeed, setPausedSpeed] = useState(SPEED_START);
-
-    const [level, setLevel] = useState(6);
     const [menuView, setMenuView] = useState(false);
-    const [levelView, setLevelView] = useState(false);
     const [instructionsView, setInstructionsView] = useState(false);
     const [settingsView, setSettingsView] = useState(false);
+    /* SNAKE II STATE */
+    const [level, setLevel] = useState(6);
+    const [levelView, setLevelView] = useState(false);
+    const [prey, setPrey] = useState(PREY_START);
+    const [preyTimer, setPreyTimer] = useState(0);
+
 
     /* FUNCTIONS */
 
@@ -51,14 +52,14 @@ export function SnakeII() {
 
     const startGame = () => {
         setSnake(SNAKE_II_START);
+        setDirection(DIRECTION_START);
+        setSpeed(pausedSpeed);
+        setPaused(false);
         setGameOver(false);
         setScore(0);
         setFoodCount(0);
         setPrey(PREY_START);
         setPreyTimer(0);
-        setSpeed(pausedSpeed);
-        setDirection(DIRECTION_START);
-        setPaused(false);
     }
 
     const endGame = () => {
@@ -95,8 +96,6 @@ export function SnakeII() {
     const returnToGame = () => {
         setPaused(false);
     }
-
-
 
     const blink = () => {
         if (gameOver)
@@ -340,10 +339,10 @@ export function SnakeII() {
 
             {/* <div className="controls"> */}
 
-                <button className="up-button controls" onClick={moveUp}></button>
-                <button className="left-button controls" onClick={moveLeft}></button>
-                <button className="right-button controls" onClick={moveRight}></button>
-                <button className="down-button controls" onClick={moveDown}></button>
+            <button className="up-button controls" onClick={moveUp}></button>
+            <button className="left-button controls" onClick={moveLeft}></button>
+            <button className="right-button controls" onClick={moveRight}></button>
+            <button className="down-button controls" onClick={moveDown}></button>
 
             {/* </div> */}
 
