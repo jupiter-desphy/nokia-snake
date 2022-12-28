@@ -1,7 +1,4 @@
-import { useState } from "react";
-import Board from "../components/Board.jsx";
-import Marquee from "../components/Marquee.jsx";
-import useInterval from "../helpers/useInterval.js";
+import { useState, useEffect, useRef } from "react";
 import {
     COLUMNS,
     ROWS,
@@ -9,10 +6,16 @@ import {
     PREY_NA,
     SPEED_START
 } from '../constants';
+import Board from "../components/Board.jsx";
+import Marquee from "../components/Marquee.jsx";
+import MenuSlide from "../components/MenuOption";
+import LiteSlide from "../components/LiteSlide";
+import Settings from "../components/Settings";
+import Instructions from "../components/Instructions";
+import useInterval from "../helpers/useInterval.js";
 import layMatrix from "../helpers/layMatrix.js";
 
 export function SnakeI() {
-
 
     /* STATE */
     const [snake, setSnake] = useState(SNAKE_I_START);
@@ -55,7 +58,7 @@ export function SnakeI() {
         setSettingsView(false);
     }
 
-    const pauseGame = () => {
+    const cyclePausePhase = () => {
         if (speed !== null) {
             goSnake2Menu();
         } else if (!paused) {
@@ -115,35 +118,65 @@ export function SnakeI() {
     };
 
     const moveLeft = () => {
-        if (prevDirection[0] !== 1 && prevDirection[1] !== 0) setDirection([-1, 0]);
+        if (!paused) {
+            if (prevDirection[0] !== 1 && prevDirection[1] !== 0) setDirection([-1, 0]);
+            if (!speed) nudgeSnake();
+        }
     }
     const moveUp = () => {
-        if (prevDirection[0] !== 0 && prevDirection[1] !== 1) setDirection([0, -1]);
+        if (!paused) {
+            if (prevDirection[0] !== 0 && prevDirection[1] !== 1) setDirection([0, -1]);
+            if (!speed) nudgeSnake();
+        }
     }
     const moveRight = () => {
-        if (prevDirection[0] !== -1 && prevDirection[1] !== 0) setDirection([1, 0]);
+        if (!paused) {
+            if (prevDirection[0] !== -1 && prevDirection[1] !== 0) setDirection([1, 0]);
+            if (!speed) nudgeSnake();
+        }
     }
     const moveDown = () => {
-        if (prevDirection[0] !== 0 && prevDirection[1] !== -1) setDirection([0, 1]);
-    }
-
-    const moveSnake = ({ keyCode }) => {
-        switch (keyCode) {
-            case 37: moveLeft();
-                break;
-            case 38: moveUp();
-                break;
-            case 39: moveRight();
-                break;
-            case 40: moveDown();
-                break;
-            case 32: pauseGame();
-                break;
-            default: ;
+        if (!paused) {
+            if (prevDirection[0] !== 0 && prevDirection[1] !== -1) setDirection([0, 1]);
+            if (!speed) nudgeSnake();
         }
     }
 
+    const useKey = (key, cb) => {
+        const callbackRef = useRef(cb);
+
+        useEffect(() => {
+            callbackRef.current = cb;
+        });
+
+        useEffect(() => {
+            const handle = (e) => {
+                if (e.key === key) {
+                    callbackRef.current(e);
+                };
+                // prevents scrolling if the viewport is too short
+                if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                    e.preventDefault();
+                }
+            }
+            document.addEventListener("keydown", handle);
+            return () => document.removeEventListener("keydown", handle)
+        }, [key]);
+    }
+
+    useKey('ArrowUp', moveUp);
+    useKey('ArrowLeft', moveLeft);
+    useKey('ArrowRight', moveRight);
+    useKey('ArrowDown', moveDown);
+    useKey('2', moveUp);
+    useKey('4', moveLeft);
+    useKey('6', moveRight);
+    useKey('8', moveDown);
+    useKey(' ', cyclePausePhase);
+    useKey('Escape', goSnake2Menu);
+
     const gameLoop = () => {
+
         const snakeCopy = JSON.parse(JSON.stringify(snake));
         const head = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1], snakeCopy[0][2]];
 
@@ -161,8 +194,8 @@ export function SnakeI() {
 
         if (snakeCopy[0][0] === food[0] && snakeCopy[0][1] === food[1]) {
             randomizeFood();
-            setScore((prevScore) => prevScore + 5);
-            setSpeed((prevSpeed) => prevSpeed - 1);
+            setScore((prevScore) => prevScore + 6);
+            setSpeed((prevSpeed) => prevSpeed - .25);
         } else snakeCopy.pop();
 
         setSnake(snakeCopy);
@@ -170,17 +203,67 @@ export function SnakeI() {
 
     useInterval(() => gameLoop(), speed);
 
+    // ------ SNAKE II MENU OPTIONS -------
+    const instructionsOption = () => { setInstructionsView(true); setMenuView(false); }
+    const settingsOption = () => { setSettingsView(true); setMenuView(false); }
+
     return (
-        <div className="snake1" role="button" tabIndex="0" onKeyDown={e => moveSnake(e)}>
-            <div className="scoreboard">
-                <Marquee layOut={scoreBoard} score={score} prey={PREY_NA} preyTimer={null} />
-            </div>
-            <div className="screen">
-                <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={PREY_NA} />
-            </div>
-            <div>
-                <button onClick={startGame}>START GAME</button>
-            </div>
+        <div className="snake1">
+            {paused ?
+                <>
+                    {instructionsView && <Instructions />}
+                    {settingsView && <Settings />}
+                    {menuView ?
+                        <>
+                            <LiteSlide optionName='Snake I' isHeading={true} />
+                            <ul>
+                                {/* <li> */}
+                                <button className='hidden-button' onClick={startGame}>
+                                    <MenuSlide optionName=' New game' />
+                                </button>
+                                {/* </li> */}
+                                <button className="hidden-button" onClick={returnToGame}>
+                                    <MenuSlide optionName=' Continue' />
+                                </button>
+                                <button className="hidden-button" onClick={instructionsOption}>
+                                    <MenuSlide optionName=' Instructions' />
+                                </button>
+                                {/* 
+                                <button className="hidden-button" onClick={settingsOption}>
+                                    <MenuSlide optionName=' Settings' />
+                                </button>
+                                */}
+                            </ul>
+                        </>
+                        :
+                        <>
+                            <br></br>
+                            <button className='menu-button' onClick={goSnake2Menu}>
+                                <MenuSlide optionName={'             Back'} />
+                            </button>
+                        </>
+                    }
+                </>
+                :
+                <>
+                    <div className="scoreboard">
+                        <Marquee layOut={scoreBoard} score={score} prey={PREY_NA} preyTimer={null} />
+                    </div>
+                    <div className="screen">
+                        <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={PREY_NA} />
+                    </div>
+                    <button className="menu-button" onClick={goSnake2Menu}>
+                        <MenuSlide optionName='            Menu' />
+                    </button>
+                </>
+            }
+            <br></br>
+
+            <button className="up-button controls" onClick={moveUp}></button>
+            <button className="left-button controls" onClick={moveLeft}></button>
+            <button className="right-button controls" onClick={moveRight}></button>
+            <button className="down-button controls" onClick={moveDown}></button>
         </div>
+
     )
 }

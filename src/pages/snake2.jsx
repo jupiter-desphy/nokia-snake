@@ -13,10 +13,10 @@ import MenuSlide from "../components/MenuOption";
 import LiteSlide from "../components/LiteSlide";
 import Level from "../components/Level";
 import Settings from "../components/Settings";
+import Instructions from "../components/Instructions";
 import { useTheme, useThemeUpdate } from "../components/ThemeContext";
 import useInterval from "../helpers/useInterval.js";
 import layMatrix from "../helpers/layMatrix.js";
-import Instructions from "../components/Instructions";
 
 export function SnakeII() {
 
@@ -78,7 +78,7 @@ export function SnakeII() {
         setSettingsView(false);
     }
 
-    const pauseGame = () => {
+    const cyclePausePhase = () => {
         if (speed !== null) {
             goSnake2Menu();
         } else if (!paused) {
@@ -98,7 +98,6 @@ export function SnakeII() {
     }
 
     const blink = () => {
-        if (gameOver)
             setBlinkOn(!blinkOn)
     }
 
@@ -214,7 +213,7 @@ export function SnakeII() {
     useKey('4', moveLeft);
     useKey('6', moveRight);
     useKey('8', moveDown);
-    useKey(' ', pauseGame);
+    useKey(' ', cyclePausePhase);
     useKey('Escape', goSnake2Menu);
     // useKey('z', keyIsWorking);
 
@@ -223,6 +222,7 @@ export function SnakeII() {
         const snakeCopy = JSON.parse(JSON.stringify(snake));
         const head = [snakeCopy[0][0] + direction[0], snakeCopy[0][1] + direction[1], snakeCopy[0][2], snakeCopy[0][3]];
 
+        /* teleport snake to other side */
         if (head[0] >= COLUMNS - 1) head[0] = 1;
         if (head[0] < 1) head[0] = COLUMNS - 2;
         if (head[1] >= ROWS - 1) head[1] = 1;

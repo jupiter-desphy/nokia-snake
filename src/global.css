@@ -236,9 +236,9 @@ li {
   outline: var(--black);
 }
 
-.menu-button {
-  grid-column: 1;
-  background-color: transparent;}
+/* .menu-button { */
+  /* grid-column: 1; */
+  /* background-color: transparent;} */
 
 @media screen and (min-width: 480px) {
   .menu-button, .controls {
