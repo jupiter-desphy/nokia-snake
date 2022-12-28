@@ -255,6 +255,7 @@ li {
     background-size: 110vw;
     background-color: white;
     padding-top: 6%;
+    position: relative;
   }
 
   /* .controls {

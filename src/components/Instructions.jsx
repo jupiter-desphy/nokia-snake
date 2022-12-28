@@ -1,17 +1,29 @@
 import React from 'react'
 import LiteSlide from './LiteSlide'
 
-export default function Instructions() {
+export default function Instructions(props) {
+    console.log(props)
+    let line1 = 'Use arrow keys on your';
+    let line2 = 'keyboard or numbers';
+    let line3 = '2,4,6 and 8 on a phone';
+    let line4 = 'to direct the snake to'
+    let line5 = 'food. Make sure it does'
+    let line6 = 'not eat itself nor walls!'
+
+    if (props.version === 'Snake II') {
+        line6 = 'not eat itself!'
+
+    }
     return (
         <>
             <LiteSlide optionName='Instructions' isHeading={true} />
             <br></br>
-            <LiteSlide optionName='Use arrow keys on your' />
-            <LiteSlide optionName='keyboard or numbers' />
-            <LiteSlide optionName='2,4,6 and 8 on a phone' />
-            <LiteSlide optionName='to direct the snake to' />
-            <LiteSlide optionName='food. Make sure it does' />
-            <LiteSlide optionName='not eat itself!' />
+            <LiteSlide optionName={line1} />
+            <LiteSlide optionName={line2} />
+            <LiteSlide optionName={line3} />
+            <LiteSlide optionName={line4} />
+            <LiteSlide optionName={line5} />
+            <LiteSlide optionName={line6} />
         </>
     )
 }
