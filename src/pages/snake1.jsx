@@ -14,6 +14,7 @@ import Settings from "../components/Settings";
 import Instructions from "../components/Instructions";
 import useInterval from "../helpers/useInterval.js";
 import layMatrix from "../helpers/layMatrix.js";
+import { Link } from "react-router-dom";
 
 export function SnakeI() {
 
@@ -228,6 +229,9 @@ export function SnakeI() {
                                 <button className="hidden-button" onClick={instructionsOption}>
                                     <MenuSlide optionName=' Instructions' />
                                 </button>
+                                <Link to={`/`}>
+                                    <MenuSlide optionName=' Main Menu' />
+                                </Link>
                                 {/* 
                                 <button className="hidden-button" onClick={settingsOption}>
                                     <MenuSlide optionName=' Settings' />

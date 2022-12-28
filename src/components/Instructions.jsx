@@ -2,7 +2,6 @@ import React from 'react'
 import LiteSlide from './LiteSlide'
 
 export default function Instructions(props) {
-    console.log(props)
     let line1 = 'Use arrow keys on your';
     let line2 = 'keyboard or numbers';
     let line3 = '2,4,6 and 8 on a phone';

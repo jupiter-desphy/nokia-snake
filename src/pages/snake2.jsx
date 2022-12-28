@@ -17,6 +17,7 @@ import Instructions from "../components/Instructions";
 import { useTheme, useThemeUpdate } from "../components/ThemeContext";
 import useInterval from "../helpers/useInterval.js";
 import layMatrix from "../helpers/layMatrix.js";
+import { Link } from "react-router-dom";
 
 export function SnakeII() {
 
@@ -98,7 +99,7 @@ export function SnakeII() {
     }
 
     const blink = () => {
-            setBlinkOn(!blinkOn)
+        setBlinkOn(!blinkOn)
     }
 
     useInterval(() => blink(), 400);
@@ -303,6 +304,9 @@ export function SnakeII() {
                                 <button className="hidden-button" onClick={instructionsOption}>
                                     <MenuSlide optionName=' Instructions' />
                                 </button>
+                                <Link to={`/`}>
+                                    <MenuSlide optionName=' Main Menu' />
+                                </Link>
                                 {/* 
                                 <button className="hidden-button" onClick={settingsOption}>
                                     <MenuSlide optionName=' Settings' />
