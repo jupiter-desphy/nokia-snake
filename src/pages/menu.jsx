@@ -22,9 +22,9 @@ export function Menu() {
       <a href="https://github.com/jupiter-desphy" >
         <MenuSlide optionName=' Github' />
       </a>
-      </ul>
       {/* <MenuSlide optionName=' Website' />
       <MenuSlide optionName=' Contact' /> */}
+      </ul>
       {/* <MenuHeader optionName=' ABCDEFGHIJKLM' />
       <MenuHeader optionName=' NOPQRSTUVWXYZ' />
       <MenuHeader optionName=' abcdefghijklm' />
