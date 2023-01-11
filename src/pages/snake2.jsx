@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import {
     COLUMNS,
     ROWS,
@@ -17,7 +18,6 @@ import Instructions from "../components/Instructions";
 import { useTheme, useThemeUpdate } from "../components/ThemeContext";
 import useInterval from "../helpers/useInterval.js";
 import layMatrix from "../helpers/layMatrix.js";
-import { Link } from "react-router-dom";
 
 export function SnakeII() {
 

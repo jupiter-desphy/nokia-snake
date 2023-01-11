@@ -25,16 +25,16 @@ export function Menu() {
       {/* <MenuSlide optionName=' Website' />
       <MenuSlide optionName=' Contact' /> */}
       </ul>
-      {/* <MenuHeader optionName=' ABCDEFGHIJKLM' />
-      <MenuHeader optionName=' NOPQRSTUVWXYZ' />
-      <MenuHeader optionName=' abcdefghijklm' />
-      <MenuHeader optionName=' nopqrstuvwxyz' />
-      <MenuHeader optionName=' 0123456789' />
-      <MenuSlide optionName=' ABCDEFGHIJKLM' />
-      <MenuSlide optionName=' NOPQRSTUVWXYZ' />
-      <MenuSlide optionName=' abcdefghijklm' />
-      <MenuSlide optionName=' nopqrstuvwxyz' />
-      <MenuSlide optionName=' 0123456789' /> */}
+      {/* <LiteSlide optionName=' ABCDEFGHIJKLM' />
+      <LiteSlide optionName=' NOPQRSTUVWXYZ' />
+      <LiteSlide optionName=' abcdefghijklm' />
+      <LiteSlide optionName=' nopqrstuvwxyz' />
+      <LiteSlide optionName=' 0123456789' />
+      <MenuSlide optionName='ABCDEFGHIJKLM' />
+      <MenuSlide optionName='NOPQRSTUVWXYZ' />
+      <MenuSlide optionName='abcdefghijklm' />
+      <MenuSlide optionName='nopqrstuvwxyz' />
+      <MenuSlide optionName='0123456789' /> */}
     </div>
   )
 }
