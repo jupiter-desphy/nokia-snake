@@ -21,7 +21,7 @@ import layMatrix from "../helpers/layMatrix.js";
 
 export function SnakeII() {
 
-    /* STATE */
+    /* ------ STATE ------- */
     const [snake, setSnake] = useState(SNAKE_II_START);
     const [gameOver, setGameOver] = useState(null);
     const [score, setScore] = useState(0);
@@ -36,14 +36,14 @@ export function SnakeII() {
     const [menuView, setMenuView] = useState(false);
     const [instructionsView, setInstructionsView] = useState(false);
     const [settingsView, setSettingsView] = useState(false);
-    /* SNAKE II STATE */
+    
+    /* ------ SNAKE II STATE ------- */
     const [level, setLevel] = useState(6);
     const [levelView, setLevelView] = useState(false);
     const [prey, setPrey] = useState(PREY_START);
     const [preyTimer, setPreyTimer] = useState(0);
 
-
-    /* FUNCTIONS */
+    /* ------ FUNCTIONS ------- */
 
     const gameBoard = [];
     const scoreBoard = [];
@@ -63,13 +63,17 @@ export function SnakeII() {
         setPreyTimer(0);
     }
 
-    const endGame = () => {
-        setSpeed(null);
-        setGameOver(true);
-        setDirection([1, 0]);
+    const cyclePausePhase = () => {
+        if (speed !== null) {
+            goToMenu();
+        } else if (paused) {
+            returnToGame();
+        } else {
+            nudgeSnake();
+        }
     }
 
-    const goSnake2Menu = () => {
+    const goToMenu = () => {
         if (speed) setPausedSpeed(speed);
         setSpeed(null);
         setPaused(true);
@@ -79,16 +83,6 @@ export function SnakeII() {
         setSettingsView(false);
     }
 
-    const cyclePausePhase = () => {
-        if (speed !== null) {
-            goSnake2Menu();
-        } else if (!paused) {
-            nudgeSnake();
-        } else {
-            returnToGame();
-        }
-    }
-
     const nudgeSnake = () => {
         if (!gameOver)
             setSpeed(pausedSpeed)
@@ -96,6 +90,11 @@ export function SnakeII() {
 
     const returnToGame = () => {
         setPaused(false);
+    }
+
+    const endGame = () => {
+        setSpeed(null);
+        setGameOver(true);
     }
 
     const blink = () => {
@@ -215,7 +214,7 @@ export function SnakeII() {
     useKey('6', moveRight);
     useKey('8', moveDown);
     useKey(' ', cyclePausePhase);
-    useKey('Escape', goSnake2Menu);
+    useKey('Escape', goToMenu);
     // useKey('z', keyIsWorking);
 
     const gameLoop = () => {
@@ -274,10 +273,11 @@ export function SnakeII() {
         //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [food]);
 
-    // ------ SNAKE II MENU OPTIONS -------
+    /* ------ SNAKE II MENU OPTIONS ------- */
+
     const levelOption = () => { setLevelView(true); setMenuView(false); }
     const instructionsOption = () => { setInstructionsView(true); setMenuView(false); }
-    const settingsOption = () => { setSettingsView(true); setMenuView(false); }
+    // const settingsOption = () => { setSettingsView(true); setMenuView(false); }
 
     return (
         <div className="snake2">
@@ -285,7 +285,7 @@ export function SnakeII() {
                 <>
                     {levelView && <Level level={level} chooseLevel={(level, pausedSpeed) => { setLevel(level); setPausedSpeed(pausedSpeed) }} levelViewable={(levelView) => setLevelView(levelView)} speed={pausedSpeed} />}
                     {instructionsView && <Instructions version='Snake II' />}
-                    {settingsView && <Settings />}
+                    {/* {settingsView && <Settings />} */}
                     {menuView ?
                         <>
                             <LiteSlide optionName='Snake II' isHeading={true} />
@@ -317,7 +317,7 @@ export function SnakeII() {
                         :
                         <>
                             <br></br>
-                            <button className='menu-button' onClick={goSnake2Menu}>
+                            <button className='menu-button' onClick={goToMenu}>
                                 <MenuSlide optionName={'             Back'} />
                             </button>
                         </>
@@ -331,7 +331,7 @@ export function SnakeII() {
                     <div className="screen">
                         <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={prey} />
                     </div>
-                    <button className="menu-button" onClick={goSnake2Menu}>
+                    <button className="menu-button" onClick={goToMenu}>
                         <MenuSlide optionName='            Menu' />
                     </button>
                 </>
@@ -352,13 +352,14 @@ export function SnakeII() {
 
 
 
-            {/* TESTING DATA
+            {/* ------ TESTING DATA ------- 
             <div>
                 {pausedSpeed}
             </div>
             <div>
                 {gameOver ? 'GAME OVER' : ''}
-            </div> */}
+            </div>
+            */}
         </div>
     )
 }

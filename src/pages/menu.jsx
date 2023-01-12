@@ -7,7 +7,7 @@ export function Menu() {
 
 
   return (
-    <div className='starting-menu second-column'>
+    <div>
       <LiteSlide optionName='Menu' isHeading={true}/>
       <ul>
       <Link to={`/snake1`}>

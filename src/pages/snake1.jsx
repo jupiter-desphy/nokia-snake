@@ -50,7 +50,7 @@ export function SnakeI() {
         setScore(0);
     }
 
-    const goSnake2Menu = () => {
+    const goToMenu = () => {
         if (speed) setPausedSpeed(speed);
         setSpeed(null);
         setPaused(true);
@@ -61,11 +61,11 @@ export function SnakeI() {
 
     const cyclePausePhase = () => {
         if (speed !== null) {
-            goSnake2Menu();
-        } else if (!paused) {
-            nudgeSnake();
-        } else {
+            goToMenu();
+        } else if (paused) {
             returnToGame();
+        } else {
+            nudgeSnake();
         }
     }
 
@@ -174,7 +174,7 @@ export function SnakeI() {
     useKey('6', moveRight);
     useKey('8', moveDown);
     useKey(' ', cyclePausePhase);
-    useKey('Escape', goSnake2Menu);
+    useKey('Escape', goToMenu);
 
     const gameLoop = () => {
 
@@ -242,7 +242,7 @@ export function SnakeI() {
                         :
                         <>
                             <br></br>
-                            <button className='menu-button' onClick={goSnake2Menu}>
+                            <button className='menu-button' onClick={goToMenu}>
                                 <MenuSlide optionName={'             Back'} />
                             </button>
                         </>
@@ -256,7 +256,7 @@ export function SnakeI() {
                     <div className="screen">
                         <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={PREY_NA} />
                     </div>
-                    <button className="menu-button" onClick={goSnake2Menu}>
+                    <button className="menu-button" onClick={goToMenu}>
                         <MenuSlide optionName='            Menu' />
                     </button>
                 </>
