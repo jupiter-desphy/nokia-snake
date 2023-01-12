@@ -32,8 +32,8 @@ const SPEED_START = 180;
 const DIRECTION_START = [1, 0];
 const PREY_START = [[null, null], [null, null], null];
 const PREY_NA = [['N/A', 'N/A'], ['N/A', 'N/A'], 'N/A'];
-const COLUMNS = 25;
-const ROWS = 15;
+const COLUMNS = 20;
+const ROWS = 12;
 const PIXEL_WIDTH = 100
 const LETTER_HEIGHT = 10;
 
