@@ -45,6 +45,8 @@ export function SnakeII() {
 
     /* ------ FUNCTIONS ------- */
 
+    // document.body.requestFullscreen();
+
     const gameBoard = [];
     const scoreBoard = [];
 

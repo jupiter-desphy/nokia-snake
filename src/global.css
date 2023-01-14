@@ -8,6 +8,9 @@
   --pixels: 100;
   --letter-height: 10;
 }
+:fullscreen {
+  background-color: blue;
+}
 
 .incomplete {
   background-color: white;
@@ -27,6 +30,8 @@
 body {
   background-color: var(--background);
   position: relative;
+  display: flex;
+  align-items: center;
   /* background-size: cover;
   background-repeat: no-repeat;
   background-size: 115vw;
