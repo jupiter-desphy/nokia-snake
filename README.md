@@ -9,12 +9,14 @@ Click [here](https://nokia-snake-jupiter-desphy.vercel.app/) to demo.
 ## Site
 ### [Landing Page](https://nokia-snake-jupiter-desphy.vercel.app/)
 
-### [Snake I](https://pokedex-nine-red.vercel.app/allpokemon/snake1)
-<!--
-  [<img width="800px" src="public/images/ScrShotFiltered.png"/>](https://nokia-snake-jupiter-desphy.vercel.app/snake1)
--->
+### [Snake I](https://nokia-snake-jupiter-desphy.vercel.app/snake1)
+
+[<img width="800px" src="src/screenshots/snake-1.png"/>](https://nokia-snake-jupiter-desphy.vercel.app/snake1)
+
 
 ### [Snake II](https://nokia-snake-jupiter-desphy.vercel.app/snake2)
+
+[<img width="800px" src="src/screenshots/snake-2-screenshot.png"/>](https://nokia-snake-jupiter-desphy.vercel.app/snake2)
   
 
 ## Contact Me
