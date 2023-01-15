@@ -12,6 +12,11 @@
   background-color: blue;
 }
 
+.grey {
+  background-color: lightgrey;
+  border: 0.0001rem solid var(--border);
+}
+
 .incomplete {
   background-color: white;
   border: 0.0001rem solid var(--border);
