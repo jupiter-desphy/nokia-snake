@@ -13,8 +13,8 @@ import Marquee from "../components/Marquee.jsx";
 import MenuSlide from "../components/MenuOption";
 import LiteSlide from "../components/LiteSlide";
 import Level from "../components/Level";
-import Settings from "../components/Settings";
 import Instructions from "../components/Instructions";
+import Settings from "../components/Settings";
 import { useTheme, useThemeUpdate } from "../components/ThemeContext";
 import useInterval from "../helpers/useInterval.js";
 import layMatrix from "../helpers/layMatrix.js";
@@ -194,7 +194,7 @@ export function SnakeII() {
                     callbackRef.current(e);
                 };
                 // prevents scrolling if the viewport is too short
-                if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
                     e.preventDefault();
                 }
             }
@@ -245,11 +245,9 @@ export function SnakeII() {
         if (snakeCopy[0][0] === food[0] && snakeCopy[0][1] === food[1]) {
             setFoodCount(foodCount + 1);
             setScore((prevScore) => prevScore + level);
-            // setSpeed((prevSpeed) => prevSpeed - .25);
             head[3] = 'full';
         } else if ((snakeCopy[0][0] === prey[0][0] && snakeCopy[0][1] === prey[0][1]) || (snakeCopy[0][0] === prey[1][0] && snakeCopy[0][1] === prey[1][1])) {
             setScore((prevScore) => prevScore + 48);
-            // setSpeed((prevSpeed) => prevSpeed - .25);
             setPrey((prevPrey) => [[null, null], [null, null], prevPrey[2]]);
             setPreyTimer(1);
             head[3] = 'full';
@@ -306,7 +304,7 @@ export function SnakeII() {
                                 <button className="hidden-button" onClick={instructionsOption}>
                                     <MenuSlide optionName=' Instructions' />
                                 </button>
-                                <Link to={`/`}>
+                                <Link to={`/menu`}>
                                     <MenuSlide optionName=' Main Menu' />
                                 </Link>
                                 {/* 

@@ -229,7 +229,7 @@ export function SnakeI() {
                                 <button className="hidden-button" onClick={instructionsOption}>
                                     <MenuSlide optionName=' Instructions' />
                                 </button>
-                                <Link to={`/`}>
+                                <Link to={`/menu`}>
                                     <MenuSlide optionName=' Main Menu' />
                                 </Link>
                                 {/* 
