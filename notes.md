@@ -8,6 +8,7 @@
 - Improve copy on ReadMe.
   - Add features section.
 - Add swipe gestures.
+- Sound effects.
 - Add "Dark Mode"
 - Screenshots and gifs for portfolio / readme.
 - Favicon.
