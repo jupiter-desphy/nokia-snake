@@ -37,7 +37,7 @@ export function SnakeII() {
     const [menuView, setMenuView] = useState(false);
     const [instructionsView, setInstructionsView] = useState(false);
     const [settingsView, setSettingsView] = useState(false);
-    
+
     /* ------ SNAKE II STATE ------- */
     const [level, setLevel] = useState(6);
     const [levelView, setLevelView] = useState(false);
@@ -227,7 +227,7 @@ export function SnakeII() {
         onSwipedUp: () => moveUp(),
         onSwipedDown: () => moveDown(),
         preventScrollOnSwipe: true // calls e.preventDefault() on touchMove event listener
-      });
+    });
 
     const gameLoop = () => {
 
@@ -335,11 +335,13 @@ export function SnakeII() {
                 </>
                 :
                 <>
-                    <div className="scoreboard" {...handlers}>
-                        <Marquee layOut={scoreBoard} score={score} prey={prey} preyTimer={preyTimer} />
-                    </div>
-                    <div className="screen" {...handlers}>
-                        <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={prey} />
+                    <div {...handlers}> {/* denotes where swipe controls can be activated */}
+                        <div className="scoreboard">
+                            <Marquee layOut={scoreBoard} score={score} prey={prey} preyTimer={preyTimer} />
+                        </div>
+                        <div className="screen">
+                            <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={prey} />
+                        </div>
                     </div>
                     <button className="menu-button" onClick={goToMenu}>
                         <MenuSlide optionName='            Menu' />
