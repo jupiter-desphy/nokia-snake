@@ -7,7 +7,8 @@
   - UseEffect w empty array then directs you to MENU page after a while in case they don't click.
 - Improve copy on ReadMe.
   - Add features section.
-- Add swipe gestures.
+<!-- - Add swipe gestures. -->
+- Add up, down, c and - buttons for phone.
 - Additional media query for tablets.
 - Sound effects.
 - Add "Dark Mode"

@@ -225,8 +225,8 @@ export function SnakeII() {
         onSwipedLeft: () => moveLeft(),
         onSwipedRight: () => moveRight(),
         onSwipedUp: () => moveUp(),
-        onSwipedDown: () => moveDown()
-        
+        onSwipedDown: () => moveDown(),
+        preventScrollOnSwipe: true // calls e.preventDefault() on touchMove event listener
       });
 
     const gameLoop = () => {
@@ -335,7 +335,7 @@ export function SnakeII() {
                 </>
                 :
                 <>
-                    <div className="scoreboard">
+                    <div className="scoreboard" {...handlers}>
                         <Marquee layOut={scoreBoard} score={score} prey={prey} preyTimer={preyTimer} />
                     </div>
                     <div className="screen" {...handlers}>
