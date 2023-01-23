@@ -18,6 +18,7 @@ import Settings from "../components/Settings";
 import { useTheme, useThemeUpdate } from "../components/ThemeContext";
 import useInterval from "../helpers/useInterval.js";
 import layMatrix from "../helpers/layMatrix.js";
+import { useSwipeable } from "react-swipeable";
 
 export function SnakeII() {
 
@@ -219,6 +220,15 @@ export function SnakeII() {
     useKey('Escape', goToMenu);
     // useKey('z', keyIsWorking);
 
+    const handlers = useSwipeable({
+        // onSwiped: (eventData) => console.log("User Swiped!", eventData),
+        onSwipedLeft: () => moveLeft(),
+        onSwipedRight: () => moveRight(),
+        onSwipedUp: () => moveUp(),
+        onSwipedDown: () => moveDown()
+        
+      });
+
     const gameLoop = () => {
 
         const snakeCopy = JSON.parse(JSON.stringify(snake));
@@ -328,7 +338,7 @@ export function SnakeII() {
                     <div className="scoreboard">
                         <Marquee layOut={scoreBoard} score={score} prey={prey} preyTimer={preyTimer} />
                     </div>
-                    <div className="screen">
+                    <div className="screen" {...handlers}>
                         <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={prey} />
                     </div>
                     <button className="menu-button" onClick={goToMenu}>
