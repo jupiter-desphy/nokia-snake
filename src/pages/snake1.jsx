@@ -15,6 +15,8 @@ import Instructions from "../components/Instructions";
 import useInterval from "../helpers/useInterval.js";
 import layMatrix from "../helpers/layMatrix.js";
 import { Link } from "react-router-dom";
+import { useSwipeable } from "react-swipeable";
+
 
 export function SnakeI() {
 
@@ -176,6 +178,15 @@ export function SnakeI() {
     useKey(' ', cyclePausePhase);
     useKey('Escape', goToMenu);
 
+    const handlers = useSwipeable({
+        // onSwiped: (eventData) => console.log("User Swiped!", eventData),
+        onSwipedLeft: () => moveLeft(),
+        onSwipedRight: () => moveRight(),
+        onSwipedUp: () => moveUp(),
+        onSwipedDown: () => moveDown(),
+        preventScrollOnSwipe: true // calls e.preventDefault() on touchMove event listener
+    });
+
     const gameLoop = () => {
 
         const snakeCopy = JSON.parse(JSON.stringify(snake));
@@ -250,11 +261,14 @@ export function SnakeI() {
                 </>
                 :
                 <>
-                    <div className="scoreboard">
-                        <Marquee layOut={scoreBoard} score={score} prey={PREY_NA} preyTimer={null} />
-                    </div>
-                    <div className="screen">
-                        <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={PREY_NA} />
+                    <div {...handlers}> {/* denotes where swipe controls can be activated */}
+
+                        <div className="scoreboard">
+                            <Marquee layOut={scoreBoard} score={score} prey={PREY_NA} preyTimer={null} />
+                        </div>
+                        <div className="screen">
+                            <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={PREY_NA} />
+                        </div>
                     </div>
                     <button className="menu-button" onClick={goToMenu}>
                         <MenuSlide optionName='            Menu' />

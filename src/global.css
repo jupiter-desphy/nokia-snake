@@ -8,9 +8,6 @@
   --pixels: 100;
   --letter-height: 10;
 }
-:fullscreen {
-  background-color: blue;
-}
 
 .grey {
   background-color: lightgrey;

@@ -1,14 +1,17 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import layMatrix from '../helpers/layMatrix';
 import useInterval from '../helpers/useInterval';
-import React, {useCallback} from 'react';
+import React, { useCallback } from 'react';
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import { SnakeII } from '.';
 
 export function Welcome() {
 
     const [frame, setFrame] = useState(1)
+    // const [snake2, setSnake2] = useState(false)
+
     const welcomeCanvas = [];
     layMatrix(welcomeCanvas, 86, 49);
     const navigate = useNavigate();
@@ -26,17 +29,17 @@ export function Welcome() {
         setTimeout(() => {
             setFrame(1)
         }, 2500)
-        // setTimeout(() => {
-        //     navigate('/menu')
-        // }, 3500)
+        setTimeout(() => {
+            navigate('/menu')
+        }, 10000)
     }, [])
 
     const handle = useFullScreenHandle();
-    const handleOnClick = () => {
-        navigate('/menu');
-        handle.enter();
-    }
-
+    // const handleFrameOnClick = () => {
+    //     setFrame(false);
+    //     setSnake2(true);
+    //     handle.enter();
+    // }
 
 
     function animate(currentPixel) {
@@ -230,21 +233,16 @@ export function Welcome() {
 
 
     return (
-        <>
-            <button className='hidden-button' onClick={handleOnClick}>
-                <div className='full-canvas'>
-                    {welcomeCanvas.map((rowArray, ind) => {
-                        return (
-                            rowArray.map((item, i) => {
-                                return <div className={animate(item) + ` ${item}`} key={`${ind}+${i}`} ></div>
-                            })
-                        )
-                    })}
-                </div>
-            </button>
-
-            <FullScreen handle={handle}>
-            </FullScreen>
-        </>
+        <Link className='hidden-button' to={'/menu'}>
+            <div className='full-canvas'>
+                {welcomeCanvas.map((rowArray, ind) => {
+                    return (
+                        rowArray.map((item, i) => {
+                            return <div className={animate(item) + ` ${item}`} key={`${ind}+${i}`} ></div>
+                        })
+                    )
+                })}
+            </div>
+        </Link>
     )
 }
