@@ -292,7 +292,8 @@ li {
   .menu-button,
   .controls {
     border-style: dashed;
-    border-color: whitesmoke;
+    border-width: 1px;
+    border-color: var(--border);
     background-color: transparent;
   }
 
