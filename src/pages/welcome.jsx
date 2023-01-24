@@ -6,6 +6,7 @@ import useInterval from '../helpers/useInterval';
 import React, { useCallback } from 'react';
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { SnakeII } from '.';
+import MenuSlide from '../components/MenuOption';
 
 export function Welcome() {
 
@@ -17,32 +18,38 @@ export function Welcome() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        setTimeout(() => {
-            setFrame(2)
-        }, 1000)
-        setTimeout(() => {
-            setFrame(3)
-        }, 1500)
-        setTimeout(() => {
-            setFrame(4)
-        }, 2000)
-        setTimeout(() => {
-            setFrame(1)
-        }, 2500)
-        setTimeout(() => {
-            navigate('/menu')
-        }, 10000)
+        // setTimeout(() => {
+        //     setFrame(2)
+        // }, 1000)
+        // setTimeout(() => {
+        //     setFrame(3)
+        // }, 1500)
+        // setTimeout(() => {
+        //     setFrame(4)
+        // }, 2000)
+        // setTimeout(() => {
+        //     setFrame(1)
+        // }, 2500)
+        // setTimeout(() => {
+        //     navigate('/menu')
+        // }, 10000)
     }, [])
 
-    const handle = useFullScreenHandle();
+    // const handle = useFullScreenHandle();
     // const handleFrameOnClick = () => {
     //     setFrame(false);
     //     setSnake2(true);
     //     handle.enter();
     // }
+    const animateFrames = () => {
+        if (frame < 5) {
+            setFrame(frame + 1)
+        } else setFrame(1);
+    }
 
+    useInterval(() => animateFrames(), 500)
 
-    function animate(currentPixel) {
+    function drawFrame(currentPixel) {
         let x = currentPixel[0];
         let y = currentPixel[1];
         let n = 'negi-space';
@@ -233,16 +240,21 @@ export function Welcome() {
 
 
     return (
-        <Link className='hidden-button' to={'/menu'}>
-            <div className='full-canvas'>
-                {welcomeCanvas.map((rowArray, ind) => {
-                    return (
-                        rowArray.map((item, i) => {
-                            return <div className={animate(item) + ` ${item}`} key={`${ind}+${i}`} ></div>
-                        })
-                    )
-                })}
-            </div>
-        </Link>
+        <div>
+            <Link className='hidden-button' to={'/menu'} tabIndex="-1">
+                <div className='full-canvas'>
+                    {welcomeCanvas.map((rowArray, ind) => {
+                        return (
+                            rowArray.map((item, i) => {
+                                return <div className={drawFrame(item) + ` ${item}`} key={`${ind}+${i}`} ></div>
+                            })
+                        )
+                    })}
+                </div>
+            </Link>
+            <Link className='menu-button' to={'/menu'}>
+                <MenuSlide optionName='           Start' />
+            </Link>
+        </div>
     )
 }

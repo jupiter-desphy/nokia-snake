@@ -107,6 +107,7 @@ li {
   width: var(--width);
   grid-template-columns: repeat(86, 1fr);
   grid-template-rows: repeat(49, 1fr);
+  margin-bottom: 1em;
 }
 
 .menu-option {
