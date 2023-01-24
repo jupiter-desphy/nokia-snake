@@ -251,12 +251,9 @@ export function SnakeI() {
                             </ul>
                         </>
                         :
-                        <>
-                            <br></br>
-                            <button className='menu-button' onClick={goToMenu}>
-                                <MenuSlide optionName={'             Back'} />
-                            </button>
-                        </>
+                        <button className='menu-button' onClick={goToMenu}>
+                            <MenuSlide optionName={'             Back'} />
+                        </button>
                     }
                 </>
                 :

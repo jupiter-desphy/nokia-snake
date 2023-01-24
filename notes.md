@@ -2,7 +2,7 @@
 
 - Full screen
 - Incorporate SQL database, so users can log in and save their scores and levels.
-- Debug fastest level / speed and menu button not landing same place on phone as predicted by dev tools.
+- Debug fastest level / speed <!-- and menu button not landing same place on phone  --> as predicted by dev tools.
 - Snake animation on welcome page.
   - Initially loop animation with onclick to navigate.
   - UseEffect w empty array then directs you to MENU page after a while in case they don't click.
