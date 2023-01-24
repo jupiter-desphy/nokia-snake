@@ -8,7 +8,7 @@ import {
 } from '../constants';
 import Board from "../components/Board.jsx";
 import Marquee from "../components/Marquee.jsx";
-import MenuSlide from "../components/MenuOption";
+import MenuOption from "../components/MenuOption";
 import LiteSlide from "../components/LiteSlide";
 import Settings from "../components/Settings";
 import Instructions from "../components/Instructions";
@@ -230,17 +230,17 @@ export function Snake() {
                             <ul>
                                 {/* <li> */}
                                 <button className='hidden-button' onClick={startGame}>
-                                    <MenuSlide optionName=' New game' />
+                                    <MenuOption optionName=' New game' />
                                 </button>
                                 {/* </li> */}
                                 <button className="hidden-button" onClick={returnToGame}>
-                                    <MenuSlide optionName=' Continue' />
+                                    <MenuOption optionName=' Continue' />
                                 </button>
                                 <button className="hidden-button" onClick={instructionsOption}>
-                                    <MenuSlide optionName=' Instructions' />
+                                    <MenuOption optionName=' Instructions' />
                                 </button>
                                 <Link to={`/menu`}>
-                                    <MenuSlide optionName=' Main Menu' />
+                                    <MenuOption optionName=' Main Menu' />
                                 </Link>
                                 {/* 
                                 <button className="hidden-button" onClick={settingsOption}>
@@ -253,7 +253,7 @@ export function Snake() {
                         <>
                             <br></br>
                             <button className='menu-button' onClick={goToMenu}>
-                                <MenuSlide optionName={'             Back'} />
+                                <MenuOption optionName={'             Back'} />
                             </button>
                         </>
                     }
@@ -267,7 +267,7 @@ export function Snake() {
                         <Board theGrid={gameBoard} snake={snake} food={food} gameOver={gameOver} blinkOn={blinkOn} prey={PREY_NA} />
                     </div>
                     <button className="menu-button" onClick={goToMenu}>
-                        <MenuSlide optionName='            Menu' />
+                        <MenuOption optionName='            Menu' />
                     </button>
                 </>
             }

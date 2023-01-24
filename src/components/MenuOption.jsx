@@ -2,7 +2,7 @@ import MenuTile from "./MenuTile.jsx";
 import layMatrix from "../helpers/layMatrix.js";
 import { LETTER_HEIGHT, PIXEL_WIDTH } from "../constants.js";
 
-export default function MenuSlide({ optionName, onClick }) {
+export default function MenuOption({ optionName, onClick }) {
 
     const optionByChar = `${optionName}`.split('');
     optionByChar.unshift(' ');

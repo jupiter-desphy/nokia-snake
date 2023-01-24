@@ -3,7 +3,7 @@ import MenuHeader from './MenuHeader';
 import { ThemeContext } from '../App';
 import { useTheme, useThemeUpdate } from './ThemeContext';
 import LiteSlide from './LiteSlide';
-import MenuSlide from './MenuOption';
+import MenuOption from './MenuOption';
 
 export default function Settings(props) {
     const darkTheme = useTheme();
@@ -23,7 +23,7 @@ export default function Settings(props) {
             <LiteSlide optionName='Settings' isHeading={true} />
             <br></br>
             <button className='hidden-button' onClick={toggleTheme}>
-                <MenuSlide optionName=' Coming soon' />
+                <MenuOption optionName=' Coming soon' />
             </button>
         </div>
     )

@@ -6,7 +6,7 @@ import useInterval from '../helpers/useInterval';
 import React, { useCallback } from 'react';
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { SnakeII } from '.';
-import MenuSlide from '../components/MenuOption';
+import MenuOption from '../components/MenuOption';
 
 export function Welcome() {
 
@@ -253,7 +253,7 @@ export function Welcome() {
                 </div>
             </Link>
             <Link className='menu-button' to={'/menu'}>
-                <MenuSlide optionName='           Start' />
+                <MenuOption optionName='           Start' />
             </Link>
         </div>
     )

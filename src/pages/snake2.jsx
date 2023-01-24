@@ -10,7 +10,7 @@ import {
 } from '../constants';
 import Board from "../components/Board.jsx";
 import Marquee from "../components/Marquee.jsx";
-import MenuSlide from "../components/MenuOption";
+import MenuOption from "../components/MenuOption";
 import LiteSlide from "../components/LiteSlide";
 import Level from "../components/Level";
 import Instructions from "../components/Instructions";
@@ -302,20 +302,20 @@ export function SnakeII() {
                             <ul>
                                 {/* <li> */}
                                 <button className='hidden-button' onClick={startGame}>
-                                    <MenuSlide optionName=' New game' />
+                                    <MenuOption optionName=' New game' />
                                 </button>
                                 {/* </li> */}
                                 <button className="hidden-button" onClick={returnToGame}>
-                                    <MenuSlide optionName=' Continue' />
+                                    <MenuOption optionName=' Continue' />
                                 </button>
                                 <button className="hidden-button" onClick={levelOption}>
-                                    <MenuSlide optionName=' Level' />
+                                    <MenuOption optionName=' Level' />
                                 </button>
                                 <button className="hidden-button" onClick={instructionsOption}>
-                                    <MenuSlide optionName=' Instructions' />
+                                    <MenuOption optionName=' Instructions' />
                                 </button>
                                 <Link to={`/menu`}>
-                                    <MenuSlide optionName=' Main Menu' />
+                                    <MenuOption optionName=' Main Menu' />
                                 </Link>
                                 {/* 
                                 <button className="hidden-button" onClick={settingsOption}>
@@ -328,7 +328,7 @@ export function SnakeII() {
                         // <>
                         //     <br></br>
                             <button className='menu-button' onClick={goToMenu}>
-                                <MenuSlide optionName={'             Back'} />
+                                <MenuOption optionName={'             Back'} />
                             </button>
                         // </>
                     }
@@ -344,7 +344,7 @@ export function SnakeII() {
                         </div>
                     </div>
                     <button className="menu-button" onClick={goToMenu}>
-                        <MenuSlide optionName='            Menu' />
+                        <MenuOption optionName='            Menu' />
                     </button>
                 </>
             }

@@ -1,5 +1,5 @@
 import React from 'react';
-import MenuSlide from '../components/MenuOption';
+import MenuOption from '../components/MenuOption';
 import LiteSlide from '../components/LiteSlide';
 import { Link } from 'react-router-dom';
 
@@ -11,16 +11,16 @@ export function Menu() {
       <LiteSlide optionName='Menu' isHeading={true}/>
       <ul>
       <Link to={`/snake1`}>
-        <MenuSlide optionName=' Snake I' />
+        <MenuOption optionName=' Snake I' />
       </Link>
       <Link to={`/snake2`}>
-        <MenuSlide optionName=' Snake II' />
+        <MenuOption optionName=' Snake II' />
       </Link>
       <a href="https://linkedin.com/in/jupiterdesphy" >
-        <MenuSlide optionName=' LinkedIn' />
+        <MenuOption optionName=' LinkedIn' />
       </a>
       <a href="https://github.com/jupiter-desphy" >
-        <MenuSlide optionName=' Github' />
+        <MenuOption optionName=' Github' />
       </a>
       {/* <MenuSlide optionName=' Website' />
       <MenuSlide optionName=' Contact' /> */}
