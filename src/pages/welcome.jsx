@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import layMatrix from '../helpers/layMatrix';
 import useInterval from '../helpers/useInterval';
+import React, {useCallback} from 'react';
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 export function Welcome() {
 
@@ -11,7 +13,7 @@ export function Welcome() {
     layMatrix(welcomeCanvas, 86, 49);
     const navigate = useNavigate();
 
-    useEffect(()=> {
+    useEffect(() => {
         setTimeout(() => {
             setFrame(2)
         }, 1000)
@@ -24,10 +26,17 @@ export function Welcome() {
         setTimeout(() => {
             setFrame(1)
         }, 2500)
-        setTimeout(() => {
-            navigate('/menu')
-        }, 3500)
+        // setTimeout(() => {
+        //     navigate('/menu')
+        // }, 3500)
     }, [])
+
+    const handle = useFullScreenHandle();
+    const handleOnClick = () => {
+        navigate('/menu');
+        handle.enter();
+    }
+
 
 
     function animate(currentPixel) {
@@ -221,16 +230,21 @@ export function Welcome() {
 
 
     return (
-        <div>
-            <div className={'full-canvas'}>
-                {welcomeCanvas.map((rowArray, ind) => {
-                    return (
-                        rowArray.map((item, i) => {
-                            return <div className={animate(item) + ` ${item}`} key={`${ind}+${i}`} ></div>
-                        })
-                    )
-                })}
-            </div>
-        </div>
+        <>
+            <button className='hidden-button' onClick={handleOnClick}>
+                <div className='full-canvas'>
+                    {welcomeCanvas.map((rowArray, ind) => {
+                        return (
+                            rowArray.map((item, i) => {
+                                return <div className={animate(item) + ` ${item}`} key={`${ind}+${i}`} ></div>
+                            })
+                        )
+                    })}
+                </div>
+            </button>
+
+            <FullScreen handle={handle}>
+            </FullScreen>
+        </>
     )
 }

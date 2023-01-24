@@ -8,7 +8,7 @@ And yet...
 I wasn't satiated.
 I needed it to look and feel the way I remembered it on a Nokia 3310. It was the O.G. mobile app, the Candy Crush of the early aughts, that crowned this little brick by Nokia king. I remember then being charmed by the level of detail the programmers put into it and the intuitive user experience they delivered. I never anticipated the challenge ahead translating what they did with some dozens of pixels now equipped with modern programming languages. I put myself in their shoes and caught glimpses of how they landed on their solutions while deepening my own understanding and appreciation in object-oriented programming and broadening my CSS toolkit. Stripped of the luxury of downloading a font, I wrote code for each letter: lower and uppercase, bold and lite. The end product allows you to choose between a more classic Snake I or Snake II, where the snake gains its stripes, teleports through walls, offers varying levels of difficulty and feeds on bonus prey.
 
-Click [here](https://nokia-snake-jupiter-desphy.vercel.app/) to demo.
+Click [here](https://nokia-snake-jupiter-desphy.vercel.app/) to demo!
 
 ## Site
 
