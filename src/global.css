@@ -268,7 +268,7 @@ li {
     background-color: transparent;
   }
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) and (orientation: portrait) {
   body {
     background-image: url(../public/Phone1080x1920.jpeg);
     background-size: cover;
@@ -293,7 +293,7 @@ li {
   .controls {
     border-style: dashed;
     border-width: 1px;
-    border-color: var(--border);
+    border-color: var(--black);
     background-color: transparent;
   }
 
