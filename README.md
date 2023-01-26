@@ -1,4 +1,4 @@
-# Snake 🐍
+# Nokia Snake I & II 🐍
 \* *  *Technologies used include* ***React***, ***JavaScript***, ***HTML***, *and* ***CSS***. * * 
 
 <!-- [<img width="900px" src="public/images/screenshot.png"/>](https://nokia-snake-jupiter-desphy.vercel.app/) -->
