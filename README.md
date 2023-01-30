@@ -29,18 +29,18 @@ Click [here](https://nokia-snake-jupiter-desphy.vercel.app/) to demo!
 - Responsive CSS, framing screen as a Nokia if on a phone in portrait mode.
 - Animations and fonts created using HTML, Javascript, and CSS.
     1. No outsourced font.
-    2. Only outsourced photo is Nokia phone for mobile use. ...for now. 😉
+    2. Only outsourced photo is the Nokia background image for mobile use. ...for now. 😉
 - Hover and focus inverts colors to denote button.
 - Levels in Snake II.
 
 ### Controls
 
 - Controls via keyboard arrow keys, swipe gestures or "buttons."
-- "Space" bar for 3-phase pause functionality:
+- **Space** bar for 3-phase pause functionality:
     1. Bring to menu.
     2. Back to game. Snake not yet moving.
     3. Snake moving again.
-- "Esc" Back to menu.
+- **Esc** Back to menu.
 - Hover or "tab" key to focus on menu options.
   
 ## Contact Me
