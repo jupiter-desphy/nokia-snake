@@ -26,9 +26,17 @@ Click [here](https://nokia-snake-jupiter-desphy.vercel.app/) to demo!
 
 ## Features
 
-- Hover or tab to focus on menu options.
-- Controls via keyboard, swipe gestures or "buttons."
 - Responsive CSS, framing screen as a Nokia if on a phone in portrait mode.
+
+### Controls
+
+- Hover or "tab" key to focus on menu options.
+- Controls via keyboard, swipe gestures or "buttons."
+- "Space" bar for 3-phase pause functionality:
+    1. Bring to menu.
+    2. Back to game. Snake not yet moving.
+    3. Snake moving again.
+- "Esc" Back to menu.
   
 ## Contact Me
 <!-- [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://nokia-snake-jupiter-desphy.vercel.app/) -->
