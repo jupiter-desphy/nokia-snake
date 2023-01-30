@@ -27,10 +27,11 @@ Click [here](https://nokia-snake-jupiter-desphy.vercel.app/) to demo!
 ## Features
 
 - Responsive CSS, framing screen as a Nokia if on a phone in portrait mode.
-- Animation and fonts created using HTML, Javascript, and CSS.
+- Animations and fonts created using HTML, Javascript, and CSS.
     1. No outsourced font.
     2. Only outsourced photo is Nokia phone for mobile use. ...for now. 😉
-    3. Hover and focus inverts colors to denote button.
+- Hover and focus inverts colors to denote button.
+- Levels in Snake II.
 
 ### Controls
 
