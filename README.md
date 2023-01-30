@@ -28,18 +28,19 @@ Click [here](https://nokia-snake-jupiter-desphy.vercel.app/) to demo!
 
 - Responsive CSS, framing screen as a Nokia if on a phone in portrait mode.
 - Animation and fonts created using HTML, Javascript, and CSS.
-    -- No outsourced font.
-    -- Only outsourced photo is Nokia phone for mobile use. ...for now. 😉
+    1. No outsourced font.
+    2. Only outsourced photo is Nokia phone for mobile use. ...for now. 😉
+    3. Hover and focus inverts colors to denote button.
 
 ### Controls
 
-- Hover or "tab" key to focus on menu options.
-- Controls via keyboard, swipe gestures or "buttons."
+- Controls via keyboard arrow keys, swipe gestures or "buttons."
 - "Space" bar for 3-phase pause functionality:
     1. Bring to menu.
     2. Back to game. Snake not yet moving.
     3. Snake moving again.
 - "Esc" Back to menu.
+- Hover or "tab" key to focus on menu options.
   
 ## Contact Me
 <!-- [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://nokia-snake-jupiter-desphy.vercel.app/) -->
