@@ -27,6 +27,9 @@ Click [here](https://nokia-snake-jupiter-desphy.vercel.app/) to demo!
 ## Features
 
 - Responsive CSS, framing screen as a Nokia if on a phone in portrait mode.
+- Animation and fonts created using HTML, Javascript, and CSS.
+    -- No outsourced font.
+    -- Only outsourced photo is Nokia phone for mobile use. ...for now. 😉
 
 ### Controls
 
