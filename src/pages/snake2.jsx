@@ -39,7 +39,7 @@ export function SnakeII() {
     const [settingsView, setSettingsView] = useState(false);
 
     /* ------ SNAKE II STATE ------- */
-    const [level, setLevel] = useState(6);
+    const [level, setLevel] = useState(1);
     const [levelView, setLevelView] = useState(false);
     const [prey, setPrey] = useState(PREY_START);
     const [preyTimer, setPreyTimer] = useState(0);
@@ -257,7 +257,7 @@ export function SnakeII() {
             setScore((prevScore) => prevScore + level);
             head[3] = 'full';
         } else if ((snakeCopy[0][0] === prey[0][0] && snakeCopy[0][1] === prey[0][1]) || (snakeCopy[0][0] === prey[1][0] && snakeCopy[0][1] === prey[1][1])) {
-            setScore((prevScore) => prevScore + 48);
+            setScore((prevScore) => prevScore + level * 7);
             setPrey((prevPrey) => [[null, null], [null, null], prevPrey[2]]);
             setPreyTimer(1);
             head[3] = 'full';

@@ -9,7 +9,7 @@ import LevelBar from './LevelBar';
 export default function Level(props) {
 
     const [demoSnake, setDemoSnake] = useState(SNAKE_DEMO);
-    const levelSpeeds = [330, 300, 270, 240, 210, 170, 140, 110, 80];
+    const levelSpeeds = [330, 300, 270, 240, 210, 180, 150, 120, 90];
 
     const tunnel = [];
     layMatrix(tunnel, COLUMNS, 1);
