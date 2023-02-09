@@ -39,7 +39,7 @@ export function SnakeII() {
     const [settingsView, setSettingsView] = useState(false);
 
     /* ------ SNAKE II STATE ------- */
-    const [level, setLevel] = useState(1);
+    const [level, setLevel] = useState(2);
     const [levelView, setLevelView] = useState(false);
     const [prey, setPrey] = useState(PREY_START);
     const [preyTimer, setPreyTimer] = useState(0);
