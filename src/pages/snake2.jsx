@@ -14,6 +14,7 @@ import MenuOption from "../components/MenuOption";
 import LiteSlide from "../components/LiteSlide";
 import Level from "../components/Level";
 import Instructions from "../components/Instructions";
+import TopScore from "../components/TopScore";
 import Settings from "../components/Settings";
 import { useTheme, useThemeUpdate } from "../components/ThemeContext";
 import useInterval from "../helpers/useInterval.js";
@@ -37,12 +38,14 @@ export function SnakeII() {
     const [menuView, setMenuView] = useState(false);
     const [instructionsView, setInstructionsView] = useState(false);
     const [settingsView, setSettingsView] = useState(false);
-
+    
     /* ------ SNAKE II STATE ------- */
     const [level, setLevel] = useState(2);
     const [levelView, setLevelView] = useState(false);
     const [prey, setPrey] = useState(PREY_START);
     const [preyTimer, setPreyTimer] = useState(0);
+    const [topScores, setTopScores] = useState([])
+    const [topScoreView, setTopScoreView] = useState(false);
 
     /* ------ FUNCTIONS ------- */
 
@@ -287,6 +290,7 @@ export function SnakeII() {
 
     const levelOption = () => { setLevelView(true); setMenuView(false); }
     const instructionsOption = () => { setInstructionsView(true); setMenuView(false); }
+    const topScoreOption = () => { setTopScoreView(true); setMenuView(false); }
     // const settingsOption = () => { setSettingsView(true); setMenuView(false); }
 
     return (
@@ -295,6 +299,7 @@ export function SnakeII() {
                 <>
                     {levelView && <Level level={level} chooseLevel={(level, pausedSpeed) => { setLevel(level); setPausedSpeed(pausedSpeed) }} levelViewable={(levelView) => setLevelView(levelView)} speed={pausedSpeed} />}
                     {instructionsView && <Instructions version='Snake II' />}
+                    {topScoreView && <TopScore />}
                     {/* {settingsView && <Settings />} */}
                     {menuView ?
                         <>
@@ -314,12 +319,15 @@ export function SnakeII() {
                                 <button className="hidden-button" onClick={instructionsOption}>
                                     <MenuOption optionName=' Instructions' />
                                 </button>
+                                <button className="hidden-button" onClick={topScoreOption}>
+                                    <MenuOption optionName=' Top Score' />
+                                </button>
                                 <Link to={`/menu`}>
                                     <MenuOption optionName=' Main Menu' />
                                 </Link>
                                 {/* 
                                 <button className="hidden-button" onClick={settingsOption}>
-                                    <MenuSlide optionName=' Settings' />
+                                    <MenuOption optionName=' Settings' />
                                 </button>
                                 */}
                             </ul>
